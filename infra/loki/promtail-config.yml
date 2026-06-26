@@ -1,0 +1,47 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+        filters:
+          - name: label
+            values: ["com.docker.compose.project"]
+    relabel_configs:
+      # container label: strip leading slash from container name (e.g. /poc-order-service → poc-order-service)
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/?(.*)'
+        target_label: container
+
+      # service label: from docker-compose service name (e.g. order-service, payment-service)
+      - source_labels: ['__meta_docker_container_label_com_docker_compose_service']
+        target_label: service
+
+      # project label
+      - source_labels: ['__meta_docker_container_label_com_docker_compose_project']
+        target_label: project
+
+    pipeline_stages:
+      # Try to parse level from plain text logback pattern:
+      # "2026-05-31 10:00:00 [thread] LEVEL logger - message"
+      - regex:
+          expression: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \[.*?\] (?P<level>\w+) '
+
+      # Promote captured level to a label (graceful: noop if regex didn't match)
+      - labels:
+          level:
+
+      # Also try to extract traceId from the pattern: "traceId=XXXX"
+      - regex:
+          expression: 'traceId=(?P<traceId>[a-f0-9]+)'
+      - labels:
+          traceId:

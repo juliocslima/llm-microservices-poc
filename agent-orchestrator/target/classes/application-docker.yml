@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+agent:
+  ollama:
+    base-url: ${OLLAMA_BASE_URL}
+    model: ${OLLAMA_MODEL:llama3:8b}
+  services:
+    order:        ${SERVICES_ORDER}
+    payment:      ${SERVICES_PAYMENT}
+    inventory:    ${SERVICES_INVENTORY}
+    notification: ${SERVICES_NOTIFICATION}
+    gateway:      ${SERVICES_GATEWAY}
+  observability:
+    prometheus-url: ${PROMETHEUS_URL}
+    loki-url:       ${LOKI_URL}
+  rabbitmq:
+    mgmt-url: ${RABBITMQ_MGMT_URL}
+    user:     ${RABBITMQ_USER}
+    pass:     ${RABBITMQ_PASS}

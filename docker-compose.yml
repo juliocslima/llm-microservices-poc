@@ -1,0 +1,343 @@
+networks:
+  poc-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+  loki_data:
+  tempo_data:
+  ollama_data:
+
+services:
+
+  # ─── Infrastructure ──────────────────────────────────────────────────────────
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: poc-postgres
+    environment:
+      POSTGRES_USER: poc
+      POSTGRES_PASSWORD: poc123
+      POSTGRES_DB: poc
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks: [poc-net]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U poc"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: poc-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: poc
+      RABBITMQ_DEFAULT_PASS: poc123
+    ports:
+      - "5672:5672"
+      - "15672:15672"   # management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks: [poc-net]
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: poc-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks: [poc-net]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+  # ─── Observability Stack ─────────────────────────────────────────────────────
+
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: poc-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=7d
+    networks: [poc-net]
+
+  loki:
+    image: grafana/loki:2.9.8
+    container_name: poc-loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./infra/loki/loki-config.yml:/etc/loki/local-config.yaml
+      - loki_data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    networks: [poc-net]
+
+  tempo:
+    image: grafana/tempo:2.5.0
+    container_name: poc-tempo
+    ports:
+      - "3200:3200"
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP
+    volumes:
+      - ./infra/tempo/tempo-config.yml:/etc/tempo.yaml
+      - tempo_data:/var/tempo
+    command: -config.file=/etc/tempo.yaml
+    networks: [poc-net]
+
+  promtail:
+    image: grafana/promtail:2.9.8
+    container_name: poc-promtail
+    volumes:
+      - ./infra/loki/promtail-config.yml:/etc/promtail/config.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/config.yml
+    networks: [poc-net]
+    depends_on: [loki]
+
+  grafana:
+    image: grafana/grafana:10.4.4
+    container_name: poc-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin123
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards
+    networks: [poc-net]
+    depends_on: [prometheus, loki, tempo]
+
+  # ─── Microservices ───────────────────────────────────────────────────────────
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ./api-gateway/Dockerfile
+    container_name: poc-api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
+      OTEL_SERVICE_NAME: api-gateway
+      LOKI_URL: http://loki:3100
+    networks: [poc-net]
+    depends_on:
+      postgres: {condition: service_healthy}
+      rabbitmq: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  order-service:
+    build:
+      context: .
+      dockerfile: ./order-service/Dockerfile
+    container_name: poc-order-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/poc
+      SPRING_DATASOURCE_USERNAME: poc
+      SPRING_DATASOURCE_PASSWORD: poc123
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: poc
+      SPRING_RABBITMQ_PASSWORD: poc123
+      SPRING_DATA_REDIS_HOST: redis
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
+      OTEL_SERVICE_NAME: order-service
+      LOKI_URL: http://loki:3100
+      PAYMENT_SERVICE_URL: http://payment-service:8082
+      INVENTORY_SERVICE_URL: http://inventory-service:8083
+    networks: [poc-net]
+    depends_on:
+      postgres: {condition: service_healthy}
+      rabbitmq: {condition: service_healthy}
+
+  payment-service:
+    build:
+      context: .
+      dockerfile: ./payment-service/Dockerfile
+    container_name: poc-payment-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/poc
+      SPRING_DATASOURCE_USERNAME: poc
+      SPRING_DATASOURCE_PASSWORD: poc123
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: poc
+      SPRING_RABBITMQ_PASSWORD: poc123
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
+      OTEL_SERVICE_NAME: payment-service
+      LOKI_URL: http://loki:3100
+    networks: [poc-net]
+    depends_on:
+      postgres: {condition: service_healthy}
+
+  inventory-service:
+    build:
+      context: .
+      dockerfile: ./inventory-service/Dockerfile
+    container_name: poc-inventory-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/poc
+      SPRING_DATASOURCE_USERNAME: poc
+      SPRING_DATASOURCE_PASSWORD: poc123
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: poc
+      SPRING_RABBITMQ_PASSWORD: poc123
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
+      OTEL_SERVICE_NAME: inventory-service
+      LOKI_URL: http://loki:3100
+      ARTIFICIAL_DELAY_MS: 0
+    networks: [poc-net]
+    depends_on:
+      postgres: {condition: service_healthy}
+
+  notification-service:
+    build:
+      context: .
+      dockerfile: ./notification-service/Dockerfile
+    container_name: poc-notification-service
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: poc
+      SPRING_RABBITMQ_PASSWORD: poc123
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
+      OTEL_SERVICE_NAME: notification-service
+      LOKI_URL: http://loki:3100
+    networks: [poc-net]
+    depends_on:
+      rabbitmq: {condition: service_healthy}
+
+  # ─── Ollama (LLM local) ──────────────────────────────────────────────────────
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: poc-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_KEEP_ALIVE=24h
+    networks: [poc-net]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+  # ── GPU (NVIDIA) ────────────────────────────────────────────────────────
+    # Descomente o bloco abaixo se o host tiver GPU NVIDIA com drivers instalados
+    # e o nvidia-container-toolkit configurado.
+    #
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # ── Pull automático de modelos ao iniciar ──────────────────────────────────
+  # Remova este serviço se preferir fazer o pull manualmente.
+  ollama-pull:
+    image: curlimages/curl:latest
+    container_name: ollama-pull
+    restart: "no"
+    networks: [poc-net]
+    depends_on:
+      ollama:
+        condition: service_healthy
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        set -e
+        echo "==> Pulling llama3:8b (pode demorar vários minutos)..."
+        curl -sf -X POST http://ollama:11434/api/pull \
+          -H 'Content-Type: application/json' \
+          -d '{"name":"llama3:8b","stream":false}' \
+          --max-time 900 \
+          --retry 3 \
+          --retry-delay 10
+        echo ""
+        echo "==> Pull concluído. Modelos disponíveis:"
+        curl -sf http://ollama:11434/api/tags \
+          | grep -o '"name":"[^"]*"' \
+          | cut -d'"' -f4
+
+  # ─── Agent Orchestrator ──────────────────────────────────────────────────────
+
+  agent-orchestrator:
+    build:
+      context: .
+      dockerfile: ./agent-orchestrator/Dockerfile
+    container_name: poc-agent-orchestrator
+    ports:
+      - "8090:8090"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/poc
+      SPRING_DATASOURCE_USERNAME: poc
+      SPRING_DATASOURCE_PASSWORD: poc123
+      OLLAMA_BASE_URL: http://ollama:11434/
+      OLLAMA_MODEL: llama3:8b
+      PROMETHEUS_URL: http://prometheus:9090
+      LOKI_URL: http://loki:3100
+      RABBITMQ_MGMT_URL: http://rabbitmq:15672
+      RABBITMQ_USER: poc
+      RABBITMQ_PASS: poc123
+      SERVICES_ORDER: http://order-service:8081
+      SERVICES_PAYMENT: http://payment-service:8082
+      SERVICES_INVENTORY: http://inventory-service:8083
+      SERVICES_NOTIFICATION: http://notification-service:8084
+      SERVICES_GATEWAY: http://api-gateway:8080
+    networks: [poc-net]
+    depends_on:
+      ollama:
+        condition: service_healthy
+      prometheus:
+        condition: service_started
+      loki:
+        condition: service_started

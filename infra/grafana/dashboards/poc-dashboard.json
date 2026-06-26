@@ -1,0 +1,269 @@
+{
+  "title": "LLM Agent POC — SBCARS 2026",
+  "uid": "poc-sbcars-2026",
+  "tags": ["poc", "sbcars", "llm-agents"],
+  "timezone": "browser",
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "time": {"from": "now-1h", "to": "now"},
+  "panels": [
+
+    {
+      "id": 1,
+      "title": "Service Health Overview",
+      "type": "stat",
+      "gridPos": {"x": 0, "y": 0, "w": 24, "h": 4},
+      "targets": [
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "up{job=~\"order-service|payment-service|inventory-service|notification-service|api-gateway|agent-orchestrator\"}",
+          "legendFormat": "{{job}}"
+        }
+      ],
+      "options": {
+        "reduceOptions": {"calcs": ["lastNotNull"]},
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value_and_name"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {"type": "value", "options": {
+              "0": {"text": "DOWN", "color": "red"},
+              "1": {"text": "UP",   "color": "green"}
+            }}
+          ],
+          "thresholds": {
+            "steps": [{"color": "red", "value": 0}, {"color": "green", "value": 1}]
+          }
+        }
+      }
+    },
+
+    {
+      "id": 2,
+      "title": "HTTP Request Rate (by service)",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 4, "w": 12, "h": 8},
+      "targets": [
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "sum by (application) (rate(http_server_requests_seconds_count[1m]))",
+          "legendFormat": "{{application}}"
+        }
+      ],
+      "fieldConfig": {"defaults": {"unit": "reqps"}}
+    },
+
+    {
+      "id": 3,
+      "title": "HTTP Error Rate (5xx) by Service",
+      "type": "timeseries",
+      "gridPos": {"x": 12, "y": 4, "w": 12, "h": 8},
+      "targets": [
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "sum by (application) (rate(http_server_requests_seconds_count{status=~\"5..\"}[1m]))",
+          "legendFormat": "{{application}} errors"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "color": {"mode": "fixed", "fixedColor": "red"}
+        }
+      }
+    },
+
+    {
+      "id": 4,
+      "title": "P99 Latency by Service (ms)",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 12, "w": 12, "h": 8},
+      "targets": [
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "histogram_quantile(0.99, sum by (application, le) (rate(http_server_requests_seconds_bucket[2m]))) * 1000",
+          "legendFormat": "{{application}} p99"
+        },
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "sum by (application) (rate(http_server_requests_seconds_sum[2m])) / sum by (application) (rate(http_server_requests_seconds_count[2m])) * 1000",
+          "legendFormat": "{{application}} avg"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "thresholds": {
+            "steps": [
+              {"color": "green",  "value": 0},
+              {"color": "yellow", "value": 500},
+              {"color": "red",    "value": 2000}
+            ]
+          }
+        }
+      }
+    },
+
+    {
+      "id": 5,
+      "title": "Orders Processing (success vs failed)",
+      "type": "timeseries",
+      "gridPos": {"x": 12, "y": 12, "w": 12, "h": 8},
+      "targets": [
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "sum(rate(orders_created_total{status=\"success\"}[1m]))",
+          "legendFormat": "✓ completed"
+        },
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "sum(rate(orders_failed_total[1m]))",
+          "legendFormat": "✗ failed"
+        }
+      ],
+      "fieldConfig": {"defaults": {"unit": "reqps"}}
+    },
+
+    {
+      "id": 6,
+      "title": "RabbitMQ — Queue Depth",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 20, "w": 12, "h": 8},
+      "targets": [
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "rabbitmq_queue_messages_ready",
+          "legendFormat": "{{queue}} ready"
+        },
+        {
+          "datasource": {"uid": "prometheus"},
+          "expr": "rabbitmq_queue_consumers",
+          "legendFormat": "{{queue}} consumers"
+        }
+      ]
+    },
+
+    {
+      "id": 7,
+      "title": "Agent Diagnostics — Tool Calls (last 1h)",
+      "type": "stat",
+      "gridPos": {"x": 12, "y": 20, "w": 6, "h": 4},
+      "targets": [
+        {
+          "datasource": {"uid": "loki"},
+          "expr": "count_over_time({service=\"agent-orchestrator\"} |= \"[TOOL]\" [1h])",
+          "legendFormat": "Tool calls"
+        }
+      ],
+      "options": {
+        "reduceOptions": {"calcs": ["sum"]},
+        "colorMode": "background",
+        "textMode": "value_and_name"
+      }
+    },
+
+    {
+      "id": 8,
+      "title": "Agent Diagnostics — Active Sessions (last 1h)",
+      "type": "stat",
+      "gridPos": {"x": 18, "y": 20, "w": 6, "h": 4},
+      "targets": [
+        {
+          "datasource": {"uid": "loki"},
+          "expr": "count_over_time({service=\"agent-orchestrator\"} |= \"Starting ReAct loop\" [1h])",
+          "legendFormat": "Diagnoses"
+        }
+      ],
+      "options": {
+        "reduceOptions": {"calcs": ["sum"]},
+        "colorMode": "background",
+        "textMode": "value_and_name"
+      }
+    },
+
+    {
+      "id": 9,
+      "title": "Agent Orchestrator Logs",
+      "type": "logs",
+      "gridPos": {"x": 0, "y": 24, "w": 24, "h": 10},
+      "targets": [
+        {
+          "datasource": {"uid": "loki"},
+          "expr": "{service=\"agent-orchestrator\"}",
+          "legendFormat": ""
+        }
+      ],
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "wrapLogMessage": true,
+        "showTime": true,
+        "showLabels": false,
+        "sortOrder": "Descending"
+      }
+    },
+
+    {
+      "id": 10,
+      "title": "Order Service Logs",
+      "type": "logs",
+      "gridPos": {"x": 0, "y": 34, "w": 12, "h": 8},
+      "targets": [
+        {
+          "datasource": {"uid": "loki"},
+          "expr": "{service=\"order-service\"}",
+          "legendFormat": ""
+        }
+      ],
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "wrapLogMessage": true,
+        "sortOrder": "Descending"
+      }
+    },
+
+    {
+      "id": 11,
+      "title": "Payment Service Logs",
+      "type": "logs",
+      "gridPos": {"x": 12, "y": 34, "w": 12, "h": 8},
+      "targets": [
+        {
+          "datasource": {"uid": "loki"},
+          "expr": "{service=\"payment-service\"}",
+          "legendFormat": ""
+        }
+      ],
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "wrapLogMessage": true,
+        "sortOrder": "Descending"
+      }
+    },
+
+    {
+      "id": 12,
+      "title": "ReAct Loop — Iteration Trace",
+      "type": "logs",
+      "gridPos": {"x": 0, "y": 42, "w": 24, "h": 8},
+      "targets": [
+        {
+          "datasource": {"uid": "loki"},
+          "expr": "{service=\"agent-orchestrator\"} |~ \"REACT|TOOL|ORCHESTRATOR|GOVERNANCE\"",
+          "legendFormat": ""
+        }
+      ],
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "wrapLogMessage": true,
+        "sortOrder": "Descending"
+      }
+    }
+  ]
+}
