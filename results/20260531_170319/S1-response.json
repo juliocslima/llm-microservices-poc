@@ -1,0 +1,36 @@
+{
+    "diagnosticId": "ed7f967e-dbac-4e73-ae47-2fac96b80c36",
+    "scenarioId": "S1",
+    "affectedService": "payment-service",
+    "probableCause": "Memory leak and OOM kill due to lack of memory limits",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "Logs showing FAULT_INJECTION label",
+        "Incident history showing OOM kill"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Add memory limits for payment-service",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order checkouts failed with payment errors",
+    "relatedServices": [
+        "order-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "HIGH",
+        "rationale": "Agent flagged action as requiring approval: 'Add memory limits for payment-service'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 10519,
+        "toolCallCount": 102,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780257850.5076928,
+    "rawAgentResponse": "I apologize for the mistake earlier!\n\nSince I've reached the final answer, I won't call any more tools. Here's my Final Answer:\n\nThought: I have sufficient evidence.\nFinal Answer:\n```json\n{\n  \"affectedService\": \"payment-service\",\n  \"probableCause\": \"Memory leak and OOM kill due to lack of memory limits\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"Logs showing FAULT_INJECTION label\", \"Incident history showing OOM kill\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Add memory limits for payment-service\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order checkouts failed with payment errors\",\n  \"relatedServices\": [\"order-service\"]\n}\n```"
+}

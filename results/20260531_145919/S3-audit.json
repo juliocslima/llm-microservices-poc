@@ -1,0 +1,258 @@
+{
+    "diagnosticId": "S3",
+    "entries": [
+        {
+            "timestamp": 1780240795.70071,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27075966156...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759661568,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759661568,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759661568,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[DOWN]  notification-service: ERROR: Failed to resolve 'notification-service' [A(1)]\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 42
+        },
+        {
+            "timestamp": 1780240796.860062,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'notification-service' (last 10 min):\n  2026-05-31T15:19:40.651Z  INFO 1 --- [notification-service] [ntContainer#0-2] [                                                 ] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for wor...\n  2026-05-31T15:19:39.948Z  INFO 1 --- [notification-service] [ntContainer#0-2] [                                                 ] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to fini...\n  2026-05-31T15:19:11.644Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:19:11.641Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:19:07.565Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:19:07.564Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:19:03.494Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:19:03.492Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:18:59.427Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:18:59.426Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:18:55.344Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:18:55.344Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:17:52.411Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:17:52.410Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:17:50.351Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n",
+            "durationMs": 52
+        },
+        {
+            "timestamp": 1780240798.246938,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'notification-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.06542411111111111 req/s",
+            "durationMs": 26
+        },
+        {
+            "timestamp": 1780240799.423894,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'notification-service' ===\n\nCriticality: LOW\nDirect dependencies: [\"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  None (leaf service or not registered)\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780240800.531411,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0,\"consumer_utilisation\":0,\"consumers\":0,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42920,\"message_bytes\":730,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":730,\"message_bytes_ram\":146,\"message_bytes_ready\":730,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":35,\"ack_details\":{\"rate\":0.0},\"deliver\":35,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":35,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":40,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":5,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":5,\"messages_ram\":1,\"messages_ready\":5,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":1,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":102222,\"reductions_details\":{\"rate\":225.8},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 8
+        },
+        {
+            "timestamp": 1780240801.552949,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'notification-service' (1 records) ===\n\nType: QUEUE_ACCUMULATION\nDescription: poc.notifications RabbitMQ queue accumulated thousands of messages with 0 active consumers. notification-service container was stopped.\nResolution: Restarted notification-service. Consumer reconnected to RabbitMQ and processed backlog.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780240805.049131,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10873
+        },
+        {
+            "timestamp": 1780241862.12974,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27074136473...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270741364736,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270741364736,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270741364736,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[DOWN]  notification-service: ERROR: Failed to resolve 'notification-service' [A(1)]\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 30
+        },
+        {
+            "timestamp": 1780241863.069891,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'notification-service' (last 10 min):\n  2026-05-31T15:37:27.177Z  INFO 1 --- [notification-service] [ntContainer#0-2] [                                                 ] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for wor...\n  2026-05-31T15:37:26.795Z  INFO 1 --- [notification-service] [ntContainer#0-2] [                                                 ] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to fini...\n  2026-05-31T15:36:59.172Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:36:59.172Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:36:55.110Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:36:55.109Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:36:51.061Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:36:51.060Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:36:47.002Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:36:47.002Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:36:42.945Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:36:42.945Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:35:46.579Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T15:35:46.578Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T15:35:44.516Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n",
+            "durationMs": 37
+        },
+        {
+            "timestamp": 1780241864.215358,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'notification-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.06531577777777778 req/s",
+            "durationMs": 9
+        },
+        {
+            "timestamp": 1780241865.004796,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0,\"consumer_utilisation\":0,\"consumers\":0,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35016,\"message_bytes\":730,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":730,\"message_bytes_ram\":146,\"message_bytes_ready\":730,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":55,\"ack_details\":{\"rate\":0.0},\"deliver\":55,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":55,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":60,\"publish_details\":{\"rate\":0.4},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":5,\"messages_details\":{\"rate\":1.0},\"messages_paged_out\":0,\"messages_persistent\":5,\"messages_ram\":1,\"messages_ready\":5,\"messages_ready_details\":{\"rate\":1.0},\"messages_ready_ram\":1,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":152387,\"reductions_details\":{\"rate\":1037.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 20
+        },
+        {
+            "timestamp": 1780241865.970501,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'notification-service' ===\n\nCriticality: LOW\nDirect dependencies: [\"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  None (leaf service or not registered)\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780241866.76758,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'notification-service' (1 records) ===\n\nType: QUEUE_ACCUMULATION\nDescription: poc.notifications RabbitMQ queue accumulated thousands of messages with 0 active consumers. notification-service container was stopped.\nResolution: Restarted notification-service. Consumer reconnected to RabbitMQ and processed backlog.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780241870.479178,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9573
+        },
+        {
+            "timestamp": 1780243607.370753,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27073125171...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270731251712,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270731251712,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270731251712,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[DOWN]  notification-service: ERROR: Failed to resolve 'notification-service' [A(1)]\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 27
+        },
+        {
+            "timestamp": 1780243608.472008,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'notification-service' (last 10 min):\n  2026-05-31T16:06:32.339Z  INFO 1 --- [notification-service] [ntContainer#0-2] [                                                 ] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for wor...\n  2026-05-31T16:06:32.250Z  INFO 1 --- [notification-service] [ntContainer#0-2] [                                                 ] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to fini...\n  2026-05-31T16:06:04.334Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T16:06:04.333Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T16:06:00.271Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T16:06:00.270Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T16:05:56.198Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T16:05:56.196Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T16:05:52.137Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T16:05:52.135Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T16:05:48.050Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T16:05:48.049Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T16:04:50.628Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T16:04:50.628Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T16:04:48.583Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n",
+            "durationMs": 48
+        },
+        {
+            "timestamp": 1780243609.689997,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'notification-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.06470744444444444 req/s",
+            "durationMs": 10
+        },
+        {
+            "timestamp": 1780243610.665187,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'notification-service' ===\n\nCriticality: LOW\nDirect dependencies: [\"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  None (leaf service or not registered)\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780243611.63806,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0,\"consumer_utilisation\":0,\"consumers\":0,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":143384,\"message_bytes\":730,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":730,\"message_bytes_ram\":146,\"message_bytes_ready\":730,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":75,\"ack_details\":{\"rate\":0.0},\"deliver\":75,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":75,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":80,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":5,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":5,\"messages_ram\":1,\"messages_ready\":5,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":1,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":210793,\"reductions_details\":{\"rate\":985.6},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 10
+        },
+        {
+            "timestamp": 1780243612.734139,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'notification-service' (1 records) ===\n\nType: QUEUE_ACCUMULATION\nDescription: poc.notifications RabbitMQ queue accumulated thousands of messages with 0 active consumers. notification-service container was stopped.\nResolution: Restarted notification-service. Consumer reconnected to RabbitMQ and processed backlog.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780243616.5247,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10599
+        },
+        {
+            "timestamp": 1780250506.291538,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26920011776...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269200117760,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269200117760,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269200134144,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[DOWN]  notification-service: ERROR: Failed to resolve 'notification-service' [A(1)]\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 82
+        },
+        {
+            "timestamp": 1780250507.527865,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'notification-service' (last 10 min):\n  2026-05-31T18:01:31.368Z  INFO 1 --- [notification-service] [ntContainer#0-2] [                                                 ] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for wor...\n  2026-05-31T18:01:31.037Z  INFO 1 --- [notification-service] [ntContainer#0-2] [                                                 ] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to fini...\n  2026-05-31T18:00:59.358Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T18:00:59.358Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T18:00:55.305Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T18:00:55.305Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T18:00:51.243Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T18:00:51.243Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T18:00:47.178Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T18:00:47.174Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T18:00:43.102Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T18:00:43.102Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T17:59:39.904Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n  2026-05-31T17:59:39.904Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Notification received event...\n  2026-05-31T17:59:37.840Z  INFO 1 --- [notification-service] [ntContainer#0-1] [                                                 ] b.u.poc.messaging.NotificationConsumer   : Sending notification to cus...\n",
+            "durationMs": 56
+        },
+        {
+            "timestamp": 1780250508.7179,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'notification-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.04666666666666666 req/s",
+            "durationMs": 18
+        },
+        {
+            "timestamp": 1780250509.73573,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0,\"consumer_utilisation\":0,\"consumers\":0,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":231056,\"message_bytes\":730,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":730,\"message_bytes_ram\":146,\"message_bytes_ready\":730,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":15,\"ack_details\":{\"rate\":0.0},\"deliver\":15,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":15,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":20,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":5,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":5,\"messages_ram\":1,\"messages_ready\":5,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":1,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":54330,\"reductions_details\":{\"rate\":958.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 9
+        },
+        {
+            "timestamp": 1780250510.772121,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'notification-service' ===\n\nCriticality: LOW\nDirect dependencies: [\"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  None (leaf service or not registered)\n",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780250511.566715,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'notification-service' (1 records) ===\n\nType: QUEUE_ACCUMULATION\nDescription: poc.notifications RabbitMQ queue accumulated thousands of messages with 0 active consumers. notification-service container was stopped.\nResolution: Restarted notification-service. Consumer reconnected to RabbitMQ and processed backlog.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780250515.356432,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10342
+        }
+    ],
+    "traceabilityScore": 0.7
+}

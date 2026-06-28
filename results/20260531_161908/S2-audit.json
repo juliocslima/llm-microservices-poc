@@ -1,0 +1,762 @@
+{
+    "diagnosticId": "S2",
+    "entries": [
+        {
+            "timestamp": 1780240756.973225,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27075978854...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759788544,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759788544,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759788544,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759788544,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 41
+        },
+        {
+            "timestamp": 1780240758.175923,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T15:19:08.621Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [4114e34d96e6ef3f591c74b57d11bc58-2400530a65db6afa] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:19:04.536Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [7eb7aed775efffe9ddbecb9dffe6297a-008c66a5bf95ca64] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:19:00.462Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [77c75366261adfd506153132f6678ba5-d121800bc06316b8] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:18:56.383Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [61c26387bb810a258247c2ac9b732969-5d04cc79eacffe0a] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:18:52.316Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [839516ba1c9e33cb59282b1b180c9357-40e723a4fa9d2e0f] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:18:47.281Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [e62ca429950ca6be2c611b8e5b9318ba-48aa1257178aa604] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T15:18:42.228Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [5cb6ae592fd6600a4675f5e4e2fb1241-911e8d0241ebe4ee] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T15:18:34.162Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [b2d20f7c84bf0180eccc5e1a9f5db776-a6274ce1cde18943] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T15:17:54.464Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [f2fd0d9af27fee7dd67b1a0226d9fb1a-700cff9c06026db7] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T15:17:52.401Z  INFO 1 --- [inventory-service] [nio-8083-exec-5] [72d96088ec606855735cb3f11fb186fb-bacf1a6ae01081a7] b.u.poc.controller.InventoryController   : Inventory reserved for orderId...\n  2026-05-31T15:17:33.377Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [7edb5ed0180c1102fd1b594ea9015cf6-001e0699572c83d2] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to valid...\n  2026-05-31T15:17:33.375Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [7edb5ed0180c1102fd1b594ea9015cf6-001e0699572c83d2] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to valid...\n  2026-05-31T15:17:33.373Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [7edb5ed0180c1102fd1b594ea9015cf6-001e0699572c83d2] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to valid...\n  2026-05-31T15:17:33.372Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [7edb5ed0180c1102fd1b594ea9015cf6-001e0699572c83d2] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to valid...\n  2026-05-31T15:17:33.370Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [7edb5ed0180c1102fd1b594ea9015cf6-001e0699572c83d2] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to valid...\n",
+            "durationMs": 26
+        },
+        {
+            "timestamp": 1780240759.505571,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 10
+        },
+        {
+            "timestamp": 1780240760.465944,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 7
+        },
+        {
+            "timestamp": 1780240761.429083,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":35,\"ack_details\":{\"rate\":0.0},\"deliver\":35,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":35,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":35,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":94254,\"reductions_details\":{\"rate\":269.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 22
+        },
+        {
+            "timestamp": 1780240762.483195,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780240766.250417,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10558
+        },
+        {
+            "timestamp": 1780241824.541086,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27074198323...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270741983232,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270741983232,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270741983232,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270741983232,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 41
+        },
+        {
+            "timestamp": 1780241825.683285,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T15:36:56.154Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [d3a6bc30afe76d09379c107201224a1d-869cec871bf26a56] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:36:52.091Z  WARN 1 --- [inventory-service] [nio-8083-exec-9] [8e875e7179029e841369717b00ad16ce-1f6355d3de250d64] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:36:48.040Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [cd48aebad0c76de33f27dc4b34e837a6-9478dfaebc4da960] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:36:43.991Z  WARN 1 --- [inventory-service] [nio-8083-exec-4] [14e55e594d4032b02556f5b69437ba78-82bb5396fcde509b] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:36:39.921Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [67441d1a0930bded4a444ade7be9326c-eba601099d8e1255] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T15:36:34.864Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [fd072555d65cf3f716f044713e2eacde-8e4deee5f0da2c24] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T15:36:29.816Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [def4a8c3224777dd9a8f3e7655309e7d-0910a99619646ce2] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T15:36:21.656Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [6ab471b889fb69f8c1f7ab6ac16c5f3c-4d3c40838241baf0] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T15:35:48.615Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [dbcb2077f84fbc91afae5609a0d0d3e2-23a11c5958ee211d] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n",
+            "durationMs": 18
+        },
+        {
+            "timestamp": 1780241826.82541,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 24
+        },
+        {
+            "timestamp": 1780241827.766283,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780241828.577381,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35208,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":55,\"ack_details\":{\"rate\":0.0},\"deliver\":55,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":55,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":55,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":144184,\"reductions_details\":{\"rate\":423.8},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 10
+        },
+        {
+            "timestamp": 1780241829.723729,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780241832.94301,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9744
+        },
+        {
+            "timestamp": 1780243569.677116,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27073147289...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270731472896,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270731472896,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270731472896,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270731472896,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 48
+        },
+        {
+            "timestamp": 1780243570.864365,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T16:06:01.308Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [24276fff2082abd3b582f714e2a40211-1cb2b02ed644ad09] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T16:05:57.243Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [f999d320c90e8be16b410f69dbbcedeb-b489307e86a52173] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T16:05:53.173Z  WARN 1 --- [inventory-service] [nio-8083-exec-9] [7dc28b3d2cedabfd8ef7ec8144adb5ca-d3de742e0e11dcc8] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T16:05:49.108Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [4b5908b43e1fb7b019b71547409ca2f2-2ebb98f88656b280] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T16:05:45.021Z  WARN 1 --- [inventory-service] [nio-8083-exec-4] [9bb0a3ba4b61b71a8b8f74d3a239dfd6-03f9830be1bec054] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T16:05:39.975Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [c34b15ab83a157dfb720750709571d73-dc076c7869088332] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T16:05:34.921Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [ddb69019f938a8fe20facd97258f7ca3-229eb8b32ed13ef5] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T16:05:26.858Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [cc69b31c41a46bd4e90371dd4814a63a-31abcf618a62ab93] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T16:04:52.652Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [50fd4adef932eb4eea296da4364fe819-7814c15bdb4e9607] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T16:04:50.622Z  INFO 1 --- [inventory-service] [nio-8083-exec-1] [5194196f00c633d10805244434d5037d-0445d1fb4c122640] b.u.poc.controller.InventoryController   : Inventory reserved for orderId...\n  2026-05-31T16:04:50.618Z  INFO 1 --- [inventory-service] [nio-8083-exec-1] [5194196f00c633d10805244434d5037d-0445d1fb4c122640] b.u.poc.controller.InventoryController   : Reserve request orderId=f4f3f9...\n",
+            "durationMs": 6
+        },
+        {
+            "timestamp": 1780243572.247874,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 24
+        },
+        {
+            "timestamp": 1780243573.0637,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780243574.107302,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35208,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":75,\"ack_details\":{\"rate\":0.0},\"deliver\":75,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":75,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":75,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":197687,\"reductions_details\":{\"rate\":524.2},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 13
+        },
+        {
+            "timestamp": 1780243575.404847,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780243578.703589,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10333
+        },
+        {
+            "timestamp": 1780250464.605636,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26920058470...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269200584704,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269200584704,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269200584704,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269200584704,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 65
+        },
+        {
+            "timestamp": 1780250465.652508,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T18:00:56.346Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [765deaf253b44bf689b5444aaf72ec27-ee2d04b56e138b41] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:00:52.285Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [9ca7337fcd72642dd12cf40231753c50-427eed1241947bc8] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:00:48.215Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [d0e03b4f8a7444b7587a71840512b527-e2687b02addf558c] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:00:44.152Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [9b81d8b2c963ae0c45495359a5760bfb-f95f5fae84f67008] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:00:40.075Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [4834eae7714a7a20794aefe4b3136947-fd4f70ebeadc12a9] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:00:35.034Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [620da504d10e510d9ca6a273a16675c3-efd61dd6150d96aa] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:00:27.949Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [92b27bdcc01f3236a87a3c3aa1863e5b-6a62613ace42e5c1] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:00:17.817Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [4aba43ca150363a7cf7a0ae13c80b32c-54ae5a65805e1626] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T17:59:41.948Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [7e0d32a424e03b15652155d33413849f-b9625dfcdf407b6b] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T17:59:29.594Z  INFO 1 --- [inventory-service] [nio-8083-exec-5] [8554c3a4bec2015cb6872b04014d9f13-4845f76384d5fe21] b.u.poc.controller.InventoryController   : Inventory reserved for orderId...\n  2026-05-31T17:59:29.588Z  INFO 1 --- [inventory-service] [nio-8083-exec-5] [8554c3a4bec2015cb6872b04014d9f13-4845f76384d5fe21] b.u.poc.controller.InventoryController   : Reserve request orderId=a2d971...\n  2026-05-31T17:59:23.401Z  INFO 1 --- [inventory-service] [nio-8083-exec-1] [e8c347792989ab24537418891b812f97-13bc80d82da911e8] b.u.poc.controller.InventoryController   : Reserve request orderId=075771...\n  2026-05-31T17:54:34.805Z  WARN 1 --- [inventory-service] [           main] [                                                 ] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is ena...\n",
+            "durationMs": 11
+        },
+        {
+            "timestamp": 1780250466.979504,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.04194133333333333 req/s",
+            "durationMs": 22
+        },
+        {
+            "timestamp": 1780250468.061641,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780250469.048991,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35208,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":15,\"ack_details\":{\"rate\":0.2},\"deliver\":15,\"deliver_details\":{\"rate\":0.2},\"deliver_get\":15,\"deliver_get_details\":{\"rate\":0.2},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":15,\"publish_details\":{\"rate\":0.2},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":39291,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 9
+        },
+        {
+            "timestamp": 1780250470.110032,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780250473.15699,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9763
+        },
+        {
+            "timestamp": 1780251423.696585,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26919080345...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269190803456,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269190803456,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269190803456,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269190803456,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 66
+        },
+        {
+            "timestamp": 1780251424.796022,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T18:16:55.245Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [d80a2c7b471cfa9fc8efbbb0355a625a-4b60f5a9b6e30027] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:16:51.198Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [330d735234eb8757100529e27f8c48d0-5c97195d5d60f197] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:16:47.148Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [be33bf6d396d2bb04c15880c6e41eec8-e16181ba26181e31] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:16:43.093Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [c6793823fbb09fac038aad4db4173dc0-0a3ca1420cee04bc] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:16:42.047Z ERROR 1 --- [inventory-service] [nio-8083-exec-4] [99178a3a9e74cb5dfdf05c80e12fe65f-f177570a43a45aba] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:16:39.039Z  WARN 1 --- [inventory-service] [nio-8083-exec-4] [99178a3a9e74cb5dfdf05c80e12fe65f-f177570a43a45aba] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:16:33.996Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [c4e65936ec123a3933c95f43543c23f5-3e8bfe6c535340d3] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:16:26.908Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [7f08bb22adfb8f414f100f338c394f1c-cb5848f91000c790] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:16:16.802Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [eb9ede7d3415066d44fe90f094468e88-8c8ce1b0891ac52f] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:15:42.408Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [b75142a0dabedd4e5ded02e4e468874e-433a7885c6212347] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:15:40.369Z ERROR 1 --- [inventory-service] [io-8083-exec-10] [e7cd196acb30384c489386692925124e-b0d4d33df3b9d57b] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:15:38.324Z ERROR 1 --- [inventory-service] [nio-8083-exec-9] [576738d9e0646415d2cc95033726bb8b-c05023a12afdfe05] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:15:38.321Z  INFO 1 --- [inventory-service] [nio-8083-exec-9] [576738d9e0646415d2cc95033726bb8b-c05023a12afdfe05] b.u.poc.controller.InventoryController   : Reserve request orderId=1ce411...\n  2026-05-31T18:15:36.276Z ERROR 1 --- [inventory-service] [nio-8083-exec-7] [5089b02bb298f124ff577bda82c77012-792ee02b37f7b72e] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:15:34.237Z ERROR 1 --- [inventory-service] [nio-8083-exec-6] [2e120e9157ff7921b55197f7c053a618-9f6232b61ce98071] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n",
+            "durationMs": 20
+        },
+        {
+            "timestamp": 1780251425.988076,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780251426.892451,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780251427.76877,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":26,\"ack_details\":{\"rate\":0.0},\"deliver\":26,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":26,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":26,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":78809,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 11
+        },
+        {
+            "timestamp": 1780251428.777247,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780251433.330015,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 11037
+        },
+        {
+            "timestamp": 1780251902.319386,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26919030374...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269190303744,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269190303744,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269190303744,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269190303744,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 68
+        },
+        {
+            "timestamp": 1780251903.397787,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T18:24:53.939Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [f252f8af8ab682c0ab2db306907b529d-6747ac964a1f2116] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:24:49.867Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [64148a06a9e0a04e18000b7c6c969795-18e019a675f208ca] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:24:45.812Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [d75fda4a749101aa6ec85a1eb418d788-06ddb09f9f6ef3a2] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:24:41.744Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [062445f530a625f3f129e31c097f88d2-267d7848f6786186] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:24:40.694Z ERROR 1 --- [inventory-service] [nio-8083-exec-9] [7aa233036e6af26779b15ae182356fee-cfc6a32a700afb0b] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:24:37.691Z  WARN 1 --- [inventory-service] [nio-8083-exec-9] [7aa233036e6af26779b15ae182356fee-cfc6a32a700afb0b] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:24:32.650Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [0a65939e744fee2f105ee058ae6b327b-661b71c7205c6a87] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:24:25.565Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [187c644145ec0aee98a9e5beaebdd71c-3ea6707aea1ba3c3] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:24:15.464Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [517860f10b9ee00cba5af84f26bbd5b5-21f6885c3ce12b65] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:23:44.821Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [b1bb317c98f7c92851332cf4ecb1e55d-d247ebc14f91d33b] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:23:42.784Z ERROR 1 --- [inventory-service] [nio-8083-exec-3] [cc7c39153e4df73c3745a0eedebded10-fb33c53419d1d477] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:23:40.727Z ERROR 1 --- [inventory-service] [nio-8083-exec-8] [1c0fbe54a170c1560e6fadceb1e72f17-951858538ffebdb6] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:23:38.669Z ERROR 1 --- [inventory-service] [nio-8083-exec-2] [7d8ff10268f80622c314519f8b2c2e34-7022efa6395e4e51] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:23:36.613Z ERROR 1 --- [inventory-service] [nio-8083-exec-1] [3aa1ad267f7a4dc90de71bf087ab831d-3ce7f722ff9d1ba7] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:23:34.566Z ERROR 1 --- [inventory-service] [nio-8083-exec-5] [ef7dd3c9566d9ef7320352fab6bd966e-c49f882f112d55bd] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n",
+            "durationMs": 22
+        },
+        {
+            "timestamp": 1780251904.550946,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.0017094017094017092 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 22
+        },
+        {
+            "timestamp": 1780251905.745975,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780251906.607653,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":34,\"ack_details\":{\"rate\":0.0},\"deliver\":34,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":34,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":34,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":108203,\"reductions_details\":{\"rate\":270.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 11
+        },
+        {
+            "timestamp": 1780251907.861569,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780251911.139802,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10127
+        },
+        {
+            "timestamp": 1780252403.329021,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26919749222...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269197496320,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269197496320,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269197496320,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269197496320,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 42
+        },
+        {
+            "timestamp": 1780252404.574052,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T18:33:14.906Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [87ba989e9b5a939d0b621ef6fbf223ba-2cf50aa492f92406] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:33:10.859Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [391c613f53209c19b58d4ada0cce0e8d-8ceaa1c55f4b1be2] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:33:06.794Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [8bb16df14443f4b8595efd621d8972d4-7f7c5d3114e67f87] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:33:02.695Z  WARN 1 --- [inventory-service] [nio-8083-exec-9] [418157f02f68a3917797abb4baae1e31-06068ad4865b834c] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:33:01.652Z ERROR 1 --- [inventory-service] [nio-8083-exec-6] [e4eead16404df26b45d9ae448ad511bb-eda1f5338745aab2] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:32:58.650Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [e4eead16404df26b45d9ae448ad511bb-eda1f5338745aab2] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:32:53.599Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [ae1daa5fdd22172826f01f8ab2c4c583-39ef47990dee4dbf] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:32:46.504Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [2a4a9c3b098ff2154cfdd8a2a4aa1afc-36a235f289c2e53f] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:32:36.347Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [c7f06f2c11fea0a88e0cac5cb0cc9522-569251f8834438c5] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:32:05.947Z  WARN 1 --- [inventory-service] [nio-8083-exec-4] [0c17362a49dac3b21455958216ae223c-d30fbe7c300f3426] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:32:03.906Z ERROR 1 --- [inventory-service] [nio-8083-exec-2] [993b57649a6550b7b667709d8d9fdacb-895d640baa2ead5c] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:32:01.860Z ERROR 1 --- [inventory-service] [nio-8083-exec-1] [c20f07a8b5c7055790ec8aa778e5dbd1-d908783fe34c20df] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:31:59.816Z ERROR 1 --- [inventory-service] [nio-8083-exec-5] [7fb05b7dbe5fccbe425356da63f7b283-72efbb510d407270] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:31:57.778Z ERROR 1 --- [inventory-service] [nio-8083-exec-7] [95da3981b6124bb7cb9075be3629bc21-5c75c307e759de32] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:31:55.725Z ERROR 1 --- [inventory-service] [nio-8083-exec-8] [46ab6819347e3038b314aabd0421fd1b-f8516ab9dc64d455] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n",
+            "durationMs": 21
+        },
+        {
+            "timestamp": 1780252405.974276,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.0017094017094017092 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 19
+        },
+        {
+            "timestamp": 1780252407.085888,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780252407.996516,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":42,\"ack_details\":{\"rate\":0.0},\"deliver\":42,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":42,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":42,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":136987,\"reductions_details\":{\"rate\":486.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780252409.003006,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780252413.097964,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 11129
+        },
+        {
+            "timestamp": 1780252947.562621,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26924408012...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269244080128,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269244080128,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269244080128,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269244080128,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 67
+        },
+        {
+            "timestamp": 1780252948.631615,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T18:42:19.075Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [510e04c27c3b8306608ad7bf198c1323-3c9958633b5a8646] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:42:15.023Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [bf200d2c6e04f3ee4407e0279a50fd03-8ad783a3da2261b2] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:42:10.957Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [2a97ad29451acaacd40fcd5f6f94b523-fe78b5403742eaf3] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:42:06.900Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [38d679e2b5d3f698afb9f1e99b826742-1390259313bdbc45] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:42:05.844Z ERROR 1 --- [inventory-service] [nio-8083-exec-5] [79bc0bab0b6175945b5d165b268c0a95-ec242828bfd5bbf0] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:42:02.842Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [79bc0bab0b6175945b5d165b268c0a95-ec242828bfd5bbf0] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:41:57.799Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [5730705335d4b6dcae7e04b63bb54d15-71347f4ef04792a3] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:41:50.711Z  WARN 1 --- [inventory-service] [nio-8083-exec-9] [39d2f2e8e204a61c4a35f89875812f61-1f56b4a88a51df91] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:41:40.589Z  WARN 1 --- [inventory-service] [nio-8083-exec-4] [f263423c41700be5dc92fa50a0fc2a9e-fd74b865b8ab4164] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:41:09.391Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [4bfcef38d82990ba294964f2b99d19c4-61b520d8a727df3e] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:41:07.345Z ERROR 1 --- [inventory-service] [nio-8083-exec-7] [fb8564145bd56938d8e1065da515939d-080ed0ba7d5ea4ed] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:41:05.283Z ERROR 1 --- [inventory-service] [nio-8083-exec-8] [d036e5cdc53c9b7f02464cf8a49e2f02-6568bbf7ed20c8b5] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:41:03.233Z ERROR 1 --- [inventory-service] [nio-8083-exec-9] [ac9e2ad531cca5900f4319d015748380-ea19e3c910c32c7b] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:41:01.174Z ERROR 1 --- [inventory-service] [nio-8083-exec-6] [a60a17e9a877022f542739901db55790-054d9e8e7a6e6540] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:40:59.116Z ERROR 1 --- [inventory-service] [nio-8083-exec-3] [3942c28097aba89f38b70951266ad2ac-a617de6e28866f42] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n",
+            "durationMs": 19
+        },
+        {
+            "timestamp": 1780252949.877012,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780252950.863504,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780252951.713504,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":54,\"ack_details\":{\"rate\":0.0},\"deliver\":54,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":54,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":54,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":171997,\"reductions_details\":{\"rate\":424.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780252952.699158,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780252956.672062,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10534
+        },
+        {
+            "timestamp": 1780253644.744216,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26924646809...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269246468096,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269246468096,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269246468096,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269246468096,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 52
+        },
+        {
+            "timestamp": 1780253645.93556,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T18:53:56.359Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [6807b4d696443032c2e90dd3d415be5e-ae6596821fb0692a] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:53:52.307Z  WARN 1 --- [inventory-service] [nio-8083-exec-9] [f5b8b0be8dc2aca5b4c77326ed1d1176-0ba5b7c23a706f94] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:53:48.241Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [1ea3f7eef5eac7a4385d61dfaed6305f-c9283d26bb0dfea6] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:53:44.169Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [61948ab53173d6f39a969d6f9d7744f7-915c1568ae059fd8] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:53:43.124Z ERROR 1 --- [inventory-service] [nio-8083-exec-1] [f74ca860f0ed654839c210fd550ad037-262d7aff901f62ec] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:53:40.119Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [f74ca860f0ed654839c210fd550ad037-262d7aff901f62ec] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T18:53:35.082Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [fd56c40bad829e0214e5606790588305-7cd851e109fc6a8e] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:53:27.999Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [af3ebd11e95a3311ded54fb9668f0c15-f2e010a6f6ceb823] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:53:17.899Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [f8be6d8975fcb0652b27dc034741bc50-4c7e5938f617ef7a] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:52:47.414Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [538d245bcce0a2f4a89f7fb240b990bc-6b429ca2a8e82222] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T18:52:45.377Z ERROR 1 --- [inventory-service] [io-8083-exec-10] [91d5359661eba1033801f7d5cf0edb27-680db2db7f9551b7] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:52:43.316Z ERROR 1 --- [inventory-service] [nio-8083-exec-7] [994d8701aa1c51d5fa110f0205b421ff-fe02726fb42ffe60] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:52:41.271Z ERROR 1 --- [inventory-service] [nio-8083-exec-9] [1a1dacc3f533289293f9a6746ce573ed-9dfcd5fd48860704] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:52:39.217Z ERROR 1 --- [inventory-service] [nio-8083-exec-3] [86a475240e4561f52063d6f7c2e34c4b-610a5331e68473ac] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T18:52:37.149Z ERROR 1 --- [inventory-service] [nio-8083-exec-2] [e1504e08365deb6e07871899cb346f75-709b71668f179b11] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n",
+            "durationMs": 23
+        },
+        {
+            "timestamp": 1780253647.202615,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.0017094017094017092 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 17
+        },
+        {
+            "timestamp": 1780253648.32122,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780253649.212129,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":62,\"ack_details\":{\"rate\":0.0},\"deliver\":62,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":62,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":62,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":199736,\"reductions_details\":{\"rate\":636.2},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 7
+        },
+        {
+            "timestamp": 1780253650.121824,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780253653.422501,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9985
+        },
+        {
+            "timestamp": 1780254198.596589,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26924579225...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269245792256,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269245792256,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269245792256,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269245792256,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 66
+        },
+        {
+            "timestamp": 1780254199.654128,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T19:03:10.010Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [03c6e0ab86979e158399d4123cd6634b-baf91540abb07804] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:03:05.945Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [55e2d165dd192d29e5ba4be026ebf5e5-f83d96ba13bc64b4] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:03:01.872Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [b07adac142f5d25f39c50cd941b560a6-043d9ca2cc16749c] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:02:57.782Z  WARN 1 --- [inventory-service] [nio-8083-exec-9] [f55bcb91fa7f2bbbf48a86a63cff6f9c-52256920af023ce7] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:02:56.713Z ERROR 1 --- [inventory-service] [nio-8083-exec-2] [0eee980dcae877ef02b266351e1bee9b-036ecffd1885a321] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:02:53.711Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [0eee980dcae877ef02b266351e1bee9b-036ecffd1885a321] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:02:48.660Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [813cb0467bb14e236b082c5eaa5014ca-1e4cec40db47b1c5] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:02:41.552Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [01823badbec03849625153fdb2d1698b-2723baeb841ce907] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:02:31.451Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [27849337b8389287013b6160969d8fb1-ee1226f56929282c] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:01:59.505Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [e6f6ca343751513fac1dfd4ef6bb6ea8-2964d73ef3806d00] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:01:57.454Z ERROR 1 --- [inventory-service] [nio-8083-exec-4] [8517d272918b76b34cdbc4a591bc3c87-0c113df846e93f5e] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:01:55.380Z ERROR 1 --- [inventory-service] [nio-8083-exec-6] [3ef54963da95365c9cb9c98d27f16892-368698361a549597] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:01:53.345Z ERROR 1 --- [inventory-service] [io-8083-exec-10] [a21c428feaf71db1ff8385e6aacde1a7-dca33db47c46485a] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:01:51.297Z ERROR 1 --- [inventory-service] [nio-8083-exec-7] [201cd7dd672166e9d0ff1253ef2195e3-097bc4b2526559d5] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:01:49.254Z ERROR 1 --- [inventory-service] [nio-8083-exec-9] [7870a0bb9a4728194265ff5294b39f47-334e5c3e777722ee] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n",
+            "durationMs": 16
+        },
+        {
+            "timestamp": 1780254201.156387,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.0017094017094017092 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 6
+        },
+        {
+            "timestamp": 1780254202.12354,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780254203.203309,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":70,\"ack_details\":{\"rate\":0.0},\"deliver\":70,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":70,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":70,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":230602,\"reductions_details\":{\"rate\":424.2},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 7
+        },
+        {
+            "timestamp": 1780254204.404134,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780254207.723091,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10667
+        },
+        {
+            "timestamp": 1780254688.593959,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26922219110...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269222191104,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269222191104,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269222191104,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269222191104,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 46
+        },
+        {
+            "timestamp": 1780254689.591219,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T19:11:20.221Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [a3fef0c212603fa58e7760001e2e667d-4db8565049ebe1fc] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:11:16.153Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [d7dcdb5017a8275c0ebf15bdbfb9a4ec-4d6c2af5b9c4a60e] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:11:12.102Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [7fb86abef309582c37692de1513d3154-ca20178c425f1087] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:11:08.020Z  WARN 1 --- [inventory-service] [nio-8083-exec-6] [a9006ecaa151e25a8b7ebd1ea653eab0-e7ce37b68b5a38de] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:11:06.979Z ERROR 1 --- [inventory-service] [nio-8083-exec-5] [ca4a034c8c2cf50bf85fb838a92ee44c-ac8d5b0ee3fb8ef7] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:11:03.977Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [ca4a034c8c2cf50bf85fb838a92ee44c-ac8d5b0ee3fb8ef7] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:10:58.928Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [0785d2cbc6ea5a3f9827157c2f660d2c-437c703f08d81131] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:10:51.842Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [65893f4242c29db5df94f4f09946f7b9-c46194d64bf84c2c] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:10:41.746Z  WARN 1 --- [inventory-service] [nio-8083-exec-8] [5503d95955d9c0a3ef7bb4d646581239-684143999b3d4a64] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:10:11.528Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [8695d40435cdd9f0836d2f5d6c922283-25ab9666ce597558] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:10:09.493Z ERROR 1 --- [inventory-service] [nio-8083-exec-9] [cf113acc28127d88183e01bbba5b4436-80eb935f5daef8c4] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:10:07.440Z ERROR 1 --- [inventory-service] [nio-8083-exec-2] [9ede3e72d1a4db995c233529a8b69e26-4b40d85397cf26d1] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:10:05.390Z ERROR 1 --- [inventory-service] [nio-8083-exec-1] [447f04eefb9996a5fefbb2eff84cf497-b23e95d0e2a4ae98] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:10:03.339Z ERROR 1 --- [inventory-service] [nio-8083-exec-8] [c6a6c737e9dbf77e044bce76ba1b4255-580656c51f570c43] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:10:01.284Z ERROR 1 --- [inventory-service] [nio-8083-exec-7] [2df5a9e4e7debaee2b0e913fcadc8c4e-4e27c18619254800] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n",
+            "durationMs": 16
+        },
+        {
+            "timestamp": 1780254690.934928,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.0017179060786388688 req/s\n  Total rate  : 0.065280430988277 req/s",
+            "durationMs": 22
+        },
+        {
+            "timestamp": 1780254692.135395,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780254693.242984,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":78,\"ack_details\":{\"rate\":0.0},\"deliver\":78,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":78,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":78,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":261005,\"reductions_details\":{\"rate\":273.2},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 7
+        },
+        {
+            "timestamp": 1780254694.081243,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780254707.370382,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 20094
+        },
+        {
+            "timestamp": 1780255246.996248,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26921398272...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269213982720,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269213982720,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269213982720,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269213982720,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 28
+        },
+        {
+            "timestamp": 1780255248.146281,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'inventory-service' (last 10 min):\n  2026-05-31T19:20:38.674Z  WARN 1 --- [inventory-service] [io-8083-exec-10] [f877c372903cf799f70b620431701b69-e98341d8bc6f1f4e] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:20:34.585Z  WARN 1 --- [inventory-service] [nio-8083-exec-9] [bb03676cd3e666b50d230001a590590a-1740fe1a05b3331d] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:20:30.522Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [b8db00bc10954d6675f2422fe4ddd069-c0d781a42cf5d44b] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:20:26.441Z  WARN 1 --- [inventory-service] [nio-8083-exec-1] [aeec84bace5365002acf910636aa8396-5ada13dcfd442370] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:20:25.385Z ERROR 1 --- [inventory-service] [nio-8083-exec-7] [5616b53c6b10205f2cff640624b97cb5-9be4c23eca11c1e1] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:20:22.382Z  WARN 1 --- [inventory-service] [nio-8083-exec-7] [5616b53c6b10205f2cff640624b97cb5-9be4c23eca11c1e1] b.u.poc.controller.InventoryController   : FAULT_INJECTION: adding artifi...\n  2026-05-31T19:20:17.342Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [cebe8e8afec513e37f67cdc9d451fa1c-62d5cf7627a91b58] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:20:10.260Z  WARN 1 --- [inventory-service] [nio-8083-exec-5] [9b70b23916422e3b8b62736c74313808-1a65021e611c9a0b] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:20:00.148Z  WARN 1 --- [inventory-service] [nio-8083-exec-2] [7b093eb65df5d5800457411419bb3e53-8d368ad3415b850c] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:19:29.138Z  WARN 1 --- [inventory-service] [nio-8083-exec-3] [6904cb386e18de96a8540b79d2bd22f5-a3c1a049a7eafef9] b.u.poc.controller.InventoryController   : Fault injection configured: en...\n  2026-05-31T19:19:27.104Z ERROR 1 --- [inventory-service] [nio-8083-exec-4] [91a930189e433d2e0398e60e0bc1d336-00a0b82d8270abf3] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:19:25.051Z ERROR 1 --- [inventory-service] [nio-8083-exec-5] [c3abd111c93d93af33b2a8cc22c973b3-d448bbe926616432] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:19:22.983Z ERROR 1 --- [inventory-service] [nio-8083-exec-9] [1b36df8fa71786b4caaaff65fba34256-49f42133c3721fe8] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:19:20.934Z ERROR 1 --- [inventory-service] [nio-8083-exec-2] [f89c998f6cc3bb897fe4e1f16d0ffe42-bcbd769615a6fe79] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n  2026-05-31T19:19:18.890Z ERROR 1 --- [inventory-service] [nio-8083-exec-1] [1f691b2c5c82b95204d56e244e7ad892-2119e423c83c255c] b.u.poc.controller.InventoryController   : Insufficient stock productId=P...\n",
+            "durationMs": 11
+        },
+        {
+            "timestamp": 1780255249.393841,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'inventory-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.0017094104756092765 req/s\n  Total rate  : 0.0666670085487618 req/s",
+            "durationMs": 8
+        },
+        {
+            "timestamp": 1780255250.558743,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'inventory-service' ===\n\nCriticality: MEDIUM\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780255251.485884,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35208,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":86,\"ack_details\":{\"rate\":0.0},\"deliver\":86,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":86,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":86,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":288518,\"reductions_details\":{\"rate\":423.8},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780255252.465136,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'inventory-service' (1 records) ===\n\nType: HIGH_LATENCY\nDescription: inventory-service reserve endpoint taking 3000ms+ per request due to artificial delay injection. P99 latency spike visible in Prometheus.\nResolution: Disabled artificial delay via /api/inventory/fault endpoint. Normal latency (< 100ms) restored.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780255256.05127,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10324
+        }
+    ],
+    "traceabilityScore": 0.7
+}

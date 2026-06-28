@@ -1,0 +1,36 @@
+{
+    "diagnosticId": "6db265fd-fe61-417a-828c-1c5113d8fc7f",
+    "scenarioId": "S3",
+    "affectedService": "notification-service",
+    "probableCause": "RabbitMQ queue accumulation due to lack of active consumers",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "queue depth is high",
+        "similar incident occurred in the past"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Restart notification-service and monitor consumer connections",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order confirmation emails and notifications may be delayed or not sent at all",
+    "relatedServices": [
+        "rabbitmq"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "CRITICAL",
+        "rationale": "Critical action detected: restart. Agent flagged action as requiring approval: 'Restart notification-service and monitor consumer connections'. Critical pattern 'restart' in action: 'Restart notification-service and monitor consumer connections'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 13717,
+        "toolCallCount": 60,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780254253.238203,
+    "rawAgentResponse": "Thought: The incident history suggests that a similar issue occurred in the past, where the notification-service queue accumulated messages due to a lack of active consumers.\nAction: STOP (diagnosis complete)\n\nNow it's time to write the Final Answer:\n\nThought: I have sufficient evidence.\nFinal Answer:\n```json\n{\n  \"affectedService\": \"notification-service\",\n  \"probableCause\": \"RabbitMQ queue accumulation due to lack of active consumers\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"queue depth is high\", \"similar incident occurred in the past\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Restart notification-service and monitor consumer connections\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order confirmation emails and notifications may be delayed or not sent at all\",\n  \"relatedServices\": [\"rabbitmq\"]\n}\n```"
+}

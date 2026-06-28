@@ -1,0 +1,69 @@
+{
+    "diagnosticId": "S6",
+    "entries": [
+        {
+            "timestamp": 1780252638.299941,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26918997196...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269189971968,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269189971968,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269189971968,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269189971968,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 71
+        },
+        {
+            "timestamp": 1780252639.331952,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'postgres' (last 10 min):\n  2026-05-31 18:37:07.689 UTC [1] LOG:  database system is ready to accept connections\n  2026-05-31 18:37:07.681 UTC [29] LOG:  database system was shut down at 2026-05-31 18:35:58 UTC\n  2026-05-31 18:37:07.675 UTC [1] LOG:  listening on Unix socket \"/var/run/postgresql/.s.PGSQL.5432\"\n  2026-05-31 18:37:07.671 UTC [1] LOG:  listening on IPv6 address \"::\", port 5432\n  2026-05-31 18:37:07.671 UTC [1] LOG:  listening on IPv4 address \"0.0.0.0\", port 5432\n  2026-05-31 18:37:07.671 UTC [1] LOG:  starting PostgreSQL 16.14 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit\n  \n  PostgreSQL Database directory appears to contain a database; Skipping initialization\n  \n  2026-05-31 18:35:58.949 UTC [1] LOG:  database system is shut down\n  2026-05-31 18:35:58.938 UTC [27] LOG:  checkpoint complete: wrote 41 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.010 s, total=0.033 s; sync files=24, longest=0.00...\n  2026-05-31 18:35:58.912 UTC [27] LOG:  checkpoint starting: shutdown immediate\n  2026-05-31 18:35:58.905 UTC [27] LOG:  shutting down\n  2026-05-31 18:35:58.884 UTC [76] FATAL:  terminating connection due to administrator command\n  2026-05-31 18:35:58.882 UTC [77] FATAL:  terminating connection due to administrator command\n",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780252640.58931,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'postgres' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : no data",
+            "durationMs": 16
+        },
+        {
+            "timestamp": 1780252641.349895,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'postgres' ===\n\nService not found in topology registry.\nServices that depend ON this service (upstream impact):\n  - order-service\n  - payment-service\n  - inventory-service\n",
+            "durationMs": 12
+        },
+        {
+            "timestamp": 1780252642.164846,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":43112,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":50,\"ack_details\":{\"rate\":0.0},\"deliver\":50,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":50,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":50,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":163068,\"reductions_details\":{\"rate\":273.8},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 14
+        },
+        {
+            "timestamp": 1780252643.328922,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'postgres' (1 records) ===\n\nType: DATABASE_UNAVAILABLE\nDescription: PostgreSQL container stopped. All services depending on postgres (order-service, payment-service, inventory-service) failed with JDBC connection errors and HikariPool exhaustion.\nResolution: Restarted postgres container. All services reconnected automatically via HikariCP retry.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 13
+        },
+        {
+            "timestamp": 1780252647.680978,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10860
+        }
+    ],
+    "traceabilityScore": 0.7
+}

@@ -1,0 +1,36 @@
+{
+    "diagnosticId": "2936396c-ad3f-482c-8a3a-0202c161a057",
+    "scenarioId": "S3",
+    "affectedService": "notification-service",
+    "probableCause": "Queue accumulation due to lack of active consumers",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "RabbitMQ queue depth",
+        "Incident history"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Restart the notification-service container",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order confirmation emails and notifications not being sent",
+    "relatedServices": [
+        "rabbitmq"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "CRITICAL",
+        "rationale": "Critical action detected: restart. Agent flagged action as requiring approval: 'Restart the notification-service container'. Critical pattern 'restart' in action: 'Restart the notification-service container'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 13524,
+        "toolCallCount": 116,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780259197.9530807,
+    "rawAgentResponse": "I apologize for the mistake earlier!\n\nSince we've completed all 6 tool calls, I'll write the Final Answer.\n\nThought: I have sufficient evidence.\nFinal Answer:\n```json\n{\n  \"affectedService\": \"notification-service\",\n  \"probableCause\": \"Queue accumulation due to lack of active consumers\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"RabbitMQ queue depth\", \"Incident history\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Restart the notification-service container\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order confirmation emails and notifications not being sent\",\n  \"relatedServices\": [\"rabbitmq\"]\n}\n```"
+}

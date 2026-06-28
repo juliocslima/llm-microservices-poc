@@ -1,0 +1,37 @@
+{
+    "diagnosticId": "10ced926-440e-42a1-8dd6-093a22bb622a",
+    "scenarioId": "S3",
+    "affectedService": "notification-service",
+    "probableCause": "RabbitMQ queue accumulation with 0 active consumers",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "queue depth",
+        "logs showing correct functionality up until a certain point in time",
+        "incident history showing queue accumulation and service restart"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Restart the notification-service to clear the backlog",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Notification emails and notifications not being sent",
+    "relatedServices": [
+        "rabbitmq"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "CRITICAL",
+        "rationale": "Critical action detected: restart. Agent flagged action as requiring approval: 'Restart the notification-service to clear the backlog'. Critical pattern 'restart' in action: 'Restart the notification-service to clear the backlog'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 12363,
+        "toolCallCount": 72,
+        "evidenceCount": 3,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780255300.597929,
+    "rawAgentResponse": "Thought: We've gathered sufficient evidence to diagnose the issue.\nAction: None (Final Answer)\n\n**Final Answer**\n```json\n{\n  \"affectedService\": \"notification-service\",\n  \"probableCause\": \"RabbitMQ queue accumulation with 0 active consumers\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"queue depth\", \"logs showing correct functionality up until a certain point in time\", \"incident history showing queue accumulation and service restart\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Restart the notification-service to clear the backlog\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Notification emails and notifications not being sent\",\n  \"relatedServices\": [\"rabbitmq\"]\n}\n```"
+}

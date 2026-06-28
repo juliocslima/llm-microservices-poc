@@ -1,0 +1,37 @@
+{
+    "diagnosticId": "9eaaa723-712e-4983-be28-6758d82fbb1f",
+    "scenarioId": "S2",
+    "affectedService": "inventory-service",
+    "probableCause": "Artificial delay injection causing high latency",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "Logs showing FAULT_INJECTION warnings",
+        "Latency metrics indicating P99 spike",
+        "RabbitMQ queue status looking normal"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Disable artificial delay via /api/inventory/fault endpoint",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Slow checkout and potential order service delays",
+    "relatedServices": [
+        "order-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "HIGH",
+        "rationale": "Agent flagged action as requiring approval: 'Disable artificial delay via /api/inventory/fault endpoint'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 10481,
+        "toolCallCount": 78,
+        "evidenceCount": 3,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780255880.4074426,
+    "rawAgentResponse": "Thought: We've gathered sufficient evidence to diagnose the incident.\nAction: None (we're done with the ReAct loop)\n\nFinal Answer:\n```\n{\n  \"affectedService\": \"inventory-service\",\n  \"probableCause\": \"Artificial delay injection causing high latency\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"Logs showing FAULT_INJECTION warnings\", \"Latency metrics indicating P99 spike\", \"RabbitMQ queue status looking normal\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Disable artificial delay via /api/inventory/fault endpoint\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Slow checkout and potential order service delays\",\n  \"relatedServices\": [\"order-service\"]\n}\n```"
+}

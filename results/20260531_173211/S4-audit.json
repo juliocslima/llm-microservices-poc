@@ -1,0 +1,1266 @@
+{
+    "diagnosticId": "S4",
+    "entries": [
+        {
+            "timestamp": 1780240833.766414,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27075955097...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759550976,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759550976,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270759550976,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 166
+        },
+        {
+            "timestamp": 1780240834.754187,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 15:18:06 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=22c2699cafd41f698e08411494c050d4 spanId=f8c077ffe512206c - Payment failed for orderId=43e3776f-e050-4b36-9203...\n  2026-05-31 15:18:06 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=22c2699cafd41f698e08411494c050d4 spanId=f8c077ffe512206c - Payment service call failed orderId=43e3776f-e050-...\n  2026-05-31 15:18:05 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=27baf41d4eedad21f2c2c0e3f69e65b0 spanId=28327630d1f6afcd - Payment failed for orderId=66ce8e08-c054-4033-96ff-...\n  2026-05-31 15:18:05 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=27baf41d4eedad21f2c2c0e3f69e65b0 spanId=28327630d1f6afcd - Payment service call failed orderId=66ce8e08-c054-4...\n  2026-05-31 15:18:07 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=44192b9b82656c0fe2aa8208c22cd68c spanId=a918d672de3b0d5c - Payment failed for orderId=3384ef47-48fe-45c1-a4cb-...\n  2026-05-31 15:18:07 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=44192b9b82656c0fe2aa8208c22cd68c spanId=a918d672de3b0d5c - Payment service call failed orderId=3384ef47-48fe-4...\n  2026-05-31 15:18:08 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=6f6503ae85461315da11dcdf2601120b spanId=7ebc41db9b8f200f - Payment failed for orderId=17ae4465-e808-4fcf-8ca7-...\n  2026-05-31 15:18:08 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=6f6503ae85461315da11dcdf2601120b spanId=7ebc41db9b8f200f - Payment service call failed orderId=17ae4465-e808-4...\n  2026-05-31 15:18:04 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=7fb5606364b17df7091b0ad53afc4139 spanId=299eff8ac011698b - Payment failed for orderId=782894c3-44fa-4825-8f61-...\n  2026-05-31 15:18:04 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=7fb5606364b17df7091b0ad53afc4139 spanId=299eff8ac011698b - Payment service call failed orderId=782894c3-44fa-4...\n  2026-05-31 15:18:08 [http-nio-8081-exec-4] INFO  br.ufla.poc.service.OrderService traceId=6f6503ae85461315da11dcdf2601120b spanId=7ebc41db9b8f200f - Calling payment-service for orderId=17ae4465-e808-4...\n  2026-05-31 15:18:08 [http-nio-8081-exec-4] INFO  br.ufla.poc.service.OrderService traceId=6f6503ae85461315da11dcdf2601120b spanId=7ebc41db9b8f200f - Order saved orderId=17ae4465-e808-4fcf-8ca7-e3fca08...\n  2026-05-31 15:18:08 [http-nio-8081-exec-4] INFO  br.ufla.poc.service.OrderService traceId=6f6503ae85461315da11dcdf2601120b spanId=7ebc41db9b8f200f - Creating order for customer=test-S1\n  2026-05-31 15:18:08 [http-nio-8081-exec-4] INFO  b.u.poc.controller.OrderController traceId=6f6503ae85461315da11dcdf2601120b spanId=7ebc41db9b8f200f - POST /api/orders customer=test-S1\n  2026-05-31 15:17:33 [http-nio-8081-exec-5] WARN  com.zaxxer.hikari.pool.PoolBase traceId=bd251f10deed7bbf6999ce0a7cf09403 spanId=3f4af0ae8540d3b5 - HikariPool-1 - Failed to validate connection org.pos...\n",
+            "durationMs": 18
+        },
+        {
+            "timestamp": 1780240835.833208,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.06511488888888889 req/s",
+            "durationMs": 26
+        },
+        {
+            "timestamp": 1780240836.55373,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780240837.370168,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999998566765753,\"consumer_utilisation\":0.9999998566769727,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35088,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":40,\"ack_details\":{\"rate\":0.0},\"deliver\":40,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":40,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":40,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":116157,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780240838.360741,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780240842.35341,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10053
+        },
+        {
+            "timestamp": 1780241899.413655,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27074021376...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270740213760,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270740213760,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270740213760,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 143
+        },
+        {
+            "timestamp": 1780241900.580853,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 15:33:51 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration traceId= spanId= - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed dur...\n  2026-05-31 15:33:44 [main] WARN  org.hibernate.orm.deprecation traceId= spanId= - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property...\n  2026-05-31 15:33:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool traceId= spanId= - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5401c6a8\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  br.ufla.poc.service.OrderService traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - Order completed orderId=6d6d3c5a-e722-404c-91d6-d6c...\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  b.u.p.messaging.OrderEventPublisher traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - Publishing ORDER_COMPLETED orderId=6d6d3c5a-e722...\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  br.ufla.poc.service.OrderService traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - Inventory response orderId=6d6d3c5a-e722-404c-91d6-...\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  br.ufla.poc.service.OrderService traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - Calling inventory-service for orderId=6d6d3c5a-e722...\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  br.ufla.poc.service.OrderService traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - Payment response orderId=6d6d3c5a-e722-404c-91d6-d6...\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  br.ufla.poc.service.OrderService traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - Calling payment-service for orderId=6d6d3c5a-e722-4...\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  br.ufla.poc.service.OrderService traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - Order saved orderId=6d6d3c5a-e722-404c-91d6-d6c8255...\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  br.ufla.poc.service.OrderService traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - Creating order for customer=test-S3\n  2026-05-31 15:37:36 [http-nio-8081-exec-5] INFO  b.u.poc.controller.OrderController traceId=e65e401d7c4a3bbf9b18b31ffa5924a4 spanId=1bc8abc5d66a1ab3 - POST /api/orders customer=test-S3\n  2026-05-31 15:35:59 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=97f8b0ca727deb7f41cc96a869c2ea41 spanId=a3f6d6c063540d0e - Payment failed for orderId=a6a56a75-1366-4149-8030-...\n  2026-05-31 15:35:59 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=97f8b0ca727deb7f41cc96a869c2ea41 spanId=a3f6d6c063540d0e - Payment service call failed orderId=a6a56a75-1366-4...\n  2026-05-31 15:36:00 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=9252d5b91c7e8d5290cf4aef684a324d spanId=4eb697442c2b5c8b - Payment failed for orderId=56ddde83-e239-4786-989a-...\n",
+            "durationMs": 29
+        },
+        {
+            "timestamp": 1780241901.847092,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.026666666666666665 req/s",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780241902.747152,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780241903.835051,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9998602055994488,\"consumer_utilisation\":0.9998602056963469,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35080,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":60,\"ack_details\":{\"rate\":0.0},\"deliver\":60,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":60,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":60,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":165779,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 8
+        },
+        {
+            "timestamp": 1780241904.947173,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780241908.821218,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10878
+        },
+        {
+            "timestamp": 1780243645.371917,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27073025228...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270730252288,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270730252288,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270730252288,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 120
+        },
+        {
+            "timestamp": 1780243646.364211,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  br.ufla.poc.service.OrderService traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - Order completed orderId=db0307f0-6999-45f6-991e-c25...\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  b.u.p.messaging.OrderEventPublisher traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - Publishing ORDER_COMPLETED orderId=db0307f0-6999...\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  br.ufla.poc.service.OrderService traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - Inventory response orderId=db0307f0-6999-45f6-991e-...\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  br.ufla.poc.service.OrderService traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - Calling inventory-service for orderId=db0307f0-6999...\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  br.ufla.poc.service.OrderService traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - Payment response orderId=db0307f0-6999-45f6-991e-c2...\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  br.ufla.poc.service.OrderService traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - Calling payment-service for orderId=db0307f0-6999-4...\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  br.ufla.poc.service.OrderService traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - Order saved orderId=db0307f0-6999-45f6-991e-c255333...\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  br.ufla.poc.service.OrderService traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - Creating order for customer=baseline-customer\n  2026-05-31 16:04:34 [http-nio-8081-exec-6] INFO  b.u.poc.controller.OrderController traceId=8de3ec9f8ad818a995401c7c5f342b52 spanId=d261118da38fb794 - POST /api/orders customer=baseline-customer\n  2026-05-31 16:05:48 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=1a037fd5c931abbe76aeb36f737bd185 spanId=7f503c5bed9d286a - Order completed orderId=2956c69e-6a01-456b-9632-277...\n  2026-05-31 16:05:48 [http-nio-8081-exec-9] INFO  b.u.p.messaging.OrderEventPublisher traceId=1a037fd5c931abbe76aeb36f737bd185 spanId=7f503c5bed9d286a - Publishing ORDER_COMPLETED orderId=2956c69e-6a01...\n  2026-05-31 16:05:48 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=1a037fd5c931abbe76aeb36f737bd185 spanId=7f503c5bed9d286a - Inventory response orderId=2956c69e-6a01-456b-9632-...\n  2026-05-31 16:05:45 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=1a037fd5c931abbe76aeb36f737bd185 spanId=7f503c5bed9d286a - Calling inventory-service for orderId=2956c69e-6a01...\n  2026-05-31 16:05:45 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=1a037fd5c931abbe76aeb36f737bd185 spanId=7f503c5bed9d286a - Payment response orderId=2956c69e-6a01-456b-9632-27...\n  2026-05-31 16:05:45 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=1a037fd5c931abbe76aeb36f737bd185 spanId=7f503c5bed9d286a - Calling payment-service for orderId=2956c69e-6a01-4...\n",
+            "durationMs": 8
+        },
+        {
+            "timestamp": 1780243647.682031,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.06435322124035604 req/s",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780243648.410656,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780243649.17517,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999328003944014,\"consumer_utilisation\":0.9999328005341389,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35080,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":80,\"ack_details\":{\"rate\":0.0},\"deliver\":80,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":80,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":80,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":218956,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 12
+        },
+        {
+            "timestamp": 1780243650.064558,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780243654.072609,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9983
+        },
+        {
+            "timestamp": 1780250548.681251,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26919915929...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269199155200,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269199155200,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269199155200,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 260
+        },
+        {
+            "timestamp": 1780250549.794407,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 18:02:26 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration traceId= spanId= - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed dur...\n  2026-05-31 18:02:23 [main] WARN  org.hibernate.orm.deprecation traceId= spanId= - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property...\n  2026-05-31 17:59:33 [http-nio-8081-exec-10] INFO  br.ufla.poc.service.OrderService traceId=a8f5dcc0cf1a63d7774f19d2e2898be1 spanId=9751cb61c25034e8 - Order completed orderId=93dfdaef-02c0-452c-ac88-6c...\n  2026-05-31 17:59:33 [http-nio-8081-exec-10] INFO  b.u.p.messaging.OrderEventPublisher traceId=a8f5dcc0cf1a63d7774f19d2e2898be1 spanId=9751cb61c25034e8 - Publishing ORDER_COMPLETED orderId=93dfdaef-02c...\n  2026-05-31 17:59:33 [http-nio-8081-exec-10] INFO  br.ufla.poc.service.OrderService traceId=a8f5dcc0cf1a63d7774f19d2e2898be1 spanId=9751cb61c25034e8 - Inventory response orderId=93dfdaef-02c0-452c-ac88...\n  2026-05-31 17:59:33 [http-nio-8081-exec-10] INFO  br.ufla.poc.service.OrderService traceId=a8f5dcc0cf1a63d7774f19d2e2898be1 spanId=9751cb61c25034e8 - Calling inventory-service for orderId=93dfdaef-02c...\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  br.ufla.poc.service.OrderService traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - Order completed orderId=234c5083-dcc1-430b-93f6-f51...\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  b.u.p.messaging.OrderEventPublisher traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - Publishing ORDER_COMPLETED orderId=234c5083-dcc1...\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  br.ufla.poc.service.OrderService traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - Inventory response orderId=234c5083-dcc1-430b-93f6-...\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  br.ufla.poc.service.OrderService traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - Calling inventory-service for orderId=234c5083-dcc1...\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  br.ufla.poc.service.OrderService traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - Payment response orderId=234c5083-dcc1-430b-93f6-f5...\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  br.ufla.poc.service.OrderService traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - Calling payment-service for orderId=234c5083-dcc1-4...\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  br.ufla.poc.service.OrderService traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - Order saved orderId=234c5083-dcc1-430b-93f6-f5196cb...\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  br.ufla.poc.service.OrderService traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - Creating order for customer=test-S3\n  2026-05-31 18:01:38 [http-nio-8081-exec-3] INFO  b.u.poc.controller.OrderController traceId=90f06c8ee80194974c67e310cd3ab081 spanId=847611503b4ce80d - POST /api/orders customer=test-S3\n",
+            "durationMs": 25
+        },
+        {
+            "timestamp": 1780250551.402139,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : no data\n  Total rate  : 0.04833333333333334 req/s",
+            "durationMs": 17
+        },
+        {
+            "timestamp": 1780250552.565416,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 9
+        },
+        {
+            "timestamp": 1780250553.631711,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999351740918,\"consumer_utilisation\":0.9999999351741368,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":20,\"ack_details\":{\"rate\":0.0},\"deliver\":20,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":20,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":20,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":63776,\"reductions_details\":{\"rate\":181.8},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 35
+        },
+        {
+            "timestamp": 1780250554.991341,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780250558.844114,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 11702
+        },
+        {
+            "timestamp": 1780251509.733713,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26920622080...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269206220800,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269206220800,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269206220800,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 222
+        },
+        {
+            "timestamp": 1780251510.987676,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 18:15:32 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=0fdf545113fd08600be7621691323bd5 spanId=5f68dd7330eea891 - Inventory reservation failed for orderId=3e72f467-...\n  2026-05-31 18:15:32 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=0fdf545113fd08600be7621691323bd5 spanId=5f68dd7330eea891 - Inventory service call failed orderId=3e72f467-ddb...\n  2026-05-31 18:15:36 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=2cdbb5fa57fc4bc8bbcb68ce0b968e36 spanId=766a095191808c96 - Inventory reservation failed for orderId=e1a17e0a-9...\n  2026-05-31 18:15:36 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=2cdbb5fa57fc4bc8bbcb68ce0b968e36 spanId=766a095191808c96 - Inventory service call failed orderId=e1a17e0a-9c83...\n  2026-05-31 18:15:57 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=3066776a9b7022030401bbd89ca08a92 spanId=509fed172c1f1503 - Payment failed for orderId=0275a20c-24ce-4631-a593-...\n  2026-05-31 18:15:57 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=3066776a9b7022030401bbd89ca08a92 spanId=509fed172c1f1503 - Payment service call failed orderId=0275a20c-24ce-4...\n  2026-05-31 18:15:58 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=4221a179f02859da49643ff6636b9d25 spanId=009ce3d8b47e40eb - Payment failed for orderId=c73b7fdf-7f9c-48ff-b89c-...\n  2026-05-31 18:15:58 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=4221a179f02859da49643ff6636b9d25 spanId=009ce3d8b47e40eb - Payment service call failed orderId=c73b7fdf-7f9c-4...\n  2026-05-31 18:16:42 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=583f6f5c01c83874a80fc8558ba9fc12 spanId=f71216ecf1f77b77 - Inventory reservation failed for orderId=16f20931-b...\n  2026-05-31 18:16:42 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=583f6f5c01c83874a80fc8558ba9fc12 spanId=f71216ecf1f77b77 - Inventory service call failed orderId=16f20931-b7be...\n  2026-05-31 18:15:34 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=5adc11ad82ff4d341006e57a60d19ae3 spanId=1bcfefab187b0694 - Inventory reservation failed for orderId=c5c5cd53-5...\n  2026-05-31 18:15:34 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=5adc11ad82ff4d341006e57a60d19ae3 spanId=1bcfefab187b0694 - Inventory service call failed orderId=c5c5cd53-5890...\n  2026-05-31 18:15:56 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=76bd8f234b520eb561c739658cd73832 spanId=9a69842711a97cd7 - Payment failed for orderId=e5b99010-195e-4f0d-bf13-...\n  2026-05-31 18:15:56 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=76bd8f234b520eb561c739658cd73832 spanId=9a69842711a97cd7 - Payment service call failed orderId=e5b99010-195e-4...\n  2026-05-31 18:15:40 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=96a22bb99ede8535f80e52f7590fb05b spanId=1cc2e78cc7e468f1 - Inventory reservation failed for orderId=fa3125f0-e...\n",
+            "durationMs": 22
+        },
+        {
+            "timestamp": 1780251512.29704,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0 req/s\n  Total rate  : 0.064486 req/s",
+            "durationMs": 20
+        },
+        {
+            "timestamp": 1780251513.297859,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780251514.171236,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999920826299,\"consumer_utilisation\":0.9999999920826409,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":30,\"ack_details\":{\"rate\":0.0},\"deliver\":30,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":30,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":30,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":99997,\"reductions_details\":{\"rate\":181.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780251515.233723,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780251519.176061,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10849
+        },
+        {
+            "timestamp": 1780251989.524749,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26920337817...\n[DOWN]  order-service: ERROR: finishConnect(..) failed: Connection refused: order-service/172.26.0.5:8081\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269203378176,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269203378176,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269203378176,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 374
+        },
+        {
+            "timestamp": 1780251990.593785,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 18:23:42 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=00ad2f9e68f4361bdceabdc35609f984 spanId=9c11a0164d53f393 - Inventory reservation failed for orderId=7678426c-0...\n  2026-05-31 18:23:42 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=00ad2f9e68f4361bdceabdc35609f984 spanId=9c11a0164d53f393 - Inventory service call failed orderId=7678426c-08f0...\n  2026-05-31 18:23:36 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=15267a3c9a89a865241400774607c36a spanId=62a04e6116dd2920 - Inventory reservation failed for orderId=37f5b28c-1...\n  2026-05-31 18:23:36 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=15267a3c9a89a865241400774607c36a spanId=62a04e6116dd2920 - Inventory service call failed orderId=37f5b28c-19df...\n  2026-05-31 18:24:00 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=4ab6ebac15621c39bc1c815bd03d63b1 spanId=c30440736a71c1bf - Payment failed for orderId=53ac970c-71cf-465d-a30d-...\n  2026-05-31 18:24:00 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=4ab6ebac15621c39bc1c815bd03d63b1 spanId=c30440736a71c1bf - Payment service call failed orderId=53ac970c-71cf-4...\n  2026-05-31 18:24:01 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=5a4b7e7e83583b7ef5e3abab91492b1e spanId=a85fdf952c942e9b - Payment failed for orderId=bf03538c-9d67-42f0-909e-...\n  2026-05-31 18:24:01 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=5a4b7e7e83583b7ef5e3abab91492b1e spanId=a85fdf952c942e9b - Payment service call failed orderId=bf03538c-9d67-4...\n  2026-05-31 18:23:40 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=5e10ddd10c6a660c13afaed79852ec31 spanId=ae9402001b6efb7c - Inventory reservation failed for orderId=21358194-6...\n  2026-05-31 18:23:40 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=5e10ddd10c6a660c13afaed79852ec31 spanId=ae9402001b6efb7c - Inventory service call failed orderId=21358194-611e...\n  2026-05-31 18:23:56 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=60eef0eaa7eea59ff2eb1560a2f873ee spanId=1547e96260aa6f6d - Payment failed for orderId=9295f28b-431d-480a-8916-...\n  2026-05-31 18:23:56 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=60eef0eaa7eea59ff2eb1560a2f873ee spanId=1547e96260aa6f6d - Payment service call failed orderId=9295f28b-431d-4...\n  2026-05-31 18:23:32 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=69067c538046e69d0070ac09477f1239 spanId=077527ce48d7ff56 - Inventory reservation failed for orderId=86202b82-3...\n  2026-05-31 18:23:32 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=69067c538046e69d0070ac09477f1239 spanId=077527ce48d7ff56 - Inventory service call failed orderId=86202b82-3d8b...\n  2026-05-31 18:23:59 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=732329f01b970cacaa1590fc5182de1d spanId=4da0bb11508073d2 - Payment failed for orderId=b1fa7420-b074-4869-8a21-...\n",
+            "durationMs": 19
+        },
+        {
+            "timestamp": 1780251991.775836,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008526777576124217 req/s\n  Total rate  : 0.05783751461988304 req/s",
+            "durationMs": 21
+        },
+        {
+            "timestamp": 1780251992.853511,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 6
+        },
+        {
+            "timestamp": 1780251993.528511,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999451299972,\"consumer_utilisation\":0.9999999451300353,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":38,\"ack_details\":{\"rate\":0.0},\"deliver\":38,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":38,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":38,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":127851,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 9
+        },
+        {
+            "timestamp": 1780251994.485324,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780251997.872001,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10013
+        },
+        {
+            "timestamp": 1780252487.978553,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26921244262...\n[DOWN]  order-service: ERROR: finishConnect(..) failed: Connection refused: order-service/172.26.0.5:8081\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269212442624,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269212442624,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269212442624,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 207
+        },
+        {
+            "timestamp": 1780252489.121852,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 18:34:45 [main] WARN  org.hibernate.orm.deprecation traceId= spanId= - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property...\n  2026-05-31 18:34:45 [main] INFO  com.zaxxer.hikari.pool.HikariPool traceId= spanId= - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5401c6a8\n  2026-05-31 18:33:05 [http-nio-8081-exec-2] INFO  br.ufla.poc.service.OrderService traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - Order completed orderId=f6f395a2-2709-43d6-812d-399...\n  2026-05-31 18:33:05 [http-nio-8081-exec-2] INFO  b.u.p.messaging.OrderEventPublisher traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - Publishing ORDER_COMPLETED orderId=f6f395a2-2709...\n  2026-05-31 18:33:05 [http-nio-8081-exec-2] INFO  br.ufla.poc.service.OrderService traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - Inventory response orderId=f6f395a2-2709-43d6-812d-...\n  2026-05-31 18:33:02 [http-nio-8081-exec-2] INFO  br.ufla.poc.service.OrderService traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - Calling inventory-service for orderId=f6f395a2-2709...\n  2026-05-31 18:33:02 [http-nio-8081-exec-2] INFO  br.ufla.poc.service.OrderService traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - Payment response orderId=f6f395a2-2709-43d6-812d-39...\n  2026-05-31 18:33:02 [http-nio-8081-exec-2] INFO  br.ufla.poc.service.OrderService traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - Calling payment-service for orderId=f6f395a2-2709-4...\n  2026-05-31 18:33:02 [http-nio-8081-exec-2] INFO  br.ufla.poc.service.OrderService traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - Order saved orderId=f6f395a2-2709-43d6-812d-399e8e0...\n  2026-05-31 18:33:02 [http-nio-8081-exec-2] INFO  br.ufla.poc.service.OrderService traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - Creating order for customer=test-S2\n  2026-05-31 18:33:02 [http-nio-8081-exec-2] INFO  b.u.poc.controller.OrderController traceId=a106500a58d1e8955bc40148efb4dad1 spanId=0e83f64b4e541179 - POST /api/orders customer=test-S2\n  2026-05-31 18:33:57 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=d0eba2277bd2ce3635c6c531b6bcd748 spanId=f44b27d2f1e0eed3 - Inventory reservation failed for orderId=0fe60150-1...\n  2026-05-31 18:33:57 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=d0eba2277bd2ce3635c6c531b6bcd748 spanId=f44b27d2f1e0eed3 - Inventory service call failed orderId=0fe60150-1ba9...\n  2026-05-31 18:32:19 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=b05a2b5d736602ec7ae5e8307c482f3a spanId=01f16f2d56e9324c - Payment failed for orderId=5e501588-23df-4fca-8677-...\n  2026-05-31 18:32:19 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=b05a2b5d736602ec7ae5e8307c482f3a spanId=01f16f2d56e9324c - Payment service call failed orderId=5e501588-23df-4...\n",
+            "durationMs": 13
+        },
+        {
+            "timestamp": 1780252490.385308,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.00870421492921493 req/s\n  Total rate  : 0.05729871171171171 req/s",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780252491.338513,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780252492.375421,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999843908729953,\"consumer_utilisation\":0.9999843908838147,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35080,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":46,\"ack_details\":{\"rate\":0.0},\"deliver\":46,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":46,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":46,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":155833,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 11
+        },
+        {
+            "timestamp": 1780252493.451439,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780252497.371761,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10922
+        },
+        {
+            "timestamp": 1780253034.589811,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26924369510...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269243695104,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269243695104,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269243695104,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 191
+        },
+        {
+            "timestamp": 1780253035.565341,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 18:41:24 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=109878aecaa3fb060ce6efbbc794980b spanId=51c6a8e2823c2313 - Payment failed for orderId=ec11397b-77dd-45cc-a303-...\n  2026-05-31 18:41:24 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=109878aecaa3fb060ce6efbbc794980b spanId=51c6a8e2823c2313 - Payment service call failed orderId=ec11397b-77dd-4...\n  2026-05-31 18:41:01 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=190491172797f26d27eb129f09046482 spanId=5f076dd3aa222255 - Inventory reservation failed for orderId=71587c4b-5...\n  2026-05-31 18:41:01 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=190491172797f26d27eb129f09046482 spanId=5f076dd3aa222255 - Inventory service call failed orderId=71587c4b-5fce...\n  2026-05-31 18:41:21 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=194068f1a628cb4cb770b4987469c138 spanId=7221f8ff015e779e - Payment failed for orderId=ee7156c4-30e6-4d63-88a9-...\n  2026-05-31 18:41:21 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=194068f1a628cb4cb770b4987469c138 spanId=7221f8ff015e779e - Payment service call failed orderId=ee7156c4-30e6-4...\n  2026-05-31 18:41:05 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=1f8923e19f70ec9eb668f3758c5c21cf spanId=4ee6fb1c692dcca4 - Inventory reservation failed for orderId=59623dee-3...\n  2026-05-31 18:41:05 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=1f8923e19f70ec9eb668f3758c5c21cf spanId=4ee6fb1c692dcca4 - Inventory service call failed orderId=59623dee-3dbe...\n  2026-05-31 18:42:05 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=2e71797976c497cd0ffe19dfbd25eed0 spanId=eac272b85bfebec9 - Inventory reservation failed for orderId=39dda8b8-1...\n  2026-05-31 18:42:05 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=2e71797976c497cd0ffe19dfbd25eed0 spanId=eac272b85bfebec9 - Inventory service call failed orderId=39dda8b8-139e...\n  2026-05-31 18:41:22 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=616f1e85b3598e35e92f0a1532476e7e spanId=ca0c919e8dbb62bc - Payment failed for orderId=fd076cb8-bfaa-4cd8-8df6-...\n  2026-05-31 18:41:22 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=616f1e85b3598e35e92f0a1532476e7e spanId=ca0c919e8dbb62bc - Payment service call failed orderId=fd076cb8-bfaa-4...\n  2026-05-31 18:40:59 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=99e0aa09f1ceca93f2519a1c21d8bdec spanId=9aa5dfe1531fa4a1 - Inventory reservation failed for orderId=d9b1628b-f...\n  2026-05-31 18:40:59 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=99e0aa09f1ceca93f2519a1c21d8bdec spanId=9aa5dfe1531fa4a1 - Inventory service call failed orderId=d9b1628b-f938...\n  2026-05-31 18:40:55 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=99e9ffbef6ae8be2013e2f4964050e00 spanId=8cdef827bcd1e6b9 - Inventory reservation failed for orderId=2459806e-...\n",
+            "durationMs": 11
+        },
+        {
+            "timestamp": 1780253036.87291,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.0017196800766283522 req/s\n  Total rate  : 0.05832484795321638 req/s",
+            "durationMs": 18
+        },
+        {
+            "timestamp": 1780253037.985429,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780253038.938266,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999912711732,\"consumer_utilisation\":0.9999999912711793,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":58,\"ack_details\":{\"rate\":0.0},\"deliver\":58,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":58,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":58,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":192888,\"reductions_details\":{\"rate\":181.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 8
+        },
+        {
+            "timestamp": 1780253039.992872,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780253042.959571,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9902
+        },
+        {
+            "timestamp": 1780253729.003274,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26923989811...\n[DOWN]  order-service: ERROR: finishConnect(..) failed: Connection refused: order-service/172.26.0.5:8081\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269239898112,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269239898112,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269239898112,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 232
+        },
+        {
+            "timestamp": 1780253729.952741,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 18:52:45 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=011e8ab22b31411f6d04eaa8509a83a8 spanId=c718a100ce8f1da8 - Inventory reservation failed for orderId=af37797c-...\n  2026-05-31 18:52:45 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=011e8ab22b31411f6d04eaa8509a83a8 spanId=c718a100ce8f1da8 - Inventory service call failed orderId=af37797c-ad7...\n  2026-05-31 18:53:00 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=040a91b8ec4f2866fd8c496d0fff5efa spanId=d04582bfbeaee9d9 - Payment failed for orderId=c8ed7226-4c05-4654-870e-...\n  2026-05-31 18:53:00 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=040a91b8ec4f2866fd8c496d0fff5efa spanId=d04582bfbeaee9d9 - Payment service call failed orderId=c8ed7226-4c05-4...\n  2026-05-31 18:54:37 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=058b55426e7f4955af71a08ac42d1d32 spanId=41a0dd6c4aac2b2d - Inventory reservation failed for orderId=0e75a64c-5...\n  2026-05-31 18:54:37 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=058b55426e7f4955af71a08ac42d1d32 spanId=41a0dd6c4aac2b2d - Inventory service call failed orderId=0e75a64c-5856...\n  2026-05-31 18:53:03 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=455363a424e269526350385eba77efe9 spanId=10f60372bcea41eb - Payment failed for orderId=c4e328b0-1513-41bc-a944-...\n  2026-05-31 18:53:03 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=455363a424e269526350385eba77efe9 spanId=10f60372bcea41eb - Payment service call failed orderId=c4e328b0-1513-4...\n  2026-05-31 18:53:43 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=72e046a4cfd6fd477cba5fa8625d09e0 spanId=e110a277e872bd87 - Inventory reservation failed for orderId=9cd1bf32-a...\n  2026-05-31 18:53:43 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=72e046a4cfd6fd477cba5fa8625d09e0 spanId=e110a277e872bd87 - Inventory service call failed orderId=9cd1bf32-ae6e...\n  2026-05-31 18:52:59 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=7609c27e884a7db84271b694c9d55e8d spanId=912ab1a18192258e - Payment failed for orderId=f7576b18-e266-4a94-9b91-...\n  2026-05-31 18:52:59 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=7609c27e884a7db84271b694c9d55e8d spanId=912ab1a18192258e - Payment service call failed orderId=f7576b18-e266-4...\n  2026-05-31 18:53:02 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=7cffc32cb1d30df1048ebf03540e05a5 spanId=982677e1bc2aaf2b - Payment failed for orderId=140c4080-652d-4f45-af60-...\n  2026-05-31 18:53:02 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=7cffc32cb1d30df1048ebf03540e05a5 spanId=982677e1bc2aaf2b - Payment service call failed orderId=140c4080-652d-4...\n  2026-05-31 18:53:01 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=abf665fca55901e6d5bfc01e48e1a6b1 spanId=47b801c937ee6438 - Payment failed for orderId=c254fd0d-88b3-428a-aaaf-...\n",
+            "durationMs": 16
+        },
+        {
+            "timestamp": 1780253731.093071,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.006846846846846846 req/s\n  Total rate  : 0.06461955555555556 req/s",
+            "durationMs": 16
+        },
+        {
+            "timestamp": 1780253732.071863,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780253732.87891,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999971982139,\"consumer_utilisation\":0.9999999971982177,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":143448,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":66,\"ack_details\":{\"rate\":0.0},\"deliver\":66,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":66,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":66,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":220420,\"reductions_details\":{\"rate\":251.2},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 8
+        },
+        {
+            "timestamp": 1780253733.925509,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 8
+        },
+        {
+            "timestamp": 1780253737.013351,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9455
+        },
+        {
+            "timestamp": 1780254286.976959,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26922939596...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269229395968,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269229395968,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269229391872,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 372
+        },
+        {
+            "timestamp": 1780254288.10267,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 19:04:46 [main] WARN  org.hibernate.orm.deprecation traceId= spanId= - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property...\n  2026-05-31 19:03:00 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - Order completed orderId=c2c4fc81-03a9-434a-b17d-f7e...\n  2026-05-31 19:03:00 [http-nio-8081-exec-9] INFO  b.u.p.messaging.OrderEventPublisher traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - Publishing ORDER_COMPLETED orderId=c2c4fc81-03a9...\n  2026-05-31 19:03:00 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - Inventory response orderId=c2c4fc81-03a9-434a-b17d-...\n  2026-05-31 19:02:57 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - Calling inventory-service for orderId=c2c4fc81-03a9...\n  2026-05-31 19:02:57 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - Payment response orderId=c2c4fc81-03a9-434a-b17d-f7...\n  2026-05-31 19:02:57 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - Calling payment-service for orderId=c2c4fc81-03a9-4...\n  2026-05-31 19:02:57 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - Order saved orderId=c2c4fc81-03a9-434a-b17d-f7e2835...\n  2026-05-31 19:02:57 [http-nio-8081-exec-9] INFO  br.ufla.poc.service.OrderService traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - Creating order for customer=test-S2\n  2026-05-31 19:02:57 [http-nio-8081-exec-9] INFO  b.u.poc.controller.OrderController traceId=d650304a23838022161b47e38760422f spanId=e809deb5fdd68e51 - POST /api/orders customer=test-S2\n  2026-05-31 19:02:12 [http-nio-8081-exec-4] INFO  br.ufla.poc.service.OrderService traceId=871e49d00b4c24b57283d021cc64fe81 spanId=9acadd3e4abd2539 - Calling payment-service for orderId=e19343e1-86fc-4...\n  2026-05-31 19:02:12 [http-nio-8081-exec-4] INFO  br.ufla.poc.service.OrderService traceId=871e49d00b4c24b57283d021cc64fe81 spanId=9acadd3e4abd2539 - Order saved orderId=e19343e1-86fc-4016-b330-d1cd76d...\n  2026-05-31 19:03:51 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=f3a1497d819b95af35f77a3c4fc34c85 spanId=17b3b0e0db70bee2 - Inventory reservation failed for orderId=da2b8843-e...\n  2026-05-31 19:03:51 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=f3a1497d819b95af35f77a3c4fc34c85 spanId=17b3b0e0db70bee2 - Inventory service call failed orderId=da2b8843-ee9e...\n  2026-05-31 19:02:11 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=d0b3c2d4c06258f67243b5e5c66294fd spanId=8d4d937ffa9998f5 - Payment failed for orderId=787e5359-3d60-42bd-abbe-...\n",
+            "durationMs": 42
+        },
+        {
+            "timestamp": 1780254289.392149,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.00848372807017544 req/s\n  Total rate  : 0.05757754385964912 req/s",
+            "durationMs": 20
+        },
+        {
+            "timestamp": 1780254290.327921,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 6
+        },
+        {
+            "timestamp": 1780254291.316788,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999773829225,\"consumer_utilisation\":0.9999999773829539,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":74,\"ack_details\":{\"rate\":0.0},\"deliver\":74,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":74,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":74,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":252563,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 27
+        },
+        {
+            "timestamp": 1780254292.210498,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780254295.405953,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9988
+        },
+        {
+            "timestamp": 1780254785.458648,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26921995059...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269219950592,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269219950592,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269219950592,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 234
+        },
+        {
+            "timestamp": 1780254786.541369,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 19:10:24 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=014d5254d7473e710be34b9355ea6e82 spanId=a40e9147d67a67e2 - Payment failed for orderId=ed81139c-f64c-4ee4-b602-...\n  2026-05-31 19:10:24 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=014d5254d7473e710be34b9355ea6e82 spanId=a40e9147d67a67e2 - Payment service call failed orderId=ed81139c-f64c-4...\n  2026-05-31 19:10:03 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=262d859bbc9f7af4ae5e7d403efc7132 spanId=bf05f210a537c924 - Inventory reservation failed for orderId=6fe856fc-3...\n  2026-05-31 19:10:03 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=262d859bbc9f7af4ae5e7d403efc7132 spanId=bf05f210a537c924 - Inventory service call failed orderId=6fe856fc-343a...\n  2026-05-31 19:11:06 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=3470bba57fc4cc9db7f526ce7bf81ee1 spanId=20dafe9791f55571 - Inventory reservation failed for orderId=6ada351e-d...\n  2026-05-31 19:11:06 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=3470bba57fc4cc9db7f526ce7bf81ee1 spanId=20dafe9791f55571 - Inventory service call failed orderId=6ada351e-d40b...\n  2026-05-31 19:10:09 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=5e9ef3d40f9ad1a0e9f45e4e3effae24 spanId=158f5b39209d39eb - Inventory reservation failed for orderId=025944be-0...\n  2026-05-31 19:10:09 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=5e9ef3d40f9ad1a0e9f45e4e3effae24 spanId=158f5b39209d39eb - Inventory service call failed orderId=025944be-06c1...\n  2026-05-31 19:09:55 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=70e19dcc36bbc928bada0d66330717d3 spanId=b10ac0a0902974c0 - Inventory reservation failed for orderId=7b9840a2-8...\n  2026-05-31 19:10:07 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=8aada466e63eef629431c51bfe2f9a69 spanId=8756f8320660ba23 - Inventory reservation failed for orderId=92101e6b-f...\n  2026-05-31 19:10:07 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=8aada466e63eef629431c51bfe2f9a69 spanId=8756f8320660ba23 - Inventory service call failed orderId=92101e6b-fa98...\n  2026-05-31 19:09:57 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=a072e0b2eee85bc6903afb73ee61339f spanId=6491b68296b4bea8 - Inventory reservation failed for orderId=b653c98d-1...\n  2026-05-31 19:09:57 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=a072e0b2eee85bc6903afb73ee61339f spanId=6491b68296b4bea8 - Inventory service call failed orderId=b653c98d-1e46...\n  2026-05-31 19:09:59 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=c82f6f77ed095bcf58ac125114573281 spanId=5a810b184510eb6c - Inventory reservation failed for orderId=20b4e584-6...\n  2026-05-31 19:09:59 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=c82f6f77ed095bcf58ac125114573281 spanId=5a810b184510eb6c - Inventory service call failed orderId=20b4e584-6544...\n",
+            "durationMs": 22
+        },
+        {
+            "timestamp": 1780254787.660832,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008783348177191752 req/s\n  Total rate  : 0.05972676760490391 req/s",
+            "durationMs": 13
+        },
+        {
+            "timestamp": 1780254788.634935,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780254789.380509,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999975902095329,\"consumer_utilisation\":0.9999975902128737,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":89264,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":82,\"ack_details\":{\"rate\":0.0},\"deliver\":82,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":82,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":82,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":279689,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780254790.427895,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780254793.847356,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9887
+        },
+        {
+            "timestamp": 1780255333.882802,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26921106636...\n[DOWN]  order-service: ERROR: finishConnect(..) failed: Connection refused: order-service/172.26.0.5:8081\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269211066368,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269211066368,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269211066368,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 238
+        },
+        {
+            "timestamp": 1780255335.136553,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 19:19:25 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=1855df5fb318917215a827961080f570 spanId=fac37ea2934dc6bd - Inventory reservation failed for orderId=d89ab888-...\n  2026-05-31 19:19:25 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=1855df5fb318917215a827961080f570 spanId=fac37ea2934dc6bd - Inventory service call failed orderId=d89ab888-601...\n  2026-05-31 19:19:42 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=2392baa30654aa1f5d26256c10bce578 spanId=620465148a0f295a - Payment failed for orderId=8f13fec1-cf46-43b0-8ce1-...\n  2026-05-31 19:19:42 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=2392baa30654aa1f5d26256c10bce578 spanId=620465148a0f295a - Payment service call failed orderId=8f13fec1-cf46-4...\n  2026-05-31 19:19:22 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=3025c66840dd50f1936cc56f93f70708 spanId=b64513d352328bbe - Inventory reservation failed for orderId=1049591a-5...\n  2026-05-31 19:19:22 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=3025c66840dd50f1936cc56f93f70708 spanId=b64513d352328bbe - Inventory service call failed orderId=1049591a-5207...\n  2026-05-31 19:19:41 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=4323d38a2afeb8dc2da46dc0a05a7b7b spanId=6f50aa8b2c7cf5b7 - Payment failed for orderId=c9e4fda0-b936-4d92-8504-...\n  2026-05-31 19:19:41 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=4323d38a2afeb8dc2da46dc0a05a7b7b spanId=6f50aa8b2c7cf5b7 - Payment service call failed orderId=c9e4fda0-b936-4...\n  2026-05-31 19:19:45 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=571d340983be5f60f1229bffd3fa0f37 spanId=b11f05d0d95e6442 - Payment failed for orderId=0893c67d-b0d9-4139-85d6-...\n  2026-05-31 19:19:45 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=571d340983be5f60f1229bffd3fa0f37 spanId=b11f05d0d95e6442 - Payment service call failed orderId=0893c67d-b0d9-4...\n  2026-05-31 19:20:25 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=792e2b754d802f542e0ada3406865aea spanId=1b3d794bc7794770 - Inventory reservation failed for orderId=13fcdd81-9...\n  2026-05-31 19:20:25 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=792e2b754d802f542e0ada3406865aea spanId=1b3d794bc7794770 - Inventory service call failed orderId=13fcdd81-9dd0...\n  2026-05-31 19:19:20 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=82b30c51abd4049371f6dcf9a032ed78 spanId=f4686173d5213b7a - Inventory reservation failed for orderId=e6110cc1-d...\n  2026-05-31 19:19:20 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=82b30c51abd4049371f6dcf9a032ed78 spanId=f4686173d5213b7a - Inventory service call failed orderId=e6110cc1-d5c4...\n  2026-05-31 19:19:44 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=9572c28c0070968bafcff438cabed59c spanId=24429a0ef930a850 - Payment failed for orderId=503ba478-fed1-479c-99c4-...\n",
+            "durationMs": 18
+        },
+        {
+            "timestamp": 1780255336.215859,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008519269005847954 req/s\n  Total rate  : 0.05949538011695907 req/s",
+            "durationMs": 19
+        },
+        {
+            "timestamp": 1780255337.339401,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 4
+        },
+        {
+            "timestamp": 1780255338.192446,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999395011983,\"consumer_utilisation\":0.9999999395012822,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":143448,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":90,\"ack_details\":{\"rate\":0.0},\"deliver\":90,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":90,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":90,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":309764,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780255339.255699,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780255342.230734,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9881
+        },
+        {
+            "timestamp": 1780255960.686379,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26920525824...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269205254144,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269205250048,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269205250048,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269205250048,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 1235
+        },
+        {
+            "timestamp": 1780255961.851389,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 19:32:37 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration traceId= spanId= - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed dur...\n  2026-05-31 19:32:33 [main] WARN  org.hibernate.orm.deprecation traceId= spanId= - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property...\n  2026-05-31 19:31:44 [http-nio-8081-exec-8] INFO  br.ufla.poc.service.OrderService traceId=1b495039b43b850bbee6deb296fb1b06 spanId=e8e9775ba43c754c - Calling inventory-service for orderId=c3d21238-21ed...\n  2026-05-31 19:31:44 [http-nio-8081-exec-8] INFO  br.ufla.poc.service.OrderService traceId=1b495039b43b850bbee6deb296fb1b06 spanId=e8e9775ba43c754c - Payment response orderId=c3d21238-21ed-43a6-b0d2-27...\n  2026-05-31 19:31:44 [http-nio-8081-exec-8] INFO  br.ufla.poc.service.OrderService traceId=1b495039b43b850bbee6deb296fb1b06 spanId=e8e9775ba43c754c - Calling payment-service for orderId=c3d21238-21ed-4...\n  2026-05-31 19:31:44 [http-nio-8081-exec-8] INFO  br.ufla.poc.service.OrderService traceId=1b495039b43b850bbee6deb296fb1b06 spanId=e8e9775ba43c754c - Order saved orderId=c3d21238-21ed-43a6-b0d2-27e1a45...\n  2026-05-31 19:31:44 [http-nio-8081-exec-8] INFO  br.ufla.poc.service.OrderService traceId=1b495039b43b850bbee6deb296fb1b06 spanId=e8e9775ba43c754c - Creating order for customer=test-S3\n  2026-05-31 19:31:44 [http-nio-8081-exec-8] INFO  b.u.poc.controller.OrderController traceId=1b495039b43b850bbee6deb296fb1b06 spanId=e8e9775ba43c754c - POST /api/orders customer=test-S3\n  2026-05-31 19:29:43 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=e4297419af5ea5fe69ad8a3e1668681b spanId=ee94a633758b143d - Inventory reservation failed for orderId=963d81da-5...\n  2026-05-31 19:29:51 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=d487fe7715de7aa6ca726b3f9018b342 spanId=088620197008de3f - Inventory reservation failed for orderId=b02df168-3...\n  2026-05-31 19:29:51 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=d487fe7715de7aa6ca726b3f9018b342 spanId=088620197008de3f - Inventory service call failed orderId=b02df168-314b...\n  2026-05-31 19:30:06 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=c553283ad7ce299cffeee90f9c29fc48 spanId=4c336053595d8db5 - Payment failed for orderId=49ce73de-a3b4-4040-b582-...\n  2026-05-31 19:30:06 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=c553283ad7ce299cffeee90f9c29fc48 spanId=4c336053595d8db5 - Payment service call failed orderId=49ce73de-a3b4-4...\n  2026-05-31 19:30:07 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=b32aba947cdaf8d211d8bb3a0954c7b3 spanId=2e53e2f38dd422f6 - Payment failed for orderId=5261fdf8-e794-48a4-84d8...\n  2026-05-31 19:30:07 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=b32aba947cdaf8d211d8bb3a0954c7b3 spanId=2e53e2f38dd422f6 - Payment service call failed orderId=5261fdf8-e794-...\n",
+            "durationMs": 14
+        },
+        {
+            "timestamp": 1780255963.263083,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.006875 req/s\n  Total rate  : 0.06333333333333332 req/s",
+            "durationMs": 10
+        },
+        {
+            "timestamp": 1780255964.303082,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780255965.178404,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.999999521230097,\"consumer_utilisation\":0.9999995212307609,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35080,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":98,\"ack_details\":{\"rate\":0.0},\"deliver\":98,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":98,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":98,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":340978,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 7
+        },
+        {
+            "timestamp": 1780255966.310617,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780255970.655848,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 12492
+        },
+        {
+            "timestamp": 1780256501.271234,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26931822182...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269318221824,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269318221824,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269318221824,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 178
+        },
+        {
+            "timestamp": 1780256502.34108,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 19:38:51 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=105074a03bcf369d31e647b66c0996c9 spanId=37a597a1dc617a96 - Inventory reservation failed for orderId=16432248-0...\n  2026-05-31 19:38:51 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=105074a03bcf369d31e647b66c0996c9 spanId=37a597a1dc617a96 - Inventory service call failed orderId=16432248-049a...\n  2026-05-31 19:38:44 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=1e11c0b9ffb8360680b379e9534f70f8 spanId=485cd5ba0baa80bf - Inventory reservation failed for orderId=c8398571-f...\n  2026-05-31 19:38:44 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=1e11c0b9ffb8360680b379e9534f70f8 spanId=485cd5ba0baa80bf - Inventory service call failed orderId=c8398571-fd4d...\n  2026-05-31 19:38:55 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=2172adc4b838946581fe57d2d6c0c5d9 spanId=bde70232ebaca248 - Inventory reservation failed for orderId=9cfbc02e-9...\n  2026-05-31 19:38:55 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=2172adc4b838946581fe57d2d6c0c5d9 spanId=bde70232ebaca248 - Inventory service call failed orderId=9cfbc02e-92c6...\n  2026-05-31 19:39:15 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=2bcd29f1aecc3b8b13a6b2b017af008e spanId=379825970e81d0cb - Payment failed for orderId=43a8b858-a943-4949-8a2c-...\n  2026-05-31 19:39:15 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=2bcd29f1aecc3b8b13a6b2b017af008e spanId=379825970e81d0cb - Payment service call failed orderId=43a8b858-a943-4...\n  2026-05-31 19:39:56 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=3934f647aa7d63616df79e7376557d76 spanId=5f8c6974100bbd06 - Inventory reservation failed for orderId=f5915459-e...\n  2026-05-31 19:39:56 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=3934f647aa7d63616df79e7376557d76 spanId=5f8c6974100bbd06 - Inventory service call failed orderId=f5915459-eb01...\n  2026-05-31 19:39:14 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=3a87e7060dd6ccfa8b2ad4433297f516 spanId=95d6a7afe15ea17d - Payment failed for orderId=8f2e1d94-eea0-48aa-b0de-...\n  2026-05-31 19:39:14 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=3a87e7060dd6ccfa8b2ad4433297f516 spanId=95d6a7afe15ea17d - Payment service call failed orderId=8f2e1d94-eea0-4...\n  2026-05-31 19:38:46 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=4111e86d8f0d19bdb427e21788444062 spanId=e1eb9f3451baf8e5 - Inventory reservation failed for orderId=d4d0ea1a-6...\n  2026-05-31 19:38:46 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=4111e86d8f0d19bdb427e21788444062 spanId=e1eb9f3451baf8e5 - Inventory service call failed orderId=d4d0ea1a-6259...\n  2026-05-31 19:40:49 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=6642b8f19cdf4d74009f8043f65b2fe3 spanId=ed118b3818e60506 - Inventory reservation failed for orderId=e81786d7-c...\n",
+            "durationMs": 34
+        },
+        {
+            "timestamp": 1780256503.546526,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008558289473684208 req/s\n  Total rate  : 0.05808476023391812 req/s",
+            "durationMs": 16
+        },
+        {
+            "timestamp": 1780256504.548337,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780256505.560227,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999318348803,\"consumer_utilisation\":0.9999999318349275,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":143448,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":106,\"ack_details\":{\"rate\":0.0},\"deliver\":106,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":106,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":106,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":369834,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 11
+        },
+        {
+            "timestamp": 1780256506.677285,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780256509.72171,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9864
+        },
+        {
+            "timestamp": 1780256982.953261,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26931545702...\n[DOWN]  order-service: ERROR: finishConnect(..) failed: Connection refused: order-service/172.26.0.5:8081\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269315452928,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269315452928,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269315452928,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 236
+        },
+        {
+            "timestamp": 1780256984.108198,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 19:47:53 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=44fb3bc86c8bb9c18c17a2c61a9e8c24 spanId=d14efbe0bef1e140 - Inventory reservation failed for orderId=8c96a34a-...\n  2026-05-31 19:47:53 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=44fb3bc86c8bb9c18c17a2c61a9e8c24 spanId=d14efbe0bef1e140 - Inventory service call failed orderId=8c96a34a-eee...\n  2026-05-31 19:47:10 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=4db14e5744b27aa47049f6a7dbbcae23 spanId=70bce2ae5370f895 - Payment failed for orderId=95e3bb7d-a8a2-483e-a06a-...\n  2026-05-31 19:47:10 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=4db14e5744b27aa47049f6a7dbbcae23 spanId=70bce2ae5370f895 - Payment service call failed orderId=95e3bb7d-a8a2-4...\n  2026-05-31 19:46:56 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=8d941a749c74caffc045f0768da79f07 spanId=e8e25b63dce58edd - Inventory reservation failed for orderId=f7fe2979-2...\n  2026-05-31 19:47:11 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=91bce65e3fc76d4c438c08f6d9836ddb spanId=64019de165a56daf - Payment failed for orderId=032a9372-548d-4c64-b701-...\n  2026-05-31 19:47:11 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=91bce65e3fc76d4c438c08f6d9836ddb spanId=64019de165a56daf - Payment service call failed orderId=032a9372-548d-4...\n  2026-05-31 19:47:13 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=9d44c233c88093e3c148c05858183c80 spanId=1aaf0a6b5c352973 - Payment failed for orderId=1c27c3c7-5e4c-482a-a2d3-...\n  2026-05-31 19:47:13 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=9d44c233c88093e3c148c05858183c80 spanId=1aaf0a6b5c352973 - Payment service call failed orderId=1c27c3c7-5e4c-4...\n  2026-05-31 19:47:14 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=a25c1faa37ce87559fc45b7704ef421e spanId=30d955ea50d82679 - Payment failed for orderId=a23b96e7-ba41-4b00-8e67-...\n  2026-05-31 19:47:14 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=a25c1faa37ce87559fc45b7704ef421e spanId=30d955ea50d82679 - Payment service call failed orderId=a23b96e7-ba41-4...\n  2026-05-31 19:47:12 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=a2e2e26858ab89e1046b778285b4bd17 spanId=2b6086525ace8855 - Payment failed for orderId=32e32791-f232-448b-9c38...\n  2026-05-31 19:47:12 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=a2e2e26858ab89e1046b778285b4bd17 spanId=2b6086525ace8855 - Payment service call failed orderId=32e32791-f232-...\n  2026-05-31 19:48:48 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=b1174c5fc7e5cb603a9640db9ac0b2b1 spanId=425e41ea8a2be9e3 - Inventory reservation failed for orderId=b5386e04-3...\n  2026-05-31 19:48:48 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=b1174c5fc7e5cb603a9640db9ac0b2b1 spanId=425e41ea8a2be9e3 - Inventory service call failed orderId=b5386e04-3c43...\n",
+            "durationMs": 17
+        },
+        {
+            "timestamp": 1780256985.216971,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008533845029239769 req/s\n  Total rate  : 0.0579185380116959 req/s",
+            "durationMs": 15
+        },
+        {
+            "timestamp": 1780256986.349493,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780256987.209773,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999961970983331,\"consumer_utilisation\":0.999996197103605,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35080,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":113,\"ack_details\":{\"rate\":0.0},\"deliver\":113,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":113,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":113,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":395217,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 12
+        },
+        {
+            "timestamp": 1780256988.212275,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780256992.048756,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10416
+        },
+        {
+            "timestamp": 1780257491.115645,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26931124224...\n[DOWN]  order-service: ERROR: finishConnect(..) failed: Connection refused: order-service/172.26.0.5:8081\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269311242240,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269311242240,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269311242240,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 354
+        },
+        {
+            "timestamp": 1780257492.303774,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 19:55:39 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=0d5a48b9eee6f1afe4c11e9f6b310b58 spanId=db300c279110d6e5 - Payment failed for orderId=5b65acd9-04f0-445b-8275-...\n  2026-05-31 19:55:39 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=0d5a48b9eee6f1afe4c11e9f6b310b58 spanId=db300c279110d6e5 - Payment service call failed orderId=5b65acd9-04f0-4...\n  2026-05-31 19:55:37 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=1bfc120cad4aae70e0bf04856043f31f spanId=5b7d06ae16a5f0f8 - Payment failed for orderId=133dc004-8133-46c3-a53f...\n  2026-05-31 19:55:37 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=1bfc120cad4aae70e0bf04856043f31f spanId=5b7d06ae16a5f0f8 - Payment service call failed orderId=133dc004-8133-...\n  2026-05-31 19:55:18 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=21e11fa3c13b70d36abba85180a60016 spanId=45f5ac55ba6ac7f6 - Inventory reservation failed for orderId=a12a04f4-...\n  2026-05-31 19:55:18 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=21e11fa3c13b70d36abba85180a60016 spanId=45f5ac55ba6ac7f6 - Inventory service call failed orderId=a12a04f4-28b...\n  2026-05-31 19:55:22 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=227f3b07e9a8e327ab61f328763bf780 spanId=316f859f85a4daa6 - Inventory reservation failed for orderId=a469d605-c...\n  2026-05-31 19:55:22 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=227f3b07e9a8e327ab61f328763bf780 spanId=316f859f85a4daa6 - Inventory service call failed orderId=a469d605-c57f...\n  2026-05-31 19:56:33 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=3f23df36ec4d1b7f88dfb78d66b8403c spanId=63e68abce3395a5c - Inventory reservation failed for orderId=3421ffff-4...\n  2026-05-31 19:56:33 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=3f23df36ec4d1b7f88dfb78d66b8403c spanId=63e68abce3395a5c - Inventory service call failed orderId=3421ffff-4e65...\n  2026-05-31 19:55:20 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=45365cab3a30904cb32f86cfc3f3db18 spanId=2dd177444b762d1e - Inventory reservation failed for orderId=4ec74979-8...\n  2026-05-31 19:55:20 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=45365cab3a30904cb32f86cfc3f3db18 spanId=2dd177444b762d1e - Inventory service call failed orderId=4ec74979-828b...\n  2026-05-31 19:55:36 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=914ba182f62154d5cbe1d7e98c24e010 spanId=be72511e50a9026d - Payment failed for orderId=234ee01b-3e49-43f7-9b85-...\n  2026-05-31 19:55:36 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=914ba182f62154d5cbe1d7e98c24e010 spanId=be72511e50a9026d - Payment service call failed orderId=234ee01b-3e49-4...\n  2026-05-31 19:55:38 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=96ec396d591199d23ab703527373e240 spanId=f98a5afa98e53a08 - Payment failed for orderId=65500870-80c9-409e-93ee-...\n",
+            "durationMs": 44
+        },
+        {
+            "timestamp": 1780257493.480425,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008559400584795322 req/s\n  Total rate  : 0.05809241520467836 req/s",
+            "durationMs": 23
+        },
+        {
+            "timestamp": 1780257494.657586,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780257495.559886,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999949934666,\"consumer_utilisation\":0.9999999949934736,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":119,\"ack_details\":{\"rate\":0.0},\"deliver\":119,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":119,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":119,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":423448,\"reductions_details\":{\"rate\":181.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 9
+        },
+        {
+            "timestamp": 1780257496.577421,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780257499.615015,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 10290
+        },
+        {
+            "timestamp": 1780257997.953957,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26921553100...\n[DOWN]  order-service: ERROR: finishConnect(..) failed: Connection refused: order-service/172.26.0.5:8081\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269215531008,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269215531008,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269215531008,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 163
+        },
+        {
+            "timestamp": 1780257998.982741,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 20:06:36 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration traceId= spanId= - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed dur...\n  2026-05-31 20:06:32 [main] WARN  org.hibernate.orm.deprecation traceId= spanId= - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property...\n  2026-05-31 20:03:35 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=f43b67d10801a6ea9b3930a6d8db204c spanId=b107b21118ffd905 - Inventory reservation failed for orderId=85d3840d-a...\n  2026-05-31 20:03:35 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=f43b67d10801a6ea9b3930a6d8db204c spanId=b107b21118ffd905 - Inventory service call failed orderId=85d3840d-a663...\n  2026-05-31 20:03:52 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=b8d5ee70c8465028742245e9e4ec96ae spanId=5f2e279da29b201b - Payment failed for orderId=a1ce00dc-1643-46a3-93bd...\n  2026-05-31 20:03:52 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=b8d5ee70c8465028742245e9e4ec96ae spanId=5f2e279da29b201b - Payment service call failed orderId=a1ce00dc-1643-...\n  2026-05-31 20:03:33 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=aac1da0c7431b91b417403f312359b26 spanId=d7c0dee78d4c1f9e - Inventory reservation failed for orderId=45881059-...\n  2026-05-31 20:03:33 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=aac1da0c7431b91b417403f312359b26 spanId=d7c0dee78d4c1f9e - Inventory service call failed orderId=45881059-ef1...\n  2026-05-31 20:05:34 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=a8a41139ba9546b9a5e14e8b2a0f74e9 spanId=fdbde36d4b43322a - Inventory reservation failed for orderId=2e89d45b-4...\n  2026-05-31 20:05:34 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=a8a41139ba9546b9a5e14e8b2a0f74e9 spanId=fdbde36d4b43322a - Inventory service call failed orderId=2e89d45b-4ee1...\n  2026-05-31 20:03:31 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=9e7a37df34a5e941f0cddf5361667a9f spanId=541ba28f895a9863 - Inventory reservation failed for orderId=03fb784f-8...\n  2026-05-31 20:03:31 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=9e7a37df34a5e941f0cddf5361667a9f spanId=541ba28f895a9863 - Inventory service call failed orderId=03fb784f-8ec1...\n  2026-05-31 20:04:49 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=9c751629e447fe1cc18ef8087e693582 spanId=767b2a6c93bcc902 - Inventory reservation failed for orderId=c865cb63-4...\n  2026-05-31 20:04:49 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=9c751629e447fe1cc18ef8087e693582 spanId=767b2a6c93bcc902 - Inventory service call failed orderId=c865cb63-44ec...\n  2026-05-31 20:03:53 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=954de95bdc787ba8ba3d3f01c25b8c29 spanId=2951447478ee709e - Payment failed for orderId=356580ea-dfd9-4463-a2d5-...\n",
+            "durationMs": 34
+        },
+        {
+            "timestamp": 1780258000.005943,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008771929824561403 req/s\n  Total rate  : 0.058436391812865494 req/s",
+            "durationMs": 6
+        },
+        {
+            "timestamp": 1780258001.096889,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780258001.839413,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999970175678,\"consumer_utilisation\":0.9999999970175699,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":125,\"ack_details\":{\"rate\":0.0},\"deliver\":125,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":125,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":125,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":448738,\"reductions_details\":{\"rate\":181.4},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 5
+        },
+        {
+            "timestamp": 1780258002.771332,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780258005.94184,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9234
+        },
+        {
+            "timestamp": 1780258714.881135,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26921616588...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269216165888,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269216165888,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269216165888,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 147
+        },
+        {
+            "timestamp": 1780258716.023147,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 20:16:03 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=0b4da254eb642cb90319406ddb675acb spanId=b29e905f66565643 - Payment failed for orderId=99a6955c-74ab-46ec-9318...\n  2026-05-31 20:16:03 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=0b4da254eb642cb90319406ddb675acb spanId=b29e905f66565643 - Payment service call failed orderId=99a6955c-74ab-...\n  2026-05-31 20:16:04 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=0f8564c2ded22cd406aaed418cd138d5 spanId=c7efce5b4897d889 - Payment failed for orderId=358d5324-bfc4-433f-80ad-...\n  2026-05-31 20:16:04 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=0f8564c2ded22cd406aaed418cd138d5 spanId=c7efce5b4897d889 - Payment service call failed orderId=358d5324-bfc4-4...\n  2026-05-31 20:15:43 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=17e0b39b49c23e104b2de5072ed41396 spanId=c96f7535ae072b90 - Inventory reservation failed for orderId=8bb3f531-d...\n  2026-05-31 20:15:43 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=17e0b39b49c23e104b2de5072ed41396 spanId=c96f7535ae072b90 - Inventory service call failed orderId=8bb3f531-db57...\n  2026-05-31 20:15:41 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=1de507caf0d6ba463f4388547c3940f3 spanId=d880fed1ae0fad40 - Inventory reservation failed for orderId=efa60c32-7...\n  2026-05-31 20:15:41 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=1de507caf0d6ba463f4388547c3940f3 spanId=d880fed1ae0fad40 - Inventory service call failed orderId=efa60c32-70cd...\n  2026-05-31 20:16:07 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=2e8f3a6fbe29e2c50142ba55452f2f2e spanId=63359f5c150fa2af - Payment failed for orderId=915deff8-ce7c-46fa-87f1-...\n  2026-05-31 20:16:07 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=2e8f3a6fbe29e2c50142ba55452f2f2e spanId=63359f5c150fa2af - Payment service call failed orderId=915deff8-ce7c-4...\n  2026-05-31 20:17:46 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=3940c637446713457fb21b684981af8e spanId=5c9551f1533a4294 - Inventory reservation failed for orderId=4a4c2db9-b...\n  2026-05-31 20:17:46 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=3940c637446713457fb21b684981af8e spanId=5c9551f1533a4294 - Inventory service call failed orderId=4a4c2db9-b6b2...\n  2026-05-31 20:15:47 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=3f3d010e644bdcdeea043c770524e633 spanId=3b05db15bdd50981 - Inventory reservation failed for orderId=7e8aa9e2-e...\n  2026-05-31 20:15:47 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=3f3d010e644bdcdeea043c770524e633 spanId=3b05db15bdd50981 - Inventory service call failed orderId=7e8aa9e2-eb30...\n  2026-05-31 20:15:49 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=4fc321622b3caf2408ed663ab9bce106 spanId=d3fa4e8e152e6ba6 - Inventory reservation failed for orderId=34f5e1e9-0...\n",
+            "durationMs": 37
+        },
+        {
+            "timestamp": 1780258717.171266,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.006897824561403509 req/s\n  Total rate  : 0.06552866666666667 req/s",
+            "durationMs": 18
+        },
+        {
+            "timestamp": 1780258718.097805,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780258718.890676,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.999999993948748,\"consumer_utilisation\":0.9999999939487564,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":131,\"ack_details\":{\"rate\":0.0},\"deliver\":131,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":131,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":131,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":473839,\"reductions_details\":{\"rate\":275.6},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 6
+        },
+        {
+            "timestamp": 1780258719.874985,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780258722.949668,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9624
+        },
+        {
+            "timestamp": 1780259231.321551,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26919965491...\n[DOWN]  order-service: ERROR: Failed to resolve 'order-service' [A(1)]\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269199654912,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269199654912,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269199654912,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 142
+        },
+        {
+            "timestamp": 1780259232.431837,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 20:25:32 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=07aae03afc2af77d044f49926fe3de29 spanId=53f816c023a7f718 - Inventory reservation failed for orderId=baefaefb-2...\n  2026-05-31 20:25:32 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=07aae03afc2af77d044f49926fe3de29 spanId=53f816c023a7f718 - Inventory service call failed orderId=baefaefb-2ae9...\n  2026-05-31 20:24:38 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=0dd9a2467be6d991fd56968b7275a5a0 spanId=ff33d60595fd29a4 - Payment failed for orderId=979b1f05-b5c6-4b8f-bc75-...\n  2026-05-31 20:24:38 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=0dd9a2467be6d991fd56968b7275a5a0 spanId=ff33d60595fd29a4 - Payment service call failed orderId=979b1f05-b5c6-4...\n  2026-05-31 20:24:37 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=2a044f98f2e11b3dc55bf6ccc7cf39f8 spanId=9c876bdbfa02ea38 - Payment failed for orderId=0ebfe048-ecf1-4c7c-b556-...\n  2026-05-31 20:24:37 [http-nio-8081-exec-7] ERROR br.ufla.poc.service.OrderService traceId=2a044f98f2e11b3dc55bf6ccc7cf39f8 spanId=9c876bdbfa02ea38 - Payment service call failed orderId=0ebfe048-ecf1-4...\n  2026-05-31 20:24:40 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=2bb593c48ab4c41a38bd1a2e1575985f spanId=4ba8bc06b69f7d38 - Payment failed for orderId=6d7b5b3d-d7ad-4208-aef5-...\n  2026-05-31 20:24:40 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=2bb593c48ab4c41a38bd1a2e1575985f spanId=4ba8bc06b69f7d38 - Payment service call failed orderId=6d7b5b3d-d7ad-4...\n  2026-05-31 20:26:16 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=563006b48de1f2a3208375316c994d50 spanId=a248dc5fd98a91a8 - Inventory reservation failed for orderId=525a2022-9...\n  2026-05-31 20:26:16 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=563006b48de1f2a3208375316c994d50 spanId=a248dc5fd98a91a8 - Inventory service call failed orderId=525a2022-944c...\n  2026-05-31 20:24:41 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=70d3efeb8d043e34b70ae2cac832aeaf spanId=00919054276a564b - Payment failed for orderId=4e1b2f73-714c-4acc-877b-...\n  2026-05-31 20:24:41 [http-nio-8081-exec-1] ERROR br.ufla.poc.service.OrderService traceId=70d3efeb8d043e34b70ae2cac832aeaf spanId=00919054276a564b - Payment service call failed orderId=4e1b2f73-714c-4...\n  2026-05-31 20:26:19 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=92ebd1852d7071b3ca53d1013acc62ef spanId=ee89ece5b973b389 - Inventory reservation failed for orderId=bbcb3881-...\n  2026-05-31 20:26:19 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=92ebd1852d7071b3ca53d1013acc62ef spanId=ee89ece5b973b389 - Inventory service call failed orderId=bbcb3881-43b...\n  2026-05-31 20:24:23 [http-nio-8081-exec-8] ERROR br.ufla.poc.service.OrderService traceId=9cff72b917a6685cc00cd45694a96e82 spanId=2ff3add68e103d30 - Inventory reservation failed for orderId=d466b675-4...\n",
+            "durationMs": 23
+        },
+        {
+            "timestamp": 1780259233.757378,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.00855516081871345 req/s\n  Total rate  : 0.059746929824561396 req/s",
+            "durationMs": 12
+        },
+        {
+            "timestamp": 1780259234.799195,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780259235.704056,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999999857792203,\"consumer_utilisation\":0.9999999857792401,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":42984,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":137,\"ack_details\":{\"rate\":0.0},\"deliver\":137,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":137,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":137,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":500757,\"reductions_details\":{\"rate\":279.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 10
+        },
+        {
+            "timestamp": 1780259236.880191,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 2
+        },
+        {
+            "timestamp": 1780259241.094309,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 11267
+        },
+        {
+            "timestamp": 1780259719.60579,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26922320691...\n[DOWN]  order-service: ERROR: finishConnect(..) failed: Connection refused: order-service/172.26.0.5:8081\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269223206912,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269223206912,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269223206912,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 4 UP / 1 DOWN / 5 total",
+            "durationMs": 191
+        },
+        {
+            "timestamp": 1780259720.720068,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'order-service' (last 10 min):\n  2026-05-31 20:35:17 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration traceId= spanId= - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed dur...\n  2026-05-31 20:35:13 [main] WARN  org.hibernate.orm.deprecation traceId= spanId= - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property...\n  2026-05-31 20:32:46 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=ed30195e0330c884b3f772073aa5c22e spanId=194aad40dc59cecd - Payment failed for orderId=e035b340-326b-4c1b-9302-...\n  2026-05-31 20:32:46 [http-nio-8081-exec-9] ERROR br.ufla.poc.service.OrderService traceId=ed30195e0330c884b3f772073aa5c22e spanId=194aad40dc59cecd - Payment service call failed orderId=e035b340-326b-4...\n  2026-05-31 20:33:41 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=dda839b2ac70eab693fc9df7fba88984 spanId=c4e1b3f2df735046 - Inventory reservation failed for orderId=065cc788-e...\n  2026-05-31 20:33:41 [http-nio-8081-exec-6] ERROR br.ufla.poc.service.OrderService traceId=dda839b2ac70eab693fc9df7fba88984 spanId=c4e1b3f2df735046 - Inventory service call failed orderId=065cc788-e869...\n  2026-05-31 20:32:44 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=d0285a4e530fccc6f40efc53f5be6332 spanId=4e8466c1b1a3d7ed - Payment failed for orderId=ec6b6685-5393-41ae-bc87-...\n  2026-05-31 20:32:44 [http-nio-8081-exec-4] ERROR br.ufla.poc.service.OrderService traceId=d0285a4e530fccc6f40efc53f5be6332 spanId=4e8466c1b1a3d7ed - Payment service call failed orderId=ec6b6685-5393-4...\n  2026-05-31 20:34:27 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=cdc7ee1769dedfd71891d7e9ec7b14e1 spanId=0fc0eb67a687fbec - Inventory reservation failed for orderId=2eb798b6-a...\n  2026-05-31 20:34:27 [http-nio-8081-exec-3] ERROR br.ufla.poc.service.OrderService traceId=cdc7ee1769dedfd71891d7e9ec7b14e1 spanId=0fc0eb67a687fbec - Inventory service call failed orderId=2eb798b6-aee8...\n  2026-05-31 20:32:48 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=c5f158cc779206d1b3fa3ea5487dce99 spanId=12cb4725954336d0 - Payment failed for orderId=8fd91089-9c1e-4f48-a6cd-...\n  2026-05-31 20:32:48 [http-nio-8081-exec-5] ERROR br.ufla.poc.service.OrderService traceId=c5f158cc779206d1b3fa3ea5487dce99 spanId=12cb4725954336d0 - Payment service call failed orderId=8fd91089-9c1e-4...\n  2026-05-31 20:32:30 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=ad6a4508830e6d52cbe81571b73b327e spanId=ce635b68de45cb23 - Inventory reservation failed for orderId=faf86083-6...\n  2026-05-31 20:32:30 [http-nio-8081-exec-2] ERROR br.ufla.poc.service.OrderService traceId=ad6a4508830e6d52cbe81571b73b327e spanId=ce635b68de45cb23 - Inventory service call failed orderId=faf86083-6a85...\n  2026-05-31 20:32:45 [http-nio-8081-exec-10] ERROR br.ufla.poc.service.OrderService traceId=9e8bd7dcf9999526d3868f3efeacc50c spanId=ce8e22e934ecece6 - Payment failed for orderId=9c01f9d0-f177-4877-b73e...\n",
+            "durationMs": 20
+        },
+        {
+            "timestamp": 1780259722.084028,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'order-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008662431914673294 req/s\n  Total rate  : 0.05705661261261262 req/s",
+            "durationMs": 16
+        },
+        {
+            "timestamp": 1780259723.08739,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'order-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"payment-service\", \"inventory-service\", \"rabbitmq\", \"postgres\", \"redis\"]\n\nServices that depend ON this service (upstream impact):\n  - api-gateway\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780259723.883516,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":0.9999976504875392,\"consumer_utilisation\":0.9999976504907963,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":35080,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":143,\"ack_details\":{\"rate\":0.0},\"deliver\":143,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":143,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":143,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":527060,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 13
+        },
+        {
+            "timestamp": 1780259724.960781,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'order-service' (1 records) ===\n\nType: CONFIGURATION_ERROR\nDescription: order-service configured with invalid INVENTORY_SERVICE_URL pointing to non-existent host. All inventory calls failed with connection refused.\nResolution: Updated INVENTORY_SERVICE_URL environment variable to correct hostname. Redeployed order-service.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 1
+        },
+        {
+            "timestamp": 1780259728.045053,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 9892
+        }
+    ],
+    "traceabilityScore": 0.7
+}

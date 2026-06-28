@@ -1,0 +1,37 @@
+{
+    "diagnosticId": "91df2abd-6d57-42c5-b913-92f93cff95c2",
+    "scenarioId": "S2",
+    "affectedService": "inventory-service",
+    "probableCause": "Artificial delay injection",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "Logs showing FAULT_INJECTION warnings",
+        "Latency metrics indicating high latency",
+        "Incident history showing artificial delay injection"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Disable artificial delay injection",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order service may be affected due to inventory-service's criticality",
+    "relatedServices": [
+        "order-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "HIGH",
+        "rationale": "Agent flagged action as requiring approval: 'Disable artificial delay injection'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 9897,
+        "toolCallCount": 84,
+        "evidenceCount": 3,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780256426.5238056,
+    "rawAgentResponse": "Thought: The incident history suggests that there was a known issue with artificial delay injection causing high latency in inventory-service.\nAction: STOP\n\nI have sufficient evidence.\n\nFinal Answer:\n```json\n{\n  \"affectedService\": \"inventory-service\",\n  \"probableCause\": \"Artificial delay injection\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"Logs showing FAULT_INJECTION warnings\", \"Latency metrics indicating high latency\", \"Incident history showing artificial delay injection\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Disable artificial delay injection\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order service may be affected due to inventory-service's criticality\",\n  \"relatedServices\": [\"order-service\"]\n}\n```"
+}

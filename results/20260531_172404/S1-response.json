@@ -1,0 +1,36 @@
+{
+    "diagnosticId": "527f3a60-c822-461c-8bef-2c0449e239f8",
+    "scenarioId": "S1",
+    "affectedService": "payment-service",
+    "probableCause": "Memory leak due to OOM kill",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "OOM kill due to memory leak",
+        "Added memory limits and alerting"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Monitor payment-service memory usage",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order checkouts failed with payment errors",
+    "relatedServices": [
+        "order-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "HIGH",
+        "rationale": "Agent flagged action as requiring approval: 'Monitor payment-service memory usage'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 9447,
+        "toolCallCount": 114,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780259095.0036287,
+    "rawAgentResponse": "Thought: The incident history shows that payment-service has experienced memory-related issues in the past, which were resolved by adding memory limits and alerting.\nAction: STOP\n\nI have sufficient evidence to make a diagnosis.\n\nFinal Answer:\n```json\n{\n  \"affectedService\": \"payment-service\",\n  \"probableCause\": \"Memory leak due to OOM kill\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"OOM kill due to memory leak\", \"Added memory limits and alerting\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Monitor payment-service memory usage\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order checkouts failed with payment errors\",\n  \"relatedServices\": [\"order-service\"]\n}\n```"
+}

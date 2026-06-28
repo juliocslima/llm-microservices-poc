@@ -1,0 +1,35 @@
+{
+    "diagnosticId": "3c523666-1bb4-48e5-8c88-57661229a914",
+    "scenarioId": "S3",
+    "affectedService": "notification-service",
+    "probableCause": "Queue accumulation in poc.notifications RabbitMQ queue with 0 active consumers",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "poc.notifications RabbitMQ queue accumulated thousands of messages with 0 active consumers"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Restart the notification-service and ensure consumer reconnection to RabbitMQ",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Notification emails and notifications not sent",
+    "relatedServices": [
+        "rabbitmq"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "CRITICAL",
+        "rationale": "Critical action detected: restart. Agent flagged action as requiring approval: 'Restart the notification-service and ensure consumer reconnection to RabbitMQ'. Critical pattern 'restart' in action: 'Restart the notification-service and ensure consumer reconnection to RabbitMQ'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 10485,
+        "toolCallCount": 182,
+        "evidenceCount": 1,
+        "traceabilityScore": 0.8500000000000001
+    },
+    "timestamp": 1780265091.234279,
+    "rawAgentResponse": "I apologize for the mistake earlier!\n\nSince we've gathered sufficient evidence, I'll write the Final Answer instead of calling another tool.\n\nHere's the Final Answer:\n\nThought: I have sufficient evidence.\nFinal Answer:\n```json\n{\n  \"affectedService\": \"notification-service\",\n  \"probableCause\": \"Queue accumulation in poc.notifications RabbitMQ queue with 0 active consumers\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"poc.notifications RabbitMQ queue accumulated thousands of messages with 0 active consumers\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Restart the notification-service and ensure consumer reconnection to RabbitMQ\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Notification emails and notifications not sent\",\n  \"relatedServices\": [\"rabbitmq\"]\n}\n```"
+}

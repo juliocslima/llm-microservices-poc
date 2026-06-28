@@ -1,0 +1,37 @@
+{
+    "diagnosticId": "31630f29-b0f9-4f4c-8ef6-eca99d7b1cb7",
+    "scenarioId": "S2",
+    "affectedService": "inventory-service",
+    "probableCause": "Artificial delay injection causing high latency",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "Logs showing FAULT_INJECTION warnings",
+        "Latency metrics indicating slow requests",
+        "Incident history showing resolved high-latency issue"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Verify that artificial delay injection is not enabled in production",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Slow checkout times for customers",
+    "relatedServices": [
+        "order-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "HIGH",
+        "rationale": "Agent flagged action as requiring approval: 'Verify that artificial delay injection is not enabled in production'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 10200,
+        "toolCallCount": 150,
+        "evidenceCount": 3,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780262155.2419262,
+    "rawAgentResponse": "Thought: The incident history suggests that there was a high-latency issue in the past due to artificial delay injection, which has been resolved.\nAction: Final Answer\n\nDiagnosis:\n```json\n{\n  \"affectedService\": \"inventory-service\",\n  \"probableCause\": \"Artificial delay injection causing high latency\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"Logs showing FAULT_INJECTION warnings\", \"Latency metrics indicating slow requests\", \"Incident history showing resolved high-latency issue\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Verify that artificial delay injection is not enabled in production\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Slow checkout times for customers\",\n  \"relatedServices\": [\"order-service\"]\n}\n```\nSTOP."
+}

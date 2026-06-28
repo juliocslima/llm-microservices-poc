@@ -1,0 +1,36 @@
+{
+    "diagnosticId": "706ac9d3-341e-45d3-ad19-cb399cc75e1d",
+    "scenarioId": "S3",
+    "affectedService": "notification-service",
+    "probableCause": "Queue accumulation due to notification-service container being stopped with no active consumers.",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "RabbitMQ queue status showing thousands of unprocessed messages",
+        "Incident history indicating notification-service was restarted"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Restart the notification-service container to clear the backlog",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Notification emails and notifications not being sent.",
+    "relatedServices": [
+        "rabbitmq"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "CRITICAL",
+        "rationale": "Critical action detected: restart. Agent flagged action as requiring approval: 'Restart the notification-service container to clear the backlog'. Critical pattern 'restart' in action: 'Restart the notification-service container to clear the backlog'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 10491,
+        "toolCallCount": 134,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780260686.4922528,
+    "rawAgentResponse": "I apologize for the mistake earlier! Since we've gathered sufficient information, I'll write the Final Answer instead of calling another tool.\n\nThought: I have sufficient evidence.\nFinal Answer:\n```json\n{\n  \"affectedService\": \"notification-service\",\n  \"probableCause\": \"Queue accumulation due to notification-service container being stopped with no active consumers.\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"RabbitMQ queue status showing thousands of unprocessed messages\", \"Incident history indicating notification-service was restarted\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Restart the notification-service container to clear the backlog\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Notification emails and notifications not being sent.\",\n  \"relatedServices\": [\"rabbitmq\"]\n}\n```"
+}

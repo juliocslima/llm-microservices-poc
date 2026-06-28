@@ -1,0 +1,36 @@
+{
+    "diagnosticId": "6d3c86ad-1533-4ebb-a33e-edee5dfefaa8",
+    "scenarioId": "S3",
+    "affectedService": "notification-service",
+    "probableCause": "RabbitMQ queue accumulation with 0 active consumers",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "queue depth is high",
+        "similar incident occurred in the past"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Restart notification-service container",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order confirmation emails and notifications may not be sent",
+    "relatedServices": [
+        "rabbitmq"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "CRITICAL",
+        "rationale": "Critical action detected: restart. Agent flagged action as requiring approval: 'Restart notification-service container'. Critical pattern 'restart' in action: 'Restart notification-service container'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 25641,
+        "toolCallCount": 104,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780257965.098778,
+    "rawAgentResponse": "I'll call a tool using exactly:\n\nAction: None (Final Answer)\n\nSince we've already reached the maximum iterations, I'll stop here and write the Final Answer.\n\nHere's my Final Answer:\n\n{\n  \"affectedService\": \"notification-service\",\n  \"probableCause\": \"RabbitMQ queue accumulation with 0 active consumers\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"queue depth is high\", \"similar incident occurred in the past\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Restart notification-service container\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order confirmation emails and notifications may not be sent\",\n  \"relatedServices\": [\"rabbitmq\"]\n}\n\nFinal Answer written!"
+}

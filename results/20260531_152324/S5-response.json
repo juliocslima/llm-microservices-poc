@@ -1,0 +1,36 @@
+{
+    "diagnosticId": "4c27cfd9-05e2-46b0-98e6-fb3cf6644c8c",
+    "scenarioId": "S5",
+    "affectedService": "payment-service",
+    "probableCause": "Memory leak or OOM kill due to high load or misconfiguration",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "Logs showing FAULT_INJECTION label",
+        "Incident history showing memory-related issues"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Increase memory limits and monitor for leaks",
+            "riskLevel": "MEDIUM",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order checkouts failed with payment errors",
+    "relatedServices": [
+        "order-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "HIGH",
+        "rationale": "Agent flagged action as requiring approval: 'Increase memory limits and monitor for leaks'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 20403,
+        "toolCallCount": 36,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780252050.715144,
+    "rawAgentResponse": "I apologize for the mistake earlier! Since we've completed all 6 tool calls, I'll write the Final Answer now.\n\nThought: I have sufficient evidence.\nFinal Answer:\n{\n  \"affectedService\": \"payment-service\",\n  \"probableCause\": \"Memory leak or OOM kill due to high load or misconfiguration\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"Logs showing FAULT_INJECTION label\", \"Incident history showing memory-related issues\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Increase memory limits and monitor for leaks\",\n      \"riskLevel\": \"MEDIUM\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order checkouts failed with payment errors\",\n  \"relatedServices\": [\"order-service\"]\n}"
+}

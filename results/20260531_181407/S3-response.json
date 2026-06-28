@@ -1,0 +1,36 @@
+{
+    "diagnosticId": "6e6d879e-9aaf-49ef-9dc7-cc46acc5a9ef",
+    "scenarioId": "S3",
+    "affectedService": "notification-service",
+    "probableCause": "RabbitMQ queue accumulation due to lack of active consumers",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "queue depth is high",
+        "similar issue occurred in the past"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Restart notification-service container",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order confirmation emails and notifications may not be sent",
+    "relatedServices": [
+        "rabbitmq"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "CRITICAL",
+        "rationale": "Critical action detected: restart. Agent flagged action as requiring approval: 'Restart notification-service container'. Critical pattern 'restart' in action: 'Restart notification-service container'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 10108,
+        "toolCallCount": 152,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780262196.567576,
+    "rawAgentResponse": "I apologize for the mistake earlier!\n\nSince we've completed all 6 tool calls, I'll write the Final Answer.\n\nThought: I have sufficient evidence.\nFinal Answer:\n```json\n{\n  \"affectedService\": \"notification-service\",\n  \"probableCause\": \"RabbitMQ queue accumulation due to lack of active consumers\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"queue depth is high\", \"similar issue occurred in the past\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Restart notification-service container\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order confirmation emails and notifications may not be sent\",\n  \"relatedServices\": [\"rabbitmq\"]\n}\n```"
+}

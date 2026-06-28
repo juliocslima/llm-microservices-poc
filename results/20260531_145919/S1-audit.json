@@ -1,0 +1,258 @@
+{
+    "diagnosticId": "S1",
+    "entries": [
+        {
+            "timestamp": 1780240703.516298,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27076020224...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270760202240,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270760202240,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270760202240,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270760202240,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 1210
+        },
+        {
+            "timestamp": 1780240704.818426,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'payment-service' (last 10 min):\n  2026-05-31T15:18:08.697Z ERROR 1 --- [payment-service] [nio-8082-exec-2] [5c0f870886ede8b9e1be1c96f2fdebe9-96edd6231d3b2591] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:18:07.663Z ERROR 1 --- [payment-service] [nio-8082-exec-1] [a469be2ff9fd0b77a04e082faecbe416-de0eaaccf1cfb356] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:18:06.635Z ERROR 1 --- [payment-service] [io-8082-exec-10] [a4eaf273aaeecfd5e4b790a9ad45e3ae-3256ae794ce77688] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:18:05.603Z ERROR 1 --- [payment-service] [nio-8082-exec-9] [219aa9b718d23c9308689140713a456a-8e1d9b137cfc4359] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:18:04.568Z ERROR 1 --- [payment-service] [nio-8082-exec-8] [4e0ee2a5b43edbf6fe382d2873309f0b-2491238f5a9fdd1b] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:17:59.545Z  WARN 1 --- [payment-service] [nio-8082-exec-4] [f13f189abe688538802129c5b6e13767-30b28e7679b7b094] b.ufla.poc.controller.PaymentController  : Fault injection configured: enab...\n  2026-05-31T15:17:54.444Z  WARN 1 --- [payment-service] [nio-8082-exec-5] [c417257f7992a809fbaa910c61c55a8f-fb0af1bac8c1017b] b.ufla.poc.controller.PaymentController  : Fault injection configured: enab...\n  2026-05-31T15:17:39.989Z  INFO 1 --- [payment-service] [nio-8082-exec-4] [708dfd1b3e1a864e4011014f96003922-4494647bd2eb5f43] b.ufla.poc.controller.PaymentController  : Payment approved paymentId=3a487...\n  2026-05-31T15:17:39.979Z  INFO 1 --- [payment-service] [nio-8082-exec-4] [708dfd1b3e1a864e4011014f96003922-4494647bd2eb5f43] b.ufla.poc.controller.PaymentController  : Processing payment orderId=fab0e...\n  2026-05-31T15:17:33.328Z  INFO 1 --- [payment-service] [nio-8082-exec-1] [d5926d26c13f0f59a44425da717f46c3-4a54470822b2543f] b.ufla.poc.controller.PaymentController  : Payment approved paymentId=66605...\n  2026-05-31T15:17:33.317Z  WARN 1 --- [payment-service] [nio-8082-exec-1] [d5926d26c13f0f59a44425da717f46c3-4a54470822b2543f] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validat...\n  2026-05-31T15:17:33.315Z  WARN 1 --- [payment-service] [nio-8082-exec-1] [d5926d26c13f0f59a44425da717f46c3-4a54470822b2543f] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validat...\n  2026-05-31T15:17:33.314Z  WARN 1 --- [payment-service] [nio-8082-exec-1] [d5926d26c13f0f59a44425da717f46c3-4a54470822b2543f] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validat...\n  2026-05-31T15:17:33.311Z  WARN 1 --- [payment-service] [nio-8082-exec-1] [d5926d26c13f0f59a44425da717f46c3-4a54470822b2543f] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validat...\n  2026-05-31T15:17:33.310Z  WARN 1 --- [payment-service] [nio-8082-exec-1] [d5926d26c13f0f59a44425da717f46c3-4a54470822b2543f] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validat...\n",
+            "durationMs": 27
+        },
+        {
+            "timestamp": 1780240706.442294,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'payment-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008547008547008546 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 96
+        },
+        {
+            "timestamp": 1780240707.781294,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'payment-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 33
+        },
+        {
+            "timestamp": 1780240708.925152,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":89392,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":30,\"ack_details\":{\"rate\":0.0},\"deliver\":30,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":30,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":30,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":79992,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 17
+        },
+        {
+            "timestamp": 1780240710.251745,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'payment-service' (2 records) ===\n\nType: SERVICE_UNAVAILABLE\nDescription: payment-service returned HTTP 503 for all requests. Health check endpoint showed DOWN status. All order checkouts failed with payment errors.\nResolution: Restarted payment-service container. Root cause was OOM kill due to memory leak. Added memory limits and alerting.\nDate: 2026-05-31 15:16:17.046553\n\nType: HIGH_ERROR_RATE\nDescription: payment-service processing failed for 95% of requests. HTTP 503 responses observed in order-service logs under FAULT_INJECTION label.\nResolution: Disabled fault injection flag via /api/payments/fault endpoint. Service recovered immediately.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 12
+        },
+        {
+            "timestamp": 1780240713.704922,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 20820
+        },
+        {
+            "timestamp": 1780241772.323527,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27074280652...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270742806528,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270742806528,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270742806528,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270742806528,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 724
+        },
+        {
+            "timestamp": 1780241773.358478,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'payment-service' (last 10 min):\n  2026-05-31T15:36:02.814Z ERROR 1 --- [payment-service] [nio-8082-exec-5] [3a6d82e464bee2df6fb51dba9d986f41-27bc250407fdf944] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:36:01.782Z ERROR 1 --- [payment-service] [nio-8082-exec-2] [cb035051a7178e97963fbb36db353263-ab0574c5837684c7] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:36:00.752Z ERROR 1 --- [payment-service] [nio-8082-exec-1] [f60926bb86318aac939eb7b8dcc7a3a8-2724375f384fc1ac] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:35:59.726Z ERROR 1 --- [payment-service] [io-8082-exec-10] [9b85be1efbd7c7a56b62a4bc39185944-29b20c2be4a5be59] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:35:58.690Z ERROR 1 --- [payment-service] [nio-8082-exec-9] [5571b59b5cd1bd2ef0a27f0f9214ffda-64c1455efc9f18e9] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T15:35:53.665Z  WARN 1 --- [payment-service] [nio-8082-exec-3] [bb0e709376d7d9378ce86101c5bc0964-8ca192f4653aa28c] b.ufla.poc.controller.PaymentController  : Fault injection configured: enab...\n  2026-05-31T15:35:48.604Z  WARN 1 --- [payment-service] [nio-8082-exec-4] [1be54a50e119db8d22a4ba654293d875-aeaba122aa7d848f] b.ufla.poc.controller.PaymentController  : Fault injection configured: enab...\n",
+            "durationMs": 23
+        },
+        {
+            "timestamp": 1780241774.431674,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'payment-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.008547008547008546 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 28
+        },
+        {
+            "timestamp": 1780241775.321986,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'payment-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 25
+        },
+        {
+            "timestamp": 1780241776.23951,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":89392,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":50,\"ack_details\":{\"rate\":0.0},\"deliver\":50,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":50,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":50,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":132230,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 10
+        },
+        {
+            "timestamp": 1780241777.179598,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'payment-service' (2 records) ===\n\nType: SERVICE_UNAVAILABLE\nDescription: payment-service returned HTTP 503 for all requests. Health check endpoint showed DOWN status. All order checkouts failed with payment errors.\nResolution: Restarted payment-service container. Root cause was OOM kill due to memory leak. Added memory limits and alerting.\nDate: 2026-05-31 15:16:17.046553\n\nType: HIGH_ERROR_RATE\nDescription: payment-service processing failed for 95% of requests. HTTP 503 responses observed in order-service logs under FAULT_INJECTION label.\nResolution: Disabled fault injection flag via /api/payments/fault endpoint. Service recovered immediately.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 3
+        },
+        {
+            "timestamp": 1780241781.021456,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 14163
+        },
+        {
+            "timestamp": 1780243515.970888,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":27073479475...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270734794752,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270734794752,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270734794752,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":270734794752,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 607
+        },
+        {
+            "timestamp": 1780243517.22292,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'payment-service' (last 10 min):\n  2026-05-31T16:05:06.847Z ERROR 1 --- [payment-service] [io-8082-exec-10] [1e7b88b3e9c7af6e040bc5852d06def4-406e3c3041409f41] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T16:05:05.825Z ERROR 1 --- [payment-service] [nio-8082-exec-9] [cdbcbac9ec937793a6400d18852fe12e-42884f9b46ffd6c2] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T16:05:04.795Z ERROR 1 --- [payment-service] [nio-8082-exec-7] [007b80bdacaead3f6fdf847919224ef1-371a677782ccd91e] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T16:05:03.763Z ERROR 1 --- [payment-service] [nio-8082-exec-3] [297a34c002850e5c2c7d84f02fd6da6c-d2176bb5111c0f69] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T16:05:02.724Z ERROR 1 --- [payment-service] [nio-8082-exec-8] [284fd39bab6190afee26d58e597be3ca-d67206d3f6befbbb] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T16:04:57.702Z  WARN 1 --- [payment-service] [nio-8082-exec-5] [795ab5d618b51bbb2124cc5fee8ec50c-217fac9c694dbaec] b.ufla.poc.controller.PaymentController  : Fault injection configured: enab...\n  2026-05-31T16:04:52.645Z  WARN 1 --- [payment-service] [nio-8082-exec-1] [6714defe5618483280b59efc4bd423cc-b41112c805e79c95] b.ufla.poc.controller.PaymentController  : Fault injection configured: enab...\n",
+            "durationMs": 18
+        },
+        {
+            "timestamp": 1780243518.676346,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'payment-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.005128205128205127 req/s\n  Total rate  : 0.06666666666666665 req/s",
+            "durationMs": 23
+        },
+        {
+            "timestamp": 1780243519.859222,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'payment-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 43
+        },
+        {
+            "timestamp": 1780243520.994965,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":143576,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":70,\"ack_details\":{\"rate\":0.0},\"deliver\":70,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":70,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":70,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@b18b8bb98e23\",\"reductions\":183733,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 16
+        },
+        {
+            "timestamp": 1780243522.058117,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'payment-service' (2 records) ===\n\nType: SERVICE_UNAVAILABLE\nDescription: payment-service returned HTTP 503 for all requests. Health check endpoint showed DOWN status. All order checkouts failed with payment errors.\nResolution: Restarted payment-service container. Root cause was OOM kill due to memory leak. Added memory limits and alerting.\nDate: 2026-05-31 15:16:17.046553\n\nType: HIGH_ERROR_RATE\nDescription: payment-service processing failed for 95% of requests. HTTP 503 responses observed in order-service logs under FAULT_INJECTION label.\nResolution: Disabled fault injection flag via /api/payments/fault endpoint. Service recovered immediately.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 6
+        },
+        {
+            "timestamp": 1780243526.202429,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 15324
+        },
+        {
+            "timestamp": 1780250408.573912,
+            "agentName": "HealthCheckTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "checkAllServicesHealth",
+            "toolInput": null,
+            "toolOutput": "=== System Health Status ===\n[UP]    api-gateway: {\"status\":\"UP\",\"components\":{\"discoveryComposite\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\",\"components\":{\"discoveryClient\":{\"description\":\"Discovery Client not initialized\",\"status\":\"UNKNOWN\"}}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":26920121139...\n[UP]    order-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269201211392,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    payment-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269201211392,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    inventory-service: {\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269201207296,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"deta...\n[UP]    notification-service: {\"status\":\"UP\",\"components\":{\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":470306373632,\"free\":269201207296,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"ping\":{\"status\":\"UP\"},\"rabbit\":{\"status\":\"UP\",\"details\":{\"version\":\"3.13.7\"}}}}\n\nSummary: 5 UP / 0 DOWN / 5 total",
+            "durationMs": 1712
+        },
+        {
+            "timestamp": 1780250409.756419,
+            "agentName": "LogQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLogs",
+            "toolInput": null,
+            "toolOutput": "Logs for 'payment-service' (last 10 min):\n  2026-05-31T17:59:58.270Z ERROR 1 --- [payment-service] [io-8082-exec-10] [11bb7bbfbb8ff736e5441625dbc005cf-12d0afd383177410] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T17:59:57.236Z ERROR 1 --- [payment-service] [nio-8082-exec-9] [209e172ca7bd8e4ee7975e172fea803b-3391af3eee1c5f7b] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T17:59:56.203Z ERROR 1 --- [payment-service] [nio-8082-exec-8] [68ad9a2d00ea02e5bc60d5b85ace32b2-8f36a8896903f18c] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T17:59:55.158Z ERROR 1 --- [payment-service] [nio-8082-exec-7] [edec1e680cb34436497d4ca24192de31-47507c72427465fe] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T17:59:54.119Z ERROR 1 --- [payment-service] [nio-8082-exec-5] [6f56541ec3138fd77ec63861edc45376-d9b282a23827e99d] b.ufla.poc.controller.PaymentController  : FAULT_INJECTION: payment-service...\n  2026-05-31T17:59:49.089Z  WARN 1 --- [payment-service] [nio-8082-exec-4] [7000e3fa74b557839b2a3f7d138335aa-e51cc961d2a874d7] b.ufla.poc.controller.PaymentController  : Fault injection configured: enab...\n  2026-05-31T17:59:41.931Z  WARN 1 --- [payment-service] [nio-8082-exec-2] [e4dfd5584e7b6b284c791ea9fd1ff39b-3ab9921ed6b07bea] b.ufla.poc.controller.PaymentController  : Fault injection configured: enab...\n  2026-05-31T17:59:35.743Z  INFO 1 --- [payment-service] [nio-8082-exec-8] [d6197566a3329af2e2b8503b1d3517aa-4fe6d536b7200f7c] b.ufla.poc.controller.PaymentController  : Payment approved paymentId=918d6...\n  2026-05-31T17:59:35.731Z  INFO 1 --- [payment-service] [nio-8082-exec-8] [d6197566a3329af2e2b8503b1d3517aa-4fe6d536b7200f7c] b.ufla.poc.controller.PaymentController  : Processing payment orderId=0de32...\n  2026-05-31T17:54:31.045Z  WARN 1 --- [payment-service] [           main] [                                                 ] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabl...\n",
+            "durationMs": 24
+        },
+        {
+            "timestamp": 1780250410.954273,
+            "agentName": "MetricsQueryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "queryLatency",
+            "toolInput": null,
+            "toolOutput": "Latency & error metrics for 'payment-service' (last 10 min):\n  P99 latency : no data\n  5xx rate    : 0.007761666666666667 req/s\n  Total rate  : 0.03592088888888889 req/s",
+            "durationMs": 63
+        },
+        {
+            "timestamp": 1780250412.034834,
+            "agentName": "TopologyTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getServiceDependencies",
+            "toolInput": null,
+            "toolOutput": "=== Dependencies for 'payment-service' ===\n\nCriticality: HIGH\nDirect dependencies: [\"postgres\", \"rabbitmq\"]\n\nServices that depend ON this service (upstream impact):\n  - order-service\n",
+            "durationMs": 18
+        },
+        {
+            "timestamp": 1780250412.782511,
+            "agentName": "QueueInspectionTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "inspectQueues",
+            "toolInput": null,
+            "toolOutput": "=== RabbitMQ Queue Status ===\n[{\"arguments\":{},\"auto_delete\":false,\"consumer_capacity\":1.0,\"consumer_utilisation\":1.0,\"consumers\":1,\"durable\":true,\"effective_policy_definition\":{},\"exclusive\":false,\"memory\":89392,\"message_bytes\":0,\"message_bytes_paged_out\":0,\"message_bytes_persistent\":0,\"message_bytes_ram\":0,\"message_bytes_ready\":0,\"message_bytes_unacknowledged\":0,\"message_stats\":{\"ack\":10,\"ack_details\":{\"rate\":0.0},\"deliver\":10,\"deliver_details\":{\"rate\":0.0},\"deliver_get\":10,\"deliver_get_details\":{\"rate\":0.0},\"deliver_no_ack\":0,\"deliver_no_ack_details\":{\"rate\":0.0},\"get\":0,\"get_details\":{\"rate\":0.0},\"get_empty\":0,\"get_empty_details\":{\"rate\":0.0},\"get_no_ack\":0,\"get_no_ack_details\":{\"rate\":0.0},\"publish\":10,\"publish_details\":{\"rate\":0.0},\"redeliver\":0,\"redeliver_details\":{\"rate\":0.0}},\"messages\":0,\"messages_details\":{\"rate\":0.0},\"messages_paged_out\":0,\"messages_persistent\":0,\"messages_ram\":0,\"messages_ready\":0,\"messages_ready_details\":{\"rate\":0.0},\"messages_ready_ram\":0,\"messages_unacknowledged\":0,\"messages_unacknowledged_details\":{\"rate\":0.0},\"messages_unacknowledged_ram\":0,\"name\":\"poc.notifications\",\"node\":\"rabbit@e39b184d45b8\",\"reductions\":29482,\"reductions_details\":{\"rate\":0.0},\"state\":\"running\",\"storage_version\":1,\"type\":\"classic\",\"vhost\":\"/\"}]",
+            "durationMs": 12
+        },
+        {
+            "timestamp": 1780250413.825205,
+            "agentName": "IncidentHistoryTool",
+            "actionType": "TOOL_CALL",
+            "toolName": "getIncidentHistory",
+            "toolInput": null,
+            "toolOutput": "=== Incident History for 'payment-service' (2 records) ===\n\nType: SERVICE_UNAVAILABLE\nDescription: payment-service returned HTTP 503 for all requests. Health check endpoint showed DOWN status. All order checkouts failed with payment errors.\nResolution: Restarted payment-service container. Root cause was OOM kill due to memory leak. Added memory limits and alerting.\nDate: 2026-05-31 15:16:17.046553\n\nType: HIGH_ERROR_RATE\nDescription: payment-service processing failed for 95% of requests. HTTP 503 responses observed in order-service logs under FAULT_INJECTION label.\nResolution: Disabled fault injection flag via /api/payments/fault endpoint. Service recovered immediately.\nDate: 2026-05-31 15:16:17.046553\n\n",
+            "durationMs": 12
+        },
+        {
+            "timestamp": 1780250417.292644,
+            "agentName": "DiagnosticAgent",
+            "actionType": "RECOMMENDATION",
+            "toolName": null,
+            "toolInput": null,
+            "toolOutput": null,
+            "durationMs": 14833
+        }
+    ],
+    "traceabilityScore": 0.7
+}

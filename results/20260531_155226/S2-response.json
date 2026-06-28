@@ -1,0 +1,37 @@
+{
+    "diagnosticId": "49a41509-b022-40da-8ccd-824486e9b587",
+    "scenarioId": "S2",
+    "affectedService": "inventory-service",
+    "probableCause": "Artificial delay injection causing high latency",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "Logs showing FAULT_INJECTION warnings",
+        "Latency metrics indicating slow requests",
+        "Incident history showing previous high-latency issue"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Verify that artificial delay injection is disabled",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Slow checkout times for customers",
+    "relatedServices": [
+        "order-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "HIGH",
+        "rationale": "Agent flagged action as requiring approval: 'Verify that artificial delay injection is disabled'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 9985,
+        "toolCallCount": 54,
+        "evidenceCount": 3,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780253653.4219203,
+    "rawAgentResponse": "Thought: The incident history suggests that there was a previous issue with high latency in inventory-service due to artificial delay injection, which has since been resolved.\nAction: None (Final Answer)\n\n**Final Answer**\n\nThought: I have sufficient evidence.\n\n```json\n{\n  \"affectedService\": \"inventory-service\",\n  \"probableCause\": \"Artificial delay injection causing high latency\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"Logs showing FAULT_INJECTION warnings\", \"Latency metrics indicating slow requests\", \"Incident history showing previous high-latency issue\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Verify that artificial delay injection is disabled\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Slow checkout times for customers\",\n  \"relatedServices\": [\"order-service\"]\n}\n```"
+}

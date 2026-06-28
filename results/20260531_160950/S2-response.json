@@ -1,0 +1,37 @@
+{
+    "diagnosticId": "df23ddac-cc04-44a2-9a14-937f4c158910",
+    "scenarioId": "S2",
+    "affectedService": "inventory-service",
+    "probableCause": "Artificial delay injection",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "Logs showing FAULT_INJECTION warnings",
+        "Latency metrics indicating high latency",
+        "Incident history showing previous high latency issue"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Disable artificial delay injection",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Slow checkout times and potential inventory inconsistencies",
+    "relatedServices": [
+        "order-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "HIGH",
+        "rationale": "Agent flagged action as requiring approval: 'Disable artificial delay injection'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 20094,
+        "toolCallCount": 66,
+        "evidenceCount": 3,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780254707.3698912,
+    "rawAgentResponse": "I understand now!\n\nThought: We have sufficient evidence to diagnose the issue.\nAction: None (Final Answer)\n\nFinal Answer:\n{\n  \"affectedService\": \"inventory-service\",\n  \"probableCause\": \"Artificial delay injection\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"Logs showing FAULT_INJECTION warnings\", \"Latency metrics indicating high latency\", \"Incident history showing previous high latency issue\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Disable artificial delay injection\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Slow checkout times and potential inventory inconsistencies\",\n  \"relatedServices\": [\"order-service\"]\n}"
+}

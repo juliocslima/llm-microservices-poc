@@ -1,0 +1,39 @@
+{
+    "diagnosticId": "2728a5c7-cd7d-410f-bb21-dfee6db1b4b7",
+    "scenarioId": "S3",
+    "affectedService": "notification-service",
+    "probableCause": "Queue accumulation due to notification-service container being stopped",
+    "confidenceLevel": "HIGH",
+    "evidenceUsed": [
+        "RabbitMQ queue status showing thousands of unprocessed messages with 0 active consumers",
+        "Incident history indicating notification-service was restarted"
+    ],
+    "recommendedActions": [
+        {
+            "action": "Restart the notification-service if it's not already running",
+            "riskLevel": "LOW",
+            "requiresHumanApproval": true
+        }
+    ],
+    "potentialImpact": "Order confirmation emails and notifications may be delayed or missed",
+    "relatedServices": [
+        "api-gateway",
+        "order-service",
+        "payment-service",
+        "inventory-service"
+    ],
+    "governance": {
+        "requiresHumanApproval": true,
+        "riskLevel": "CRITICAL",
+        "rationale": "Critical action detected: restart. Agent flagged action as requiring approval: 'Restart the notification-service if it's not already running'. Critical pattern 'restart' in action: 'Restart the notification-service if it's not already running'. ",
+        "approvalStatus": "PENDING"
+    },
+    "metrics": {
+        "totalDurationMs": 10711,
+        "toolCallCount": 30,
+        "evidenceCount": 2,
+        "traceabilityScore": 1.0
+    },
+    "timestamp": 1780251476.5701556,
+    "rawAgentResponse": "I apologize for the mistake earlier!\n\nSince we've gathered sufficient information, I'll write the Final Answer instead of calling another tool.\n\nHere's the diagnosis:\n\nThought: I have sufficient evidence.\nFinal Answer:\n```json\n{\n  \"affectedService\": \"notification-service\",\n  \"probableCause\": \"Queue accumulation due to notification-service container being stopped\",\n  \"confidenceLevel\": \"HIGH\",\n  \"evidenceUsed\": [\"RabbitMQ queue status showing thousands of unprocessed messages with 0 active consumers\", \"Incident history indicating notification-service was restarted\"],\n  \"recommendedActions\": [\n    {\n      \"action\": \"Restart the notification-service if it's not already running\",\n      \"riskLevel\": \"LOW\",\n      \"requiresHumanApproval\": true\n    }\n  ],\n  \"potentialImpact\": \"Order confirmation emails and notifications may be delayed or missed\",\n  \"relatedServices\": [\"api-gateway\", \"order-service\", \"payment-service\", \"inventory-service\"]\n}\n```"
+}
