@@ -29,6 +29,7 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
     private final IncidentHistoryTool incidentHistoryTool;
 
     private static final int MAX_ITERATIONS = 12;
+    private static final int REQUIRED_TOOL_CALLS = 6;
     private final ThreadLocal<Integer> lastToolCallCount = ThreadLocal.withInitial(() -> 0);
 
     private static final Pattern ACTION_RE = Pattern.compile(
@@ -68,8 +69,9 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
           not merely a similar historical incident.
         - Use exact component names observed in the environment (for example, order-service rather
           than an invented pluralized variant).
+        - Complete all six required tool observations from the incident request before returning Final Answer.
 
-        After the required tool calls from the incident request have been completed, output:
+        After all six required tool observations have been completed, output:
           Thought: I have sufficient current evidence.
           Final Answer:
           ```json
@@ -113,14 +115,15 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
 
             Matcher finalM = FINAL_RE.matcher(raw);
             if (finalM.find()) {
-                if (toolCallCount >= 3) {
+                if (toolCallCount >= REQUIRED_TOOL_CALLS) {
                     lastToolCallCount.set(toolCallCount);
                     log.info("[REACT] Final answer after {} real tool calls", toolCallCount);
                     return raw;
                 }
                 history.add(AiMessage.from(raw));
                 history.add(UserMessage.from(
-                    "You do not yet have enough current evidence. Call another required tool now.\n" +
+                    "You do not yet have all six required current observations. " +
+                    "Continue the required tool sequence before concluding.\n" +
                     "Remember: historical incidents are context only and cannot substitute for current telemetry.\n" +
                     "Thought: I need more current evidence.\nAction: "));
                 continue;
@@ -130,7 +133,7 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
             if (!actionM.find()) {
                 history.add(AiMessage.from(raw));
                 history.add(UserMessage.from(
-                    "Please call a tool using exactly:\nAction: toolName(args)\n\n" +
+                    "Please call the next required tool using exactly:\nAction: toolName(args)\n\n" +
                     "Available: checkAllServicesHealth(), queryLogs(svc,min), queryLatency(svc,min), " +
                     "getServiceDependencies(svc), inspectQueues(), getIncidentHistory(svc)"));
                 continue;
@@ -152,13 +155,14 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
 
             history.add(UserMessage.from("Observation: " + observation +
                 "\n\nContinue the ReAct loop. Follow the incident request's required tool sequence. " +
+                "Completed real tool calls: " + toolCallCount + "/" + REQUIRED_TOOL_CALLS + ". " +
                 "Base the final root cause on current-run observations; incident history is secondary context only."));
         }
 
         lastToolCallCount.set(toolCallCount);
         history.add(UserMessage.from(
-            "Maximum iterations reached. Write the Final Answer now. " +
-            "Use only root causes supported by current-run observations; do not promote historical causes without corroboration."));
+            "Maximum iterations reached. Write the Final Answer now based only on the real observations collected. " +
+            "Do not promote historical causes without current-run corroboration."));
 
         try {
             return model.generate(history).content().text();
