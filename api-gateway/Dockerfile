@@ -2,8 +2,6 @@
 FROM maven:3.9.7-eclipse-temurin-21-alpine AS build
 WORKDIR /workspace
 
-# Copy ALL module POMs first so Maven can resolve the full reactor graph.
-# This layer is cached unless any POM changes.
 COPY pom.xml                              ./pom.xml
 COPY api-gateway/pom.xml                  ./api-gateway/pom.xml
 COPY order-service/pom.xml                ./order-service/pom.xml
@@ -12,26 +10,22 @@ COPY inventory-service/pom.xml            ./inventory-service/pom.xml
 COPY notification-service/pom.xml         ./notification-service/pom.xml
 COPY agent-orchestrator/pom.xml           ./agent-orchestrator/pom.xml
 
-# Resolve dependencies for this module only (-pl), without building siblings (-am dropped).
-# We skip -am to avoid needing sibling sources; shared deps come from the BOM in the parent POM.
-RUN mvn -pl api-gateway dependency:resolve dependency:resolve-plugins     -q --no-transfer-progress
-
-# Copy only this module's sources
+RUN mvn -pl api-gateway dependency:resolve dependency:resolve-plugins -q --no-transfer-progress
 COPY api-gateway/src ./api-gateway/src
-
-# Build this module; parent POM manages version alignment
 RUN mvn -pl api-gateway package -DskipTests -q --no-transfer-progress
 
 # ── Runtime stage ─────────────────────────────────────────────────────────────
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Non-root user for security
-RUN addgroup -S poc && adduser -S poc -G poc
-USER poc
+# curl is required by the Docker Compose healthcheck.
+RUN apk add --no-cache curl \
+    && addgroup -S poc \
+    && adduser -S poc -G poc
 
 COPY --from=build /workspace/api-gateway/target/*.jar app.jar
 
+USER poc
 EXPOSE 8080
 
 ENTRYPOINT ["java", \
