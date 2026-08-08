@@ -7,8 +7,8 @@ experiment:
   name: "GTAA-LM — Avaliação Empírica"
   venue: "SBCARS 2026 — 20º Simpósio Brasileiro de Componentes, Arquiteturas e Reutilização de Software"
   date: "2026-05-31"
-  executions: 30         # rodadas completas executadas no experimento reportado
-  scenarios: 6           # cenários por rodada
+  executions: 30
+  scenarios: 6
   total_scenario_executions: 180
 
 artifact:
@@ -16,7 +16,6 @@ artifact:
   doi: "10.5281/zenodo.21853147"
   target_badges: [Available, Functional]
 
-# Ambiente usado nas execuções reportadas no artigo.
 reported_experiment_environment:
   llm_hosting: external-local-network
   ollama_endpoint: "http://192.168.10.20:11434"
@@ -24,7 +23,6 @@ reported_experiment_environment:
     Este endpoint registra a configuração histórica usada nas execuções reportadas.
     Ele NÃO é necessário para a reprodução do artefato.
 
-# Ambiente portátil oferecido ao avaliador do artefato.
 artifact_reproduction_environment:
   llm_hosting: docker
   ollama_endpoint: "http://ollama:11434"
@@ -32,6 +30,21 @@ artifact_reproduction_environment:
   network: poc-net
   note: >
     O Docker Compose inicia o Ollama e baixa automaticamente o modelo llama3:8b.
+
+artifact_validation_environment:
+  cpu: "Intel Core i7, 5th generation"
+  ram_gb: 16
+  storage:
+    model: "Kingston A400 SA400S37/480G"
+    capacity_gb: 480
+    interface: "SATA III"
+    nominal_read_mbps: 500
+    nominal_write_mbps: 450
+  gpu_acceleration: false
+  notes:
+    - "LLM inference was executed locally with Ollama on CPU."
+    - "The complete microservices and observability stack ran on the same host."
+    - "Execution time is hardware-dependent and is not a fixed property of the GTAA-LM method."
 
 model:
   name: llama3:8b
@@ -50,9 +63,20 @@ agent:
   framework: LangChain4j 0.32
   pattern: "ReAct (Reasoning + Acting) — implementação manual"
   max_iterations: 12
-  min_tool_calls_for_answer: 3
+  required_tool_calls_for_answer: 6
+  required_tool_sequence:
+    - checkAllServicesHealth
+    - queryLogs
+    - queryLatency
+    - getServiceDependencies
+    - inspectQueues
+    - getIncidentHistory
   timeout_per_llm_call_s: 300
   tool_output_truncation: 1500
+  evidence_policy: >
+    Evidências da execução corrente têm prioridade sobre histórico de incidentes.
+    O histórico é contexto secundário e não pode ser promovido a causa raiz atual
+    sem corroboração da telemetria da sessão.
 
 tools:
   - name: checkAllServicesHealth
@@ -79,7 +103,7 @@ scenarios:
     injection: "payment-service retornando HTTP 503 via endpoint /api/payments/fault"
     mechanism: "flag em memória no PaymentController, alterado em runtime"
     expected_service: payment-service
-    expected_cause_keywords: [unavailable, 503, down, connection]
+    expected_cause_keywords: [unavailable, 503, down, connection, fault, injection]
 
   S2:
     name: "Alta latência no serviço de estoque"
