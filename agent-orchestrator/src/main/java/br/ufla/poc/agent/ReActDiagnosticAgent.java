@@ -57,20 +57,32 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
         After each Action line, STOP. Do not write Observation yourself.
         I will provide the real Observation from the system.
 
-        After at least 3 tool results, output your diagnosis:
-          Thought: I have sufficient evidence.
+        EVIDENCE RULES:
+        - Current-run health checks, logs, metrics and queue observations are primary evidence.
+        - Incident history is secondary context only. It may suggest a hypothesis, but it MUST NOT
+          be reported as the current root cause unless current-run observations independently support it.
+        - Never invent or generalize evidence. Every item in evidenceUsed must be a concrete fact that
+          appeared in an Observation from the current diagnostic session.
+        - If historical context conflicts with current-run telemetry, prefer current-run telemetry.
+        - probableCause must describe the failure mechanism supported by the current observations,
+          not merely a similar historical incident.
+        - Use exact component names observed in the environment (for example, order-service rather
+          than an invented pluralized variant).
+
+        After the required tool calls from the incident request have been completed, output:
+          Thought: I have sufficient current evidence.
           Final Answer:
           ```json
           {
             "affectedService": "<name>",
-            "probableCause": "<root cause from actual observations>",
+            "probableCause": "<root cause supported by current observations>",
             "confidenceLevel": "HIGH|MEDIUM|LOW",
-            "evidenceUsed": ["<quote from an actual observation>"],
+            "evidenceUsed": ["<concrete fact from a current Observation>"],
             "recommendedActions": [
               {"action": "<specific action>", "riskLevel": "LOW|MEDIUM|HIGH|CRITICAL", "requiresHumanApproval": true}
             ],
             "potentialImpact": "<impact>",
-            "relatedServices": ["<svc>"]
+            "relatedServices": ["<exact-service-name>"]
           }
           ```
         """;
@@ -108,8 +120,9 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
                 }
                 history.add(AiMessage.from(raw));
                 history.add(UserMessage.from(
-                    "You need at least 3 real tool observations before concluding. " +
-                    "Please call another tool now.\nThought: I need more evidence.\nAction: "));
+                    "You do not yet have enough current evidence. Call another required tool now.\n" +
+                    "Remember: historical incidents are context only and cannot substitute for current telemetry.\n" +
+                    "Thought: I need more current evidence.\nAction: "));
                 continue;
             }
 
@@ -138,15 +151,14 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
             }
 
             history.add(UserMessage.from("Observation: " + observation +
-                "\n\nContinue the ReAct loop. Write your next Thought and Action, " +
-                "or write Final Answer if you have enough evidence (minimum 3 tool calls done: " +
-                toolCallCount + ")."));
+                "\n\nContinue the ReAct loop. Follow the incident request's required tool sequence. " +
+                "Base the final root cause on current-run observations; incident history is secondary context only."));
         }
 
         lastToolCallCount.set(toolCallCount);
         history.add(UserMessage.from(
-            "Maximum iterations reached. You have made " + toolCallCount + " tool calls. " +
-            "Write your Final Answer with the JSON block now based on what you observed."));
+            "Maximum iterations reached. Write the Final Answer now. " +
+            "Use only root causes supported by current-run observations; do not promote historical causes without corroboration."));
 
         try {
             return model.generate(history).content().text();
