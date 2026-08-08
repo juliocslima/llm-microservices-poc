@@ -15,36 +15,25 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * ReAct (Reasoning + Acting) agent — manual loop compatible with any Ollama model.
- *
- * Key design: after each model call we scan the output for the FIRST "Action:" line,
- * truncate everything after it (discarding any Observations the model hallucinated),
- * execute the real tool, and inject the real "Observation:" before calling the model again.
- *
- * This forces genuine tool-calling regardless of whether the model tries to shortcut
- * the loop by inventing its own observations.
- */
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class ReActDiagnosticAgent implements DiagnosticAgent {
 
-    private final OllamaChatModel     model;
-    private final LogQueryTool        logQueryTool;
-    private final MetricsQueryTool    metricsQueryTool;
-    private final HealthCheckTool     healthCheckTool;
-    private final TopologyTool        topologyTool;
+    private final OllamaChatModel model;
+    private final LogQueryTool logQueryTool;
+    private final MetricsQueryTool metricsQueryTool;
+    private final HealthCheckTool healthCheckTool;
+    private final TopologyTool topologyTool;
     private final QueueInspectionTool queueInspectionTool;
     private final IncidentHistoryTool incidentHistoryTool;
 
     private static final int MAX_ITERATIONS = 12;
+    private final ThreadLocal<Integer> lastToolCallCount = ThreadLocal.withInitial(() -> 0);
 
-    /** Matches the first Action line, capturing toolName and raw args. */
     private static final Pattern ACTION_RE = Pattern.compile(
         "Action:\\s*([a-zA-Z]+)\\(([^)]*)\\)", Pattern.CASE_INSENSITIVE);
 
-    /** Matches the Final Answer marker together with the JSON block. */
     private static final Pattern FINAL_RE = Pattern.compile(
         "Final\\s+Answer.*?```(?:json)?\\s*(\\{[\\s\\S]*?\\})\\s*```",
         Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
@@ -88,6 +77,7 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
 
     @Override
     public String diagnose(String problem) {
+        lastToolCallCount.set(0);
         log.info("[REACT] Starting ReAct loop for: {}",
             problem.substring(0, Math.min(120, problem.length())));
 
@@ -96,30 +86,26 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
         history.add(UserMessage.from(problem));
 
         int toolCallCount = 0;
-        StringBuilder fullTrace = new StringBuilder();
 
         for (int iter = 0; iter < MAX_ITERATIONS; iter++) {
             log.debug("[REACT] Iteration {}/{} toolCalls={}", iter + 1, MAX_ITERATIONS, toolCallCount);
 
-            // ── Call model ────────────────────────────────────────────────────
             String raw;
             try {
                 raw = model.generate(history).content().text();
             } catch (Exception e) {
                 log.error("[REACT] Model call failed iter={}: {}", iter, e.getMessage());
+                lastToolCallCount.set(toolCallCount);
                 return buildErrorJson(e.getMessage());
             }
-            log.debug("[REACT] Raw model output (iter {}):\n{}", iter + 1, raw);
 
-            // ── Check for Final Answer first ───────────────────────────────
             Matcher finalM = FINAL_RE.matcher(raw);
             if (finalM.find()) {
                 if (toolCallCount >= 3) {
+                    lastToolCallCount.set(toolCallCount);
                     log.info("[REACT] Final answer after {} real tool calls", toolCallCount);
                     return raw;
                 }
-                // Model gave up too early — push it to use more tools
-                log.warn("[REACT] Final answer with only {} tool calls — requesting more evidence", toolCallCount);
                 history.add(AiMessage.from(raw));
                 history.add(UserMessage.from(
                     "You need at least 3 real tool observations before concluding. " +
@@ -127,10 +113,8 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
                 continue;
             }
 
-            // ── Extract FIRST Action only — discard anything after it ─────
             Matcher actionM = ACTION_RE.matcher(raw);
             if (!actionM.find()) {
-                log.warn("[REACT] No Action found iter={}. Nudging.", iter);
                 history.add(AiMessage.from(raw));
                 history.add(UserMessage.from(
                     "Please call a tool using exactly:\nAction: toolName(args)\n\n" +
@@ -139,81 +123,68 @@ public class ReActDiagnosticAgent implements DiagnosticAgent {
                 continue;
             }
 
-            // Truncate the model output at the end of the Action line
-            // This discards any hallucinated Observations that follow
             int actionEnd = actionM.end();
             String accepted = raw.substring(0, actionEnd);
-            fullTrace.append(accepted).append("\n");
-
             history.add(AiMessage.from(accepted));
 
-            // ── Execute the real tool ─────────────────────────────────────
-            String toolCall   = actionM.group(0).replace("Action:", "").trim();
-            String toolName   = actionM.group(1).trim();
-            String[] args     = splitArgs(actionM.group(2));
+            String toolName = actionM.group(1).trim();
+            String[] args = splitArgs(actionM.group(2));
             String observation = executeTool(toolName, args);
             toolCallCount++;
+            lastToolCallCount.set(toolCallCount);
 
-            log.info("[REACT] iter={} tool='{}' args={} → {} chars observed",
-                iter + 1, toolName, java.util.Arrays.toString(args), observation.length());
-
-            // Truncate long observations to keep context window manageable
             if (observation.length() > 1500) {
                 observation = observation.substring(0, 1500) + "\n...[truncated for context]";
             }
 
-            String observationMsg = "Observation: " + observation;
-            fullTrace.append(observationMsg).append("\n\n");
-            history.add(UserMessage.from(observationMsg +
+            history.add(UserMessage.from("Observation: " + observation +
                 "\n\nContinue the ReAct loop. Write your next Thought and Action, " +
                 "or write Final Answer if you have enough evidence (minimum 3 tool calls done: " +
                 toolCallCount + ")."));
         }
 
-        // Max iterations — force final answer
-        log.warn("[REACT] Max iterations reached after {} tool calls. Forcing final answer.", toolCallCount);
+        lastToolCallCount.set(toolCallCount);
         history.add(UserMessage.from(
             "Maximum iterations reached. You have made " + toolCallCount + " tool calls. " +
             "Write your Final Answer with the JSON block now based on what you observed."));
 
         try {
-            String last = model.generate(history).content().text();
-            log.info("[REACT] Forced final answer received");
-            return last;
+            return model.generate(history).content().text();
         } catch (Exception e) {
             return buildErrorJson("Max iterations: " + e.getMessage());
         }
     }
 
-    // ── Tool dispatcher ────────────────────────────────────────────────────────
+    @Override
+    public int consumeLastToolCallCount() {
+        int value = lastToolCallCount.get();
+        lastToolCallCount.remove();
+        return value;
+    }
 
     private String executeTool(String name, String[] args) {
-        log.info("[REACT] Executing: {}({})", name, String.join(", ", args));
         try {
             return switch (name) {
-                case "checkAllServicesHealth"  -> healthCheckTool.checkAllServicesHealth();
-                case "checkServiceHealth"      -> healthCheckTool.checkServiceHealth(s(args, 0, "order-service"));
-                case "queryLogs"               -> logQueryTool.queryLogs(s(args, 0, "order-service"), i(args, 1, 10));
-                case "queryAllLogs"            -> logQueryTool.queryAllLogs(s(args, 0, "order-service"), i(args, 1, 10));
-                case "queryLatency"            -> metricsQueryTool.queryLatency(s(args, 0, "order-service"), i(args, 1, 10));
-                case "queryHttpStatus"         -> metricsQueryTool.queryHttpStatus(s(args, 0, "order-service"), i(args, 1, 10));
-                case "queryJvmMetrics"         -> metricsQueryTool.queryJvmMetrics(s(args, 0, "order-service"));
-                case "getServiceTopology"      -> topologyTool.getServiceTopology();
-                case "getServiceDependencies"  -> topologyTool.getServiceDependencies(s(args, 0, "order-service"));
-                case "inspectQueues"           -> queueInspectionTool.inspectQueues();
-                case "inspectQueue"            -> queueInspectionTool.inspectQueue(s(args, 0, "poc.notifications"));
-                case "getIncidentHistory"      -> incidentHistoryTool.getIncidentHistory(s(args, 0, "order-service"));
-                case "getRecentIncidents"      -> incidentHistoryTool.getRecentIncidents(i(args, 0, 7));
-                default -> "Unknown tool '" + name + "'. Use one of: checkAllServicesHealth, " +
-                           "queryLogs, queryLatency, getServiceDependencies, inspectQueues, getIncidentHistory";
+                case "checkAllServicesHealth" -> healthCheckTool.checkAllServicesHealth();
+                case "checkServiceHealth" -> healthCheckTool.checkServiceHealth(s(args, 0, "order-service"));
+                case "queryLogs" -> logQueryTool.queryLogs(s(args, 0, "order-service"), i(args, 1, 10));
+                case "queryAllLogs" -> logQueryTool.queryAllLogs(s(args, 0, "order-service"), i(args, 1, 10));
+                case "queryLatency" -> metricsQueryTool.queryLatency(s(args, 0, "order-service"), i(args, 1, 10));
+                case "queryHttpStatus" -> metricsQueryTool.queryHttpStatus(s(args, 0, "order-service"), i(args, 1, 10));
+                case "queryJvmMetrics" -> metricsQueryTool.queryJvmMetrics(s(args, 0, "order-service"));
+                case "getServiceTopology" -> topologyTool.getServiceTopology();
+                case "getServiceDependencies" -> topologyTool.getServiceDependencies(s(args, 0, "order-service"));
+                case "inspectQueues" -> queueInspectionTool.inspectQueues();
+                case "inspectQueue" -> queueInspectionTool.inspectQueue(s(args, 0, "poc.notifications"));
+                case "getIncidentHistory" -> incidentHistoryTool.getIncidentHistory(s(args, 0, "order-service"));
+                case "getRecentIncidents" -> incidentHistoryTool.getRecentIncidents(i(args, 0, 7));
+                default -> "Unknown tool '" + name + "'.";
             };
         } catch (Exception e) {
             log.error("[REACT] Tool '{}' threw: {}", name, e.getMessage());
             return "Tool error for " + name + ": " + e.getMessage();
         }
     }
-
-    // ── Helpers ────────────────────────────────────────────────────────────────
 
     private String[] splitArgs(String raw) {
         if (raw == null || raw.isBlank()) return new String[0];
