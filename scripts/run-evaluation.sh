@@ -130,7 +130,7 @@ PY
 main(){
   local s="${1:-ALL}"
   wait_agent; collect_baseline; : > "$RESULTS_DIR/evaluation-results.json"
-  if [[ "$s" == ALL || "$s" == S1 ]]; then run_scenario S1 "Orders are failing at checkout with HTTP 503 from payment-service." payment-service inject_s1 payment "unavailable|503|down|unreachable|service.unavail|payment.*fail|connection.*refused"; fi
+  if [[ "$s" == ALL || "$s" == S1 ]]; then run_scenario S1 "Orders are failing at checkout with HTTP 503 from payment-service." payment-service inject_s1 payment "unavailable|503|down|unreachable|service.unavail|payment.*fail|connection.*refused|fault[ _-]?injection|fault.*inject"; fi
   if [[ "$s" == ALL || "$s" == S2 ]]; then run_scenario S2 "Checkout is slow; inventory-service calls take more than 3 seconds." inventory-service inject_s2 inventory "latency|slow|delay|timeout|performance|3.*second"; fi
   if [[ "$s" == ALL || "$s" == S3 ]]; then run_scenario S3 "Notifications are not sent; RabbitMQ has unprocessed messages and zero consumers." notification-service inject_s3 notification "queue|consumer|message|rabbit|accumul|backlog|unprocessed"; fi
   if [[ "$s" == ALL || "$s" == S4 ]]; then run_scenario S4 "Order service fails on inventory calls; INVENTORY_SERVICE_URL may be misconfigured." order-service inject_s4 order "config|invalid|host|misconfigur|url|unknown.*host|dns|resolution"; fi
