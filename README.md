@@ -69,6 +69,22 @@ Java 21 and Maven 3.9 are only required for development outside Docker.
 
 > The artifact reproduction environment does **not** require access to the original laboratory Ollama endpoint. The historical endpoint used during the reported experiment is preserved only as provenance in `experiment-config.yml`. For evaluation, Ollama runs inside `docker-compose.yml`.
 
+### Validation host and performance note
+
+The artifact was also smoke-tested on a resource-constrained CPU-only notebook with:
+
+- Intel Core i7, 5th generation
+- 16 GB RAM
+- Kingston A400 SA400S37/480G, 480 GB SATA III SSD
+- nominal storage throughput of approximately 500 MB/s read and 450 MB/s write
+- no GPU acceleration
+
+On this host, the complete microservices and observability stack runs together with local `llama3:8b` inference through Ollama. As a result, individual diagnostic scenarios may take several minutes.
+
+Execution time is strongly hardware-dependent and should not be interpreted as a fixed computational requirement of GTAA-LM. Faster CPUs, additional RAM, or supported GPU acceleration can reduce local LLM inference time without changing the experimental workflow.
+
+For Artifact Festival functional verification, evaluators may run one scenario or a short reproduction. The complete **30 × 6 = 180** execution protocol remains available for full experimental reproduction.
+
 ## Quick start
 
 From a clean clone:
@@ -115,6 +131,8 @@ A single scenario can also be executed:
 ```bash
 ./scripts/run-evaluation.sh S1
 ```
+
+Each diagnostic session follows the six-tool evidence sequence documented in `experiment-config.yml` before producing the final diagnosis. Current-run telemetry is treated as primary evidence; incident history is secondary context and must not override contradictory current observations.
 
 Each round creates an output directory containing the raw agent responses, audit information when available, `evaluation-results.json`, and `summary.json`.
 
@@ -170,12 +188,13 @@ S4 starts an alternative `order-service` container with an invalid inventory URL
 
 ## Experimental provenance
 
-`experiment-config.yml` distinguishes two environments:
+`experiment-config.yml` distinguishes three relevant environments:
 
 1. **Reported experiment environment** — records the historical environment used for the executions reported in the paper.
 2. **Artifact reproduction environment** — the self-contained Docker setup provided to evaluators.
+3. **Artifact validation environment** — records the resource-constrained host used for the current smoke tests.
 
-This distinction prevents the original laboratory endpoint from becoming a hidden reproduction dependency.
+This distinction prevents the original laboratory endpoint from becoming a hidden reproduction dependency and makes hardware-dependent execution time explicit.
 
 ## Manual diagnostic call
 
