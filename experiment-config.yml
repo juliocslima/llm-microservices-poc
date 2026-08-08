@@ -1,49 +1,67 @@
 # =============================================================================
 # experiment-config.yml
-# Configuração completa do experimento — SBCARS 2026
-# Referenciável na seção de avaliação do artigo para fins de reprodutibilidade
+# Configuração do experimento e do ambiente de reprodução — SBCARS 2026
 # =============================================================================
 
 experiment:
-  name: "LLM Agent POC — Avaliação Empírica"
+  name: "GTAA-LM — Avaliação Empírica"
   venue: "SBCARS 2026 — 20º Simpósio Brasileiro de Componentes, Arquiteturas e Reutilização de Software"
   date: "2026-05-31"
-  executions: 5          # número de rodadas completas (S1–S6) executadas
-  scenarios: 6           # cenários de falha por rodada
+  executions: 30         # rodadas completas executadas no experimento reportado
+  scenarios: 6           # cenários por rodada
+  total_scenario_executions: 180
 
-# ── Modelo LLM ──────────────────────────────────────────────────────────────
+artifact:
+  repository: "https://github.com/juliocslima/llm-microservices-poc"
+  doi: "10.5281/zenodo.21853147"
+  target_badges: [Available, Functional]
+
+# Ambiente usado nas execuções reportadas no artigo.
+reported_experiment_environment:
+  llm_hosting: external-local-network
+  ollama_endpoint: "http://192.168.10.20:11434"
+  note: >
+    Este endpoint registra a configuração histórica usada nas execuções reportadas.
+    Ele NÃO é necessário para a reprodução do artefato.
+
+# Ambiente portátil oferecido ao avaliador do artefato.
+artifact_reproduction_environment:
+  llm_hosting: docker
+  ollama_endpoint: "http://ollama:11434"
+  compose_file: docker-compose.yml
+  network: poc-net
+  note: >
+    O Docker Compose inicia o Ollama e baixa automaticamente o modelo llama3:8b.
+
 model:
   name: llama3:8b
   provider: Ollama
-  version: "0.6.x"       # verificar com: ollama --version no host
-  hosting: local-network  # servidor externo em 192.168.10.20:11434
   parameters:
-    temperature: 0.1      # baixa temperatura para maior determinismo
-    top_p: 0.9            # nucleus sampling
-    seed: 42              # semente para reproducibilidade (quando suportado)
-    num_predict: 2048     # máximo de tokens gerados por chamada
-    num_ctx: 8192         # janela de contexto
+    temperature: 0.1
+    top_p: 0.9
+    seed: 42
+    num_predict: 2048
+    num_ctx: 8192
+  reproducibility_note: >
+    Registre, na release congelada, a versão exata do Ollama e o digest do modelo
+    obtidos no ambiente efetivamente validado.
 
-# ── Agente ReAct ────────────────────────────────────────────────────────────
 agent:
   framework: LangChain4j 0.32
-  pattern: ReAct (Reasoning + Acting) — implementação manual
-  max_iterations: 12          # iterações máximas por sessão de diagnóstico
-  min_tool_calls_for_answer: 3 # ferramentas mínimas antes de Final Answer
-  timeout_per_llm_call_s: 300 # timeout por chamada ao modelo
-  tool_output_truncation: 1500 # caracteres máximos por Observation
+  pattern: "ReAct (Reasoning + Acting) — implementação manual"
+  max_iterations: 12
+  min_tool_calls_for_answer: 3
+  timeout_per_llm_call_s: 300
+  tool_output_truncation: 1500
 
-# ── Ferramentas (Tools) ─────────────────────────────────────────────────────
 tools:
   - name: checkAllServicesHealth
     source: Spring Boot Actuator /actuator/health
-    timeout_s: 4           # timeout por serviço — evita bloqueio quando DB está down
+    timeout_s: 4
   - name: queryLogs
     source: Loki API /loki/api/v1/query_range
-    label_strategy: "{service=<name>} com fallback para {container=poc-<name>}"
   - name: queryLatency
-    source: Prometheus API /api/v1/query (PromQL)
-    metrics: http_server_requests_seconds_bucket, _count
+    source: Prometheus API /api/v1/query
   - name: queryHttpStatus
     source: Prometheus API /api/v1/query
   - name: getServiceDependencies
@@ -55,7 +73,6 @@ tools:
   - name: getIncidentHistory
     source: PostgreSQL — tabela incident_history
 
-# ── Cenários de falha ────────────────────────────────────────────────────────
 scenarios:
   S1:
     name: "Serviço de pagamento indisponível"
@@ -82,17 +99,15 @@ scenarios:
     name: "Erro de configuração de URL"
     injection: "INVENTORY_SERVICE_URL=http://INVALID-HOST-DOES-NOT-EXIST:9999"
     mechanism: "container alternativo com variável de ambiente incorreta"
-    fallback: "delay extremo de 10s no inventory-service quando docker run falha"
     expected_service: order-service
     expected_cause_keywords: [config, invalid, host, misconfiguration, url]
 
   S5:
     name: "Falha de autenticação inter-serviços"
     injection: "payment-service retornando HTTP 401 Unauthorized via /api/payments/fault"
-    mechanism: "flag AUTH_FAILURE no PaymentController — simula token inter-serviço inválido"
+    mechanism: "flag AUTH_FAILURE no PaymentController"
     expected_service: payment-service
     expected_cause_keywords: [auth, 401, unauthorized, token, credential, bearer]
-    note: "Diferente de S1 (503): S5 simula falha de autenticação, não indisponibilidade"
 
   S6:
     name: "Banco de dados indisponível"
@@ -101,47 +116,39 @@ scenarios:
     expected_service: [postgres, order-service, payment-service]
     expected_cause_keywords: [database, postgres, sql, connection, jdbc]
     architectural_finding: >
-      O audit log do AuditService não pôde ser persistido durante este cenário
-      porque o próprio PostgreSQL — alvo da falha — é o backend de auditoria.
-      Esse achado revela uma dependência circular na arquitetura: o mecanismo
-      de rastreabilidade depende do sistema que está sendo observado.
-      Resultado: tool_calls reportados = 0 no audit log, embora o agente
-      tenha executado as 6 ferramentas na sessão ReAct.
+      Durante S6, o PostgreSQL é simultaneamente alvo da falha e backend da auditoria.
+      Assim, a persistência da trilha de auditoria pode ficar indisponível enquanto o
+      agente continua executando as ferramentas em memória. Esta limitação é mantida
+      explicitamente como parte das ameaças à validade e da discussão arquitetural.
 
-# ── Política de reset entre rodadas ─────────────────────────────────────────
 reset_policy:
   between_scenarios:
     - "Desativar fault injection via endpoint HTTP"
-    - "docker stop poc-order-service-bad && docker rm poc-order-service-bad (S4)"
-    - "docker start poc-order-service (S4)"
-    - "docker start poc-notification-service (S3)"
-    - "docker start poc-postgres (S6)"
-    - "sleep 5 — aguardar estabilização dos containers"
+    - "Remover poc-order-service-bad, se existir"
+    - "Restaurar poc-order-service"
+    - "Restaurar poc-notification-service"
+    - "Restaurar poc-postgres"
+    - "Aguardar estabilização dos serviços"
   between_full_runs:
-    - "Executar reset_faults completo"
-    - "Aguardar health checks verdes em todos os serviços"
-    - "Gerar tráfego de baseline (10 pedidos sintéticos)"
+    - "Executar reset_faults"
+    - "Aguardar serviços operacionais"
+    - "Gerar tráfego de baseline"
 
-# ── Estado inicial dos containers ────────────────────────────────────────────
 initial_state:
   all_services: running
   databases: [postgres, rabbitmq, redis]
   observability: [prometheus, loki, tempo, grafana, promtail]
   agent_orchestrator: running
-  external_llm_server: "192.168.10.20:11434 — modelo llama3:8b pré-carregado"
+  reproduction_llm: "Docker service ollama:11434 — llama3:8b"
 
-# ── Critérios de avaliação ────────────────────────────────────────────────────
 evaluation:
   service_correct:
-    method: "grep -qiE no campo affectedService da resposta JSON"
-    note: "usa padrão ERE para permitir alternação (postgres|order|payment)"
+    method: "comparação textual do affectedService com o serviço esperado"
   cause_correct:
-    method: "grep -qiE no campo probableCause com padrões por cenário"
-    note: "múltiplos sinônimos por padrão para cobrir variabilidade lexical do modelo"
+    method: "busca case-insensitive por padrões de causa definidos por cenário"
   traceability_score:
-    formula: "min(tool_calls/5, 0.3) + min(evidence_count/4, 0.4) + structure_score * 0.075"
-    structure_fields: [affectedService, probableCause, recommendedActions, evidenceUsed]
+    formula: "calculado pelo GovernanceService"
     max: 1.0
   human_approval:
     trigger_patterns: [restart, rollback, terminate, redeploy, scale, shutdown, flush cache]
-    implementation: GovernanceService.evaluate() — regex sobre recomendações do agente
+    implementation: "GovernanceService.evaluate()"
