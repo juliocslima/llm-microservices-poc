@@ -1,11 +1,18 @@
 package br.ufla.poc.agent;
 
 /**
- * DiagnosticAgent — marker interface.
- * The actual agent logic is implemented in ReActDiagnosticAgent using
- * the ReAct (Reasoning + Acting) loop, which works with any Ollama model
- * regardless of native tool-calling support.
+ * DiagnosticAgent abstraction used by the orchestration layer.
+ * The concrete implementation is ReActDiagnosticAgent.
  */
 public interface DiagnosticAgent {
     String diagnose(String problem);
+
+    /**
+     * Returns the number of real tool executions performed by the most recent
+     * diagnose() call on the current request thread and clears that value.
+     *
+     * This avoids deriving per-execution metrics from accumulated audit rows
+     * that share the same scenario identifier across repeated experiments.
+     */
+    int consumeLastToolCallCount();
 }
