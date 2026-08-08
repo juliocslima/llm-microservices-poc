@@ -1,5 +1,8 @@
+name: llm-microservices-poc
+
 networks:
   poc-net:
+    name: llm-microservices-poc_poc-net
     driver: bridge
 
 volumes:
@@ -13,9 +16,6 @@ volumes:
   ollama_data:
 
 services:
-
-  # ─── Infrastructure ──────────────────────────────────────────────────────────
-
   postgres:
     image: postgres:16-alpine
     container_name: poc-postgres
@@ -23,8 +23,7 @@ services:
       POSTGRES_USER: poc
       POSTGRES_PASSWORD: poc123
       POSTGRES_DB: poc
-    ports:
-      - "5432:5432"
+    ports: ["5432:5432"]
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -43,7 +42,7 @@ services:
       RABBITMQ_DEFAULT_PASS: poc123
     ports:
       - "5672:5672"
-      - "15672:15672"   # management UI
+      - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     networks: [poc-net]
@@ -56,8 +55,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: poc-redis
-    ports:
-      - "6379:6379"
+    ports: ["6379:6379"]
     volumes:
       - redis_data:/data
     networks: [poc-net]
@@ -66,13 +64,10 @@ services:
       interval: 5s
       retries: 10
 
-  # ─── Observability Stack ─────────────────────────────────────────────────────
-
   prometheus:
     image: prom/prometheus:v2.52.0
     container_name: poc-prometheus
-    ports:
-      - "9090:9090"
+    ports: ["9090:9090"]
     volumes:
       - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
@@ -84,8 +79,7 @@ services:
   loki:
     image: grafana/loki:2.9.8
     container_name: poc-loki
-    ports:
-      - "3100:3100"
+    ports: ["3100:3100"]
     volumes:
       - ./infra/loki/loki-config.yml:/etc/loki/local-config.yaml
       - loki_data:/loki
@@ -97,8 +91,8 @@ services:
     container_name: poc-tempo
     ports:
       - "3200:3200"
-      - "4317:4317"   # OTLP gRPC
-      - "4318:4318"   # OTLP HTTP
+      - "4317:4317"
+      - "4318:4318"
     volumes:
       - ./infra/tempo/tempo-config.yml:/etc/tempo.yaml
       - tempo_data:/var/tempo
@@ -119,8 +113,7 @@ services:
   grafana:
     image: grafana/grafana:10.4.4
     container_name: poc-grafana
-    ports:
-      - "3000:3000"
+    ports: ["3000:3000"]
     environment:
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: admin123
@@ -133,15 +126,12 @@ services:
     networks: [poc-net]
     depends_on: [prometheus, loki, tempo]
 
-  # ─── Microservices ───────────────────────────────────────────────────────────
-
   api-gateway:
     build:
       context: .
       dockerfile: ./api-gateway/Dockerfile
     container_name: poc-api-gateway
-    ports:
-      - "8080:8080"
+    ports: ["8080:8080"]
     environment:
       SPRING_PROFILES_ACTIVE: docker
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
@@ -159,12 +149,12 @@ services:
       retries: 10
 
   order-service:
+    image: llm-microservices-poc-order-service:artifact-2026
     build:
       context: .
       dockerfile: ./order-service/Dockerfile
     container_name: poc-order-service
-    ports:
-      - "8081:8081"
+    ports: ["8081:8081"]
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/poc
@@ -189,8 +179,7 @@ services:
       context: .
       dockerfile: ./payment-service/Dockerfile
     container_name: poc-payment-service
-    ports:
-      - "8082:8082"
+    ports: ["8082:8082"]
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/poc
@@ -211,8 +200,7 @@ services:
       context: .
       dockerfile: ./inventory-service/Dockerfile
     container_name: poc-inventory-service
-    ports:
-      - "8083:8083"
+    ports: ["8083:8083"]
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/poc
@@ -234,8 +222,7 @@ services:
       context: .
       dockerfile: ./notification-service/Dockerfile
     container_name: poc-notification-service
-    ports:
-      - "8084:8084"
+    ports: ["8084:8084"]
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_RABBITMQ_HOST: rabbitmq
@@ -248,14 +235,11 @@ services:
     depends_on:
       rabbitmq: {condition: service_healthy}
 
-  # ─── Ollama (LLM local) ──────────────────────────────────────────────────────
-
   ollama:
     image: ollama/ollama:latest
     container_name: poc-ollama
     restart: unless-stopped
-    ports:
-      - "11434:11434"
+    ports: ["11434:11434"]
     volumes:
       - ollama_data:/root/.ollama
     environment:
@@ -268,20 +252,7 @@ services:
       timeout: 5s
       retries: 10
       start_period: 30s
-  # ── GPU (NVIDIA) ────────────────────────────────────────────────────────
-    # Descomente o bloco abaixo se o host tiver GPU NVIDIA com drivers instalados
-    # e o nvidia-container-toolkit configurado.
-    #
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: all
-    #           capabilities: [gpu]
 
-  # ── Pull automático de modelos ao iniciar ──────────────────────────────────
-  # Remova este serviço se preferir fazer o pull manualmente.
   ollama-pull:
     image: curlimages/curl:latest
     container_name: ollama-pull
@@ -307,15 +278,12 @@ services:
           | grep -o '"name":"[^"]*"' \
           | cut -d'"' -f4
 
-  # ─── Agent Orchestrator ──────────────────────────────────────────────────────
-
   agent-orchestrator:
     build:
       context: .
       dockerfile: ./agent-orchestrator/Dockerfile
     container_name: poc-agent-orchestrator
-    ports:
-      - "8090:8090"
+    ports: ["8090:8090"]
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/poc
@@ -337,7 +305,11 @@ services:
     depends_on:
       ollama:
         condition: service_healthy
+      ollama-pull:
+        condition: service_completed_successfully
       prometheus:
         condition: service_started
       loki:
         condition: service_started
+      postgres:
+        condition: service_healthy
