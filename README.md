@@ -9,6 +9,7 @@ This repository contains the source code, containerized execution environment, f
 - Source repository: https://github.com/juliocslima/llm-microservices-poc
 - Persistent archive: https://doi.org/10.5281/zenodo.21853147
 - License: MIT (`LICENSE`)
+- Citation metadata: `CITATION.cff`
 - Claimed CBSoft Artifact Festival badges: **Available** and **Functional**
 
 The Zenodo record is intended to provide the immutable snapshot submitted for artifact evaluation. The GitHub repository remains the development location.
@@ -34,9 +35,11 @@ llm-microservices-poc/
 │   ├── run-paper-experiment.sh # 30 complete rounds
 │   ├── aggregate-results.py    # aggregate reproduction results
 │   └── fault-injection/
-├── results/                    # experimental outputs distributed with the artifact
+├── results/
+│   └── README.md               # interpretation and reproduction notes
 ├── experiment-config.yml       # experiment provenance and reproduction configuration
 ├── docker-compose.yml          # complete containerized environment, including Ollama
+├── CITATION.cff
 ├── setup.sh
 └── LICENSE
 ```
@@ -71,7 +74,7 @@ Java 21 and Maven 3.9 are only required for development outside Docker.
 
 ### Validation host and performance note
 
-The artifact was also smoke-tested on a resource-constrained CPU-only notebook with:
+The artifact was smoke-tested on a resource-constrained CPU-only notebook with:
 
 - Intel Core i7, 5th generation
 - 16 GB RAM
@@ -92,8 +95,7 @@ From a clean clone:
 ```bash
 git clone https://github.com/juliocslima/llm-microservices-poc.git
 cd llm-microservices-poc
-chmod +x setup.sh scripts/*.sh
-./setup.sh
+bash setup.sh
 ```
 
 `setup.sh` builds the application images, starts the Dockerized Ollama service, downloads `llama3:8b`, starts the complete stack, and waits for the agent endpoint to become available.
@@ -123,13 +125,13 @@ Useful interfaces:
 A round executes all six fault scenarios:
 
 ```bash
-./scripts/run-evaluation.sh ALL
+bash scripts/run-evaluation.sh ALL
 ```
 
 A single scenario can also be executed:
 
 ```bash
-./scripts/run-evaluation.sh S1
+bash scripts/run-evaluation.sh S1
 ```
 
 Each diagnostic session follows the six-tool evidence sequence documented in `experiment-config.yml` before producing the final diagnosis. Current-run telemetry is treated as primary evidence; incident history is secondary context and must not override contradictory current observations.
@@ -141,13 +143,13 @@ Each round creates an output directory containing the raw agent responses, audit
 The experiment reported in the artifact configuration consists of **30 complete rounds × 6 scenarios = 180 scenario executions**.
 
 ```bash
-./scripts/run-paper-experiment.sh
+bash scripts/run-paper-experiment.sh
 ```
 
 For a shorter evaluator smoke test, override the number of rounds:
 
 ```bash
-RUNS=2 ./scripts/run-paper-experiment.sh
+RUNS=2 bash scripts/run-paper-experiment.sh
 ```
 
 After the final round, `scripts/aggregate-results.py` produces:
@@ -177,6 +179,20 @@ python3 scripts/aggregate-results.py results/reproduction_<timestamp>
 | S6 | PostgreSQL unavailable | postgres / dependent services |
 
 The expected causes and matching rules are documented in `experiment-config.yml` and encoded by the evaluation runner.
+
+## Artifact validation result
+
+A complete S1–S6 validation round was successfully executed on the CPU-only validation host documented above. The round produced:
+
+- **6/6** correct affected-service identifications;
+- **5/6** complete diagnoses classified as correct by the runner;
+- **6.0** controlled tool calls per diagnostic session;
+- mean traceability score **0.975**;
+- human-approval indication in **6/6** scenarios.
+
+The S5 validation run identified `payment-service` correctly but returned the generic cause `FAULT_INJECTION` rather than the scenario-specific authentication/HTTP 401 cause. This outcome is deliberately retained as an experimental diagnostic miss. The evaluation rule was not broadened merely to make the scenario pass.
+
+See `results/README.md` for interpretation of reported results, validation outputs, and stochastic reproduction behavior.
 
 ## Important note about S6
 
@@ -226,6 +242,11 @@ docker compose down -v
 - The exact release submitted to the Artifact Festival should be identified by a Git tag and archived on Zenodo.
 - The exact Ollama version and `llama3:8b` model digest should be recorded after validation of the frozen release.
 - Avoid changing the archived Zenodo snapshot after the final evaluator smoke test; publish a new version instead if corrections are required.
+- LLM outputs may vary between runs even with a fixed seed because runtime, model-build, and hardware details can influence generation. Functional verification therefore focuses on successful execution of the documented workflow and production of structured, auditable results rather than verbatim output equality.
+
+## Citation
+
+Citation metadata for the software artifact is provided in `CITATION.cff`. When using this artifact in research, please cite both the software artifact and the associated SBCARS 2026 paper.
 
 ## License
 
