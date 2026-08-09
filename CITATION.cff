@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite the associated SBCARS 2026 paper and this software artifact."
+title: "GTAA-LM Research Artifact"
+type: software
+version: "1.0.0"
+doi: "10.5281/zenodo.21853147"
+repository-code: "https://github.com/juliocslima/llm-microservices-poc"
+url: "https://github.com/juliocslima/llm-microservices-poc"
+license: MIT
+authors:
+  - given-names: "Júlio César Sousa de"
+    family-names: "Lima"
+  - given-names: "Luiz Henrique Andrade"
+    family-names: "Correia"
+  - given-names: "André de Lima"
+    family-names: "Salgado"
+  - given-names: "Maurício Ronny de Almeida"
+    family-names: "Souza"
+keywords:
+  - large language models
+  - microservices
+  - software architecture
+  - autonomous agents
+  - observability
+  - traceability
+  - governance
+abstract: >-
+  Research artifact accompanying the GTAA-LM paper accepted at SBCARS 2026.
+  The artifact provides the microservices proof of concept, controlled diagnostic
+  tools, observability infrastructure, governance and traceability mechanisms,
+  fault-injection scenarios, evaluation scripts, and experimental outputs used
+  to instantiate and evaluate the proposed architecture.
