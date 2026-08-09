@@ -72,6 +72,20 @@ Java 21 and Maven 3.9 are only required for development outside Docker.
 
 > The artifact reproduction environment does **not** require access to the original laboratory Ollama endpoint. The historical endpoint used during the reported experiment is preserved only as provenance in `experiment-config.yml`. For evaluation, Ollama runs inside `docker-compose.yml`.
 
+### Validated runtime and model
+
+The final artifact validation was performed with:
+
+- Ollama **0.32.6**;
+- model `llama3:8b`;
+- model digest `365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1`.
+
+The digest is recorded to make changes in the model payload detectable. Evaluators can inspect their local model metadata with:
+
+```bash
+curl -s http://localhost:11434/api/tags | python3 -m json.tool
+```
+
 ### Validation host and performance note
 
 The artifact was smoke-tested on a resource-constrained CPU-only notebook with:
@@ -240,7 +254,7 @@ docker compose down -v
 ## Reproducibility notes
 
 - The exact release submitted to the Artifact Festival should be identified by a Git tag and archived on Zenodo.
-- The exact Ollama version and `llama3:8b` model digest should be recorded after validation of the frozen release.
+- The validated runtime/model combination is Ollama 0.32.6 with `llama3:8b` digest `365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1`.
 - Avoid changing the archived Zenodo snapshot after the final evaluator smoke test; publish a new version instead if corrections are required.
 - LLM outputs may vary between runs even with a fixed seed because runtime, model-build, and hardware details can influence generation. Functional verification therefore focuses on successful execution of the documented workflow and production of structured, auditable results rather than verbatim output equality.
 
