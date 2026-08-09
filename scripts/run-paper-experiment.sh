@@ -14,7 +14,7 @@ for run in $(seq -w 1 "$RUNS"); do
   echo "=== Round $run/$RUNS ==="
   run_dir="$ROOT_RESULTS/run_$run"
   mkdir -p "$run_dir"
-  RESULTS_DIR="$run_dir" ./scripts/run-evaluation.sh ALL
+  RESULTS_DIR="$run_dir" bash ./scripts/run-evaluation.sh ALL
   sleep 5
 done
 
