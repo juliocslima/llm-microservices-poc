@@ -43,6 +43,7 @@ artifact_validation_environment:
     nominal_read_mbps: 500
     nominal_write_mbps: 450
   gpu_acceleration: false
+  ollama_version: "0.32.6"
   notes:
     - "LLM inference was executed locally with Ollama on CPU."
     - "The complete microservices and observability stack ran on the same host."
@@ -51,6 +52,7 @@ artifact_validation_environment:
 model:
   name: llama3:8b
   provider: Ollama
+  validated_digest: "365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1"
   parameters:
     temperature: 0.1
     top_p: 0.9
@@ -58,8 +60,9 @@ model:
     num_predict: 2048
     num_ctx: 8192
   reproducibility_note: >
-    A versão exata do Ollama e o digest do modelo devem ser registrados na release
-    congelada a partir do ambiente efetivamente validado antes da criação da tag final.
+    A validação final do artefato foi executada com Ollama 0.32.6 e com o digest
+    llama3:8b 365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1.
+    O digest é registrado para permitir ao avaliador detectar alterações do modelo.
 
 agent:
   framework: LangChain4j 0.32
