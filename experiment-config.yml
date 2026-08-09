@@ -15,6 +15,8 @@ artifact:
   repository: "https://github.com/juliocslima/llm-microservices-poc"
   doi: "10.5281/zenodo.21853147"
   target_badges: [Available, Functional]
+  release_version: "1.0.0"
+  planned_git_tag: "v1.0.0-sbcars2026"
 
 reported_experiment_environment:
   llm_hosting: external-local-network
@@ -56,8 +58,8 @@ model:
     num_predict: 2048
     num_ctx: 8192
   reproducibility_note: >
-    Registre, na release congelada, a versão exata do Ollama e o digest do modelo
-    obtidos no ambiente efetivamente validado.
+    A versão exata do Ollama e o digest do modelo devem ser registrados na release
+    congelada a partir do ambiente efetivamente validado antes da criação da tag final.
 
 agent:
   framework: LangChain4j 0.32
@@ -176,3 +178,27 @@ evaluation:
   human_approval:
     trigger_patterns: [restart, rollback, terminate, redeploy, scale, shutdown, flush cache]
     implementation: "GovernanceService.evaluate()"
+
+reported_results:
+  affected_service_correct: "180/180"
+  complete_diagnosis_correct: "112/180"
+  mean_traceability_score: 0.945
+  human_approval_flag: "180/180"
+
+artifact_validation_result:
+  scope: "one complete S1-S6 round"
+  total_scenarios: 6
+  affected_service_correct: "6/6"
+  complete_diagnosis_correct: "5/6"
+  avg_tool_calls_per_session: 6.0
+  avg_traceability_score: 0.975
+  human_approval_flag: "6/6"
+  known_diagnostic_miss:
+    scenario: S5
+    detected_service: payment-service
+    probable_cause: FAULT_INJECTION
+    expected_specific_cause: "authentication failure / HTTP 401"
+    interpretation: >
+      O pipeline executou corretamente, mas o LLM retornou uma causa genérica em vez
+      da causa específica do cenário. O resultado é preservado como erro diagnóstico
+      experimental e não é convertido artificialmente em sucesso pela regra de avaliação.
