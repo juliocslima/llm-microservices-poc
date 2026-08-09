@@ -44,7 +44,7 @@ echo "Prometheus: http://localhost:9090"
 echo "RabbitMQ:   http://localhost:15672"
 echo
 echo "Run one complete S1-S6 round with:"
-echo "  ./scripts/run-evaluation.sh ALL"
+echo "  bash ./scripts/run-evaluation.sh ALL"
 echo
 echo "Run the 30-round paper experiment with:"
-echo "  ./scripts/run-paper-experiment.sh"
+echo "  bash ./scripts/run-paper-experiment.sh"
