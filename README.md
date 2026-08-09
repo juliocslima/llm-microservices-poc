@@ -7,12 +7,13 @@ This repository contains the source code, containerized execution environment, f
 ## Artifact availability
 
 - Source repository: https://github.com/juliocslima/llm-microservices-poc
-- Persistent archive: https://doi.org/10.5281/zenodo.21853147
+- Reserved Zenodo DOI: https://doi.org/10.5281/zenodo.21860725
+- DOI status: reserved and not yet public until the final Zenodo upload is published
 - License: MIT (`LICENSE`)
 - Citation metadata: `CITATION.cff`
 - Claimed CBSoft Artifact Festival badges: **Available** and **Functional**
 
-The Zenodo record is intended to provide the immutable snapshot submitted for artifact evaluation. The GitHub repository remains the development location.
+The Zenodo DOI is reserved for the immutable snapshot that will be published after the final GitHub release is frozen. The GitHub repository remains the development location until that publication step is completed.
 
 ## What is included
 
@@ -77,10 +78,12 @@ Java 21 and Maven 3.9 are only required for development outside Docker.
 The final artifact validation was performed with:
 
 - Ollama **0.32.6**;
+- Docker image `ollama/ollama@sha256:b88c73ace3e115f8ec53dc8761ae1c0aabfa675406e3681786b98757ce050f42`;
+- helper image `curlimages/curl@sha256:7c12af72ceb38b7432ab85e1a265cff6ae58e06f95539d539b654f2cfa64bb13`;
 - model `llama3:8b`;
 - model digest `365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1`.
 
-The digest is recorded to make changes in the model payload detectable. Evaluators can inspect their local model metadata with:
+The Docker Compose file pins the two previously floating runtime images by digest. The model digest is recorded so evaluators can detect changes in the model payload. Evaluators can inspect local model metadata with:
 
 ```bash
 curl -s http://localhost:11434/api/tags | python3 -m json.tool
@@ -253,9 +256,10 @@ docker compose down -v
 
 ## Reproducibility notes
 
-- The exact release submitted to the Artifact Festival should be identified by a Git tag and archived on Zenodo.
+- The exact release submitted to the Artifact Festival should be identified by Git tag `v1.0.0-sbcars2026` and archived on Zenodo under reserved DOI `10.5281/zenodo.21860725`.
 - The validated runtime/model combination is Ollama 0.32.6 with `llama3:8b` digest `365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1`.
-- Avoid changing the archived Zenodo snapshot after the final evaluator smoke test; publish a new version instead if corrections are required.
+- The Ollama and curl helper images are pinned by digest in `docker-compose.yml`.
+- Publish the Zenodo upload only after the GitHub release/tag is frozen; after publication, changes should use a new Zenodo version rather than modifying the archived snapshot.
 - LLM outputs may vary between runs even with a fixed seed because runtime, model-build, and hardware details can influence generation. Functional verification therefore focuses on successful execution of the documented workflow and production of structured, auditable results rather than verbatim output equality.
 
 ## Citation
