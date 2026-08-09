@@ -38,7 +38,7 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 
-# PyDev specific (Python IDE for Eclipse)
+# PyDev specific (Python IDE)
 *.pydevproject
 
 # CDT-specific (C/C++ Development Tooling)
@@ -47,7 +47,7 @@ local.properties
 # CDT- autotools
 .autotools
 
-# Java annotation processor (APT)
+# Annotation processor
 .factorypath
 
 # PDT-specific (PHP Development Tools)
@@ -56,13 +56,13 @@ local.properties
 # sbteclipse plugin
 .target
 
-# Tern plugin
+# Tern project
 .tern-project
 
 # TeXlipse plugin
 .texlipse
 
-# STS (Spring Tool Suite)
+# STS
 .springBeans
 
 # Code Recommenders
@@ -73,29 +73,19 @@ local.properties
 
 docker/tempo/tempo-data
 
-# Scala IDE specific (Scala & Java development for Eclipse)
+# Scala IDE
 .cache-main
 .scala_dependencies
 .worksheet
 
 ### Eclipse Patch ###
-# Eclipse Core
 .project
-
-# JDT-specific (Eclipse Java Development Tools)
 .classpath
-
-# Annotation Processing
-.apt_generated
-
+.apt_generated/
 .sts4-cache/
 
 ### Git ###
-# Created by git for backups. To disable backups in Git:
-# $ git config --global mergetool.keepBackup false
 *.orig
-
-# Created by git when using merge tools for conflicts
 *.BACKUP.*
 *.BASE.*
 *.LOCAL.*
@@ -106,19 +96,12 @@ docker/tempo/tempo-data
 *_REMOTE_*.txt
 
 ### Java ###
-# Compiled class file
 *.class
-
-# Log file
 *.log
-
-# BlueJ files
 *.ctxt
-
-# Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+### Package files ###
 *.jar
 *.war
 *.nar
@@ -127,7 +110,7 @@ docker/tempo/tempo-data
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# JVM crash logs
 hs_err_pid*
 
 ### Maven ###
@@ -143,28 +126,17 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 ### Windows ###
-# Windows thumbnail cache files
 Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
-
-# Dump file
 *.stackdump
-
-# Folder config file
 [Dd]esktop.ini
-
-# Recycle Bin used on file shares
 $RECYCLE.BIN/
-
-# Windows Installer files
 *.cab
 *.msi
 *.msix
 *.msm
 *.msp
-
-# Windows shortcuts
 *.lnk
 
 ### IntelliJ IDEA ###
@@ -174,6 +146,7 @@ $RECYCLE.BIN/
 *.xml
 !/.run/SidagroBackendApplication.run.xml
 .idea/*
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -187,7 +160,7 @@ build/
 ### VS Code ###
 .vscode/
 
-### Some additional ignores (sort later)
+### Additional ignores ###
 *.DS_Store
 *.sw?
 .#*
@@ -214,3 +187,9 @@ README.html
 security-report.md
 
 !**/src/test/resources/logback-test.xml
+
+# GTAA-LM generated artifact-validation outputs.
+# Published/tracked result files remain tracked; these patterns only prevent
+# newly generated local timestamped runs from polluting git status.
+/results/20*/
+/results/reproduction_*/
